@@ -1,70 +1,42 @@
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay } from 'swiper/modules';
+import React, { useState, useEffect } from "react";
+import styles from "./Banner.module.css";
 
-// Importa los estilos necesarios de Swiper
-import 'swiper/css';
-import 'swiper/css/pagination';
-import styles from './Banner.module.css';
-
-interface SlideType {
-  id: number;
-  image: string;
-  buttonText?: string | null;
-  buttonAction?: () => void;
-}
-
-const slides: SlideType[] = [
-  {
-    id: 1,
-    image: '/images/Banners_1.jpg',
-    buttonText: null, // No mostrar botón
-  },
-  {
-    id: 2,
-    image: '/images/Banners-02.jpg',
-    buttonText: 'CREA TU ARMARIO PERFECTO >',
-    buttonAction: () => alert('Crea tu armario perfecto'),
-  },
-  {
-    id: 3,
-    image: '/images/Banners-03.jpg',
-    buttonText: 'DESCUBRE MÁS >',
-    buttonAction: () => alert('Explora más opciones'),
-  },
+const images = [
+  "/images/Banner 1_1.png",
+  "/images/Banner 2_1.png",
+  "/images/Banner 3_1.png",
+  "/images/Banner 4_1.png",
+  "/images/Banner 5_1.png",
 ];
 
 const Banner: React.FC = () => {
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 4000); // Cambia cada 4 segundos
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className={styles.bannerContainer}>
-      <Swiper
-        modules={[Pagination, Autoplay]}
-        spaceBetween={0}
-        slidesPerView={1}
-        loop={true}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
-        pagination={{ clickable: true }}
-      >
-        {slides.map((slide) => (
-          <SwiperSlide key={slide.id}>
-            <div className={styles.slide}>
-              <img
-                src={slide.image}
-                alt={`Slide ${slide.id}`}
-                className={styles.slideImage}
-              />
-              {slide.buttonText && slide.buttonAction && (
-                <button
-                  className={styles.slideButton}
-                  onClick={slide.buttonAction}
-                >
-                  {slide.buttonText}
-                </button>
-              )}
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {/* Imágenes de fondo con efecto fade */}
+      {images.map((img, index) => (
+        <img
+          key={index}
+          src={img}
+          alt={`Banner ${index + 1}`}
+          className={`${styles.bannerImage} ${index === currentImage ? styles.active : ""}`}
+        />
+      ))}
+
+      {/* Overlay con el texto y el botón */}
+      <div className={styles.overlay}>
+        <img src="/images/Texto de banner.png" alt="Texto del banner" className={styles.overlayText} />
+        <button className={styles.bannerButton}>COMENZAR</button>
+      </div>
     </div>
   );
 };
