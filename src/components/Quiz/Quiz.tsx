@@ -3,21 +3,30 @@ import styles from "./Quiz.module.css";
 
 const Quiz: React.FC = () => {
   return (
-    <div className={styles.quizContainer} style={{ backgroundImage: "url('/images/pixelcut-export.jpg')" }}>
-      <div className={styles.quizBox} style={{ backgroundImage: "url('/images/Quiz_assets-08.png')" }}>
+    <div className={styles.quizContainer}>
+      <div className={styles.quizBox}>
         <div className={styles.quizContent}>
           <h2>¿Todavía no encontraste tu estilo?</h2>
           <p>
-            Descubrí tu estilo ideal con nuestro <strong className={styles.semibold}>quiz</strong> personalizado. Es rápido, práctico y el primer paso para transformar tu guardarropa.
+            Descubrí tu estilo ideal con nuestro <strong className={styles.semibold}>quiz</strong> personalizado.  
+            Es rápido, práctico y el primer paso para transformar tu guardarropa.
           </p>
 
-          <button className={styles.quizButton}>HACER EL QUIZ</button>
+          <button className={styles.quizButton}>
+            HACER EL QUIZ <span className={styles.arrow}>→</span>
+          </button>
         </div>
       </div>
       <div className={styles.quizImages}>
-        {["Gorra - Cher.png", "Sandalias - Battlo.png", "Anita Ko - Pinky Zodiac Ring.png", "Adidas - Beige Sambas.png", "Bottega Veneta - Large Hop Black Bag.png"].map((image, index) => (
+        {[
+          "Gorra - Cher.png",
+          "Sandalias - Battlo.png",
+          "Anita Ko - Pinky Zodiac Ring.png",
+          "Adidas - Beige Sambas.png",
+          "Bottega Veneta - Large Hop Black Bag.png"
+        ].map((image, index) => (
           <div key={index} className={styles.quizImageContainer}>
-            <img src={`/images/${image}`} alt={`Model ${index + 1}`} className={styles.quizImage} />
+            <img src={`/images/${image}`} alt={`Prenda ${index + 1}`} className={styles.quizImage} />
           </div>
         ))}
       </div>
