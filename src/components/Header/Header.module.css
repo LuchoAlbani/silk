@@ -1,17 +1,56 @@
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #161616;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px 40px;
-  background-color: #161616;
   font-family: "AcuminRPro", sans-serif;
+  z-index: 1000;
+  transition: padding 0.3s ease, height 0.3s ease;
 }
 
-nav {
-  margin-top: 10px;
-  margin-bottom: -5px;
+/* Cuando el header se achica */
+.shrink {
+  padding: 5px 40px;
 }
 
+/* Navegación oculta en modo reducido */
+.hidden {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Logo */
+.logo img {
+  height: 80px;
+  transition: height 0.3s ease;
+}
+
+.shrink .logo img {
+  height: 50px;
+}
+
+/* Línea divisoria */
+.divider {
+  width: 100vw;
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 10px 0;
+  transition: opacity 0.3s ease;
+}
+
+.shrink .divider {
+  opacity: 0;
+}
+
+
+/* Navegación */
 .navList {
   list-style: none;
   display: flex;
@@ -19,6 +58,7 @@ nav {
   padding: 0;
   margin: 0;
   justify-content: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .navList li a {
@@ -43,20 +83,7 @@ nav {
   width: 100%;
 }
 
-/* Logo styling */
-.logo img {
-  height: 80px;
-  transition: transform 0.3s ease;
-}
-
-.logo:hover img {
-  transform: scale(1.1);
-}
-
-/* Línea divisoria */
-.divider {
-  width: 100vw;
-  height: 1px;
-  background-color: #e0e0e0;
-  margin: 10px 0;
+.shrink .logo {
+  margin-top: 10px; /* Ajusta este valor según lo necesites */
+  transition: margin-top 0.3s ease;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Bloggers.module.css";
 import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 interface Blogger {
   img: string;
@@ -53,6 +54,7 @@ const Bloggers: React.FC = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

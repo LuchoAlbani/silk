@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 
@@ -16,17 +16,32 @@ const navLinks: NavLinkType[] = [
 ];
 
 const Header: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${isScrolled ? styles.shrink : ""}`}>
       <div className={styles.logo}>
-        <Link to="/">
+        <Link to="/" onClick={scrollToTop}>
           <img src="/images/silk_logo-02.png" alt="Logo de Estudiosilk" />
         </Link>
       </div>
 
       <div className={styles.divider}></div>
 
-      <nav>
+      <nav className={`${styles.nav} ${isScrolled ? styles.hidden : ""}`}>
         <ul className={styles.navList}>
           {navLinks.map((link, index) => (
             <li key={index}>
