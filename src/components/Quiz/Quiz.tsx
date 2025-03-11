@@ -15,7 +15,7 @@ const Quiz: React.FC = () => {
         </div>
       </div>
       <div className={styles.quizImages}>
-        {["model_4.png", "model_3.png", "model_2.png", "model_1.png", "model_5.png"].map((image, index) => (
+        {["Gorra - Cher.png", "Sandalias - Battlo.png", "Anita Ko - Pinky Zodiac Ring.png", "Adidas - Beige Sambas.png", "Bottega Veneta - Large Hop Black Bag.png"].map((image, index) => (
           <div key={index} className={styles.quizImageContainer}>
             <img src={`/images/${image}`} alt={`Model ${index + 1}`} className={styles.quizImage} />
           </div>

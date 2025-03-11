@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
-import Bloggers from "./components/Bloggers";
+import Bloggers from "./components/Bloggers/Bloggers";
 
 const router = createBrowserRouter([
   {

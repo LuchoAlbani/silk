@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Bloggers.module.css";
-import Header from "./Header";
+import Header from "../Header/Header";
 
 interface Blogger {
   img: string;

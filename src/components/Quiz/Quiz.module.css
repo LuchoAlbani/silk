@@ -73,8 +73,11 @@
 }
 
 .quizImageContainer {
-  padding: 5px;
-  transition: transform 0.3s ease;
+  width: 150px; /* Ajusta el tamaño del contenedor */
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .quizImageContainer:hover {
@@ -82,11 +85,18 @@
 }
 
 /* Estilo de las imágenes */
+.quizImages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px; /* Espaciado uniforme entre imágenes */
+  padding: 40px 0;
+}
+
 .quizImage {
-  width: 120px;
-  height: 300px;
-  object-fit: cover;
-  object-position: 40%;
+  width: 100%;
+  height: auto;
+  object-fit: contain; /* Asegura que la imagen se vea completa */
   transition: transform 0.3s ease;
 }
 
