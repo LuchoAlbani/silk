@@ -1,0 +1,62 @@
+.bloggersPage {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Vogue', sans-serif;
+    color: #000;
+    background-color: #fff;
+    width: 100%;
+}
+
+.bloggers {
+    width: 100%;
+    margin-top: 100px;
+}
+
+.bloggersTitle {
+    font-size: 50px;
+    margin-bottom: 100px;
+    font-weight: 400;
+    text-align: center;
+    width: 100%;
+}
+
+.bloggersList {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-left: 50px;
+}
+
+.bloggerItem {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+
+.bloggerImage {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.bloggerInfo {
+    text-align: left;
+}
+
+.bloggerTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.bloggerAuthor,
+.bloggerDate {
+    font-size: 16px;
+    color: gray;
+    margin-bottom: 5px;
+}

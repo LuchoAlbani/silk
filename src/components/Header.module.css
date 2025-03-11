@@ -1,0 +1,62 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #161616;
+  font-family: "AcuminRPro", sans-serif;
+}
+
+nav {
+  margin-top: 10px;
+  margin-bottom: -5px;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+.navList li a {
+  text-decoration: none;
+  color: #f2f0eb;
+  font-size: 1rem;
+  position: relative;
+}
+
+.navList li a::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #f2f0eb;
+  transition: width 0.3s ease-in-out;
+}
+
+.navList li a:hover::after {
+  width: 100%;
+}
+
+/* Logo styling */
+.logo img {
+  height: 80px;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover img {
+  transform: scale(1.1);
+}
+
+/* Línea divisoria */
+.divider {
+  width: 100vw;
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 10px 0;
+}

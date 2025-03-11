@@ -1,0 +1,61 @@
+.blog {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.blog h2 {
+  font-size: 40px;
+  margin-top: 60px;
+}
+
+.blog em {
+  font-style: italic;
+}
+
+.blogCarousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carouselButton {
+  background: none;
+  border: none;
+  font-size: 50px;
+  cursor: pointer;
+}
+
+.blogItem {
+  margin: 60px 30px;
+  text-align: left;
+  position: relative;
+}
+
+.blogItem img {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  object-position: center 10%;
+}
+
+.blogCategory {
+  font-weight: bold;
+  font-size: 15px;
+  color: black;
+  position: absolute;
+  bottom: 60px;
+  left: 10px;
+  background-color: #f2f0eb;
+  padding: 5px 10px;
+  text-transform: uppercase;
+}
+
+.blogItem h3 {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.blogItem p {
+  font-size: 12px;
+  color: gray;
+}
