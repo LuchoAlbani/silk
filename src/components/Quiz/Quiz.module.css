@@ -128,3 +128,63 @@
 .quizImage:hover {
   transform: scale(1.2);
 }
+
+@media (max-width: 768px) {
+  .quizContainer {
+      height: 650px; /* Mantiene la altura adecuada */
+   
+  }
+
+  .quizBox {
+    max-width: 350px; /* Limita su expansión */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative; /* Asegura que el botón no salga */
+    padding: 20px;
+  }
+
+  .quizContent {
+    max-width: 100%; /* Ocupar más espacio */
+    margin-bottom: 100px; /* Reduce el espacio extra debajo */
+  }
+
+  .quizContent h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .quizContent p {
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+  }
+
+  .quizButton {
+    font-size: 0.8rem; /* Reduce el tamaño del texto */
+    padding: 6px 12px; /* Reduce el tamaño del botón */
+    margin-top: 10px; /* Disminuye la separación con el contenido */
+    position: relative; /* Se mantiene dentro del cuadro */
+  }
+
+  /* Ajuste de imágenes y fondo */
+  .quizImages {
+    width: 100%; /* Ahora ocupa todo el ancho */
+    height: auto;
+    display: flex;
+    justify-content: space-around; /* Distribuye mejor */
+    align-items: center;
+    flex-wrap: wrap; /* Permite ajuste dinámico */
+    gap: 15px;
+    padding: 20px 0;
+    margin-top: -50px; /* Acerca las imágenes al cuadro */
+  }
+
+  .quizImage {
+    width: 100px; /* Ajusta tamaño */
+  }
+}
+
+
+

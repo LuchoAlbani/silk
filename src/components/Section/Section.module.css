@@ -59,3 +59,37 @@
   font-family: "AcuminRPro", sans-serif;
   font-weight: 300;
 }
+
+@media (max-width: 768px) {
+  .sectionContainer {
+    padding: 40px 20px; /* Reduce el padding en móviles */
+  }
+
+  .sectionContainer h2 {
+    font-size: 2.5rem; /* Reduce el tamaño del título */
+    margin-bottom: 30px;
+  }
+
+  .sectionGrid {
+    gap: 50px; /* Reduce el espacio entre elementos */
+  }
+
+  .sectionItem {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    text-align: center; /* Centraliza el texto en móviles */
+  }
+
+  .sectionImage {
+    height: 300px; /* Ajusta la altura de las imágenes */
+  }
+
+  .sectionItem h3 {
+    font-size: 1.2rem; /* Reduce el tamaño del subtítulo */
+    margin-bottom: 10px;
+  }
+
+  .sectionItem p {
+    font-size: 1rem; /* Reduce el tamaño del texto */
+    line-height: 1.6;
+  }
+}

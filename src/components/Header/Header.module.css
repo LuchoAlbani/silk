@@ -15,7 +15,7 @@
 
 /* Cuando el header se achica */
 .shrink {
-  padding: 5px 40px;
+  padding: 0px 40px;
 }
 
 /* Navegación oculta en modo reducido */
@@ -57,9 +57,18 @@
   gap: 40px;
   padding: 0;
   margin: 0;
-  justify-content: center;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  justify-content: center; /* Centra los elementos horizontalmente */
+  align-items: center; /* Asegura que estén alineados verticalmente */
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+  margin-top: 10px;
 }
+
+.nav {
+  display: flex;
+  justify-content: center; /* Centra el contenedor de navegación */
+  width: 100%;
+}
+
 
 .navList li a {
   text-decoration: none;
@@ -84,6 +93,7 @@
 }
 
 .shrink .logo {
-  margin-top: 10px; /* Ajusta este valor según lo necesites */
+  margin-top: 10px;
+  margin-bottom: -20px; /* Ajusta este valor según lo necesites */
   transition: margin-top 0.3s ease;
 }

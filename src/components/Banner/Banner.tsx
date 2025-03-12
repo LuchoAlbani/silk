@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Banner.module.css";
 
+
 const images = [
   "/images/Banner 1_1.png",
   "/images/Banner 2_1.png",

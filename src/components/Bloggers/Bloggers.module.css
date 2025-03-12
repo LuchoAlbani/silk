@@ -60,3 +60,51 @@
     color: gray;
     margin-bottom: 5px;
 }
+
+@media (max-width: 768px) {
+    .bloggers {
+      margin-top: 100px;
+      padding: 0 20px; /* Añade padding lateral para evitar bordes pegados */
+    }
+  
+    .bloggersTitle {
+      font-size: 40px; /* Reduce el tamaño del título */
+      margin-bottom: 50px;
+      margin-top: 10px;
+    }
+  
+    .bloggersList {
+      margin-left: 0; /* Elimina margen innecesario */
+      align-items: center; /* Centra los elementos */
+    }
+  
+    .bloggerItem {
+      flex-direction: column; /* Apila los elementos */
+      align-items: center; /* Centra el contenido */
+      text-align: center;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 20px;
+    }
+  
+    .bloggerImage {
+      width: 100%; /* Ocupa el ancho completo */
+      height: auto; /* Mantiene la proporción */
+      max-width: 350px; /* Controla el tamaño máximo */
+      margin-right: 0; /* Elimina margen derecho */
+      margin-bottom: 15px; /* Agrega espacio entre la imagen y el texto */
+    }
+  
+    .bloggerInfo {
+      text-align: center; /* Centra el texto */
+    }
+  
+    .bloggerTitle {
+      font-size: 20px; /* Reduce el tamaño del título */
+    }
+  
+    .bloggerAuthor,
+    .bloggerDate {
+      font-size: 14px; /* Ajusta el tamaño del texto */
+    }
+  }
+  

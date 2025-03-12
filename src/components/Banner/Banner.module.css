@@ -60,3 +60,46 @@
   background-color: #ddd;
   transform: scale(1.05);
 }
+
+.bannerContainer {
+  position: relative;
+  width: 100%;
+  height: 600px; /* Altura base */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .bannerContainer {
+    height: 600px; /* Mantiene la altura adecuada */
+  }
+
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* Capa oscura para mejorar legibilidad */
+    padding: 0 5px; /* Reduce padding para más espacio */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .overlayText {
+    width: 120%; /* Hace que el texto sea más grande */
+    height: auto; /* Mantiene proporción */
+    max-width: none; /* Permite que crezca sin restricciones */
+    object-fit: contain; /* Evita deformaciones */
+  }
+
+  .bannerButton {
+    bottom: 80px; /* Ajusta la posición */
+    font-size: 1.2rem;
+    padding: 12px 25px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    border: none;
+  }
+}
+
+

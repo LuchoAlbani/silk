@@ -59,3 +59,58 @@
   font-size: 12px;
   color: gray;
 }
+
+
+@media (max-width: 768px) {
+  .blog h2 {
+    font-size: 28px;
+    margin-top: 40px;
+  }
+
+  .blogCarousel {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .blogItem {
+    margin: 20px 0;
+    text-align: center;
+    position: relative; /* Para posicionar elementos dentro */
+    display: inline-block; /* Mantiene el tamaño adecuado */
+  }
+
+  .blogItem img {
+    width: 300px;
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
+
+  .blogCategory {
+    font-size: 12px;
+    position: absolute; /* Se coloca sobre la imagen */
+    bottom: 60px; /* Pegado a la parte inferior */
+    left: 10px; /* Pegado al lado izquierdo */
+    background: rgba(242, 240, 235, 0.8);
+    color: black;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    z-index: 10; /* Asegura que quede sobre la imagen */
+  }
+
+  .blogItem h3 {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+
+  .blogItem p {
+    font-size: 10px;
+  }
+
+  .carouselButton {
+    font-size: 40px;
+    display: none;
+  }
+}
+
