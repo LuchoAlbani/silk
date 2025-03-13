@@ -1,110 +1,142 @@
 .bloggersPage {
-    display: flex;
-    flex-direction: column;
-    font-family: 'Vogue', sans-serif;
-    color: #000;
-    background-color: #fff;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Vogue', sans-serif;
+  color: #000;
+  background-color: #fff;
+  width: 100%;
 }
 
 .bloggers {
-    width: 100%;
-    margin-top: 100px;
+  width: 100%;
+  margin-top: 150px; /* Un poco menos de espacio superior */
+  margin-bottom: 100px;
 }
 
 .bloggersTitle {
-    font-size: 50px;
-    margin-bottom: 100px;
-    font-weight: 400;
-    text-align: center;
-    width: 100%;
+  font-size: 50px; /* Mantiene el tamaño original */
+  margin-bottom: 80px;
+  font-weight: 400;
+  text-align: center;
+  width: 100%;
 }
 
 .bloggersList {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-left: 30px; /* Menos margen a la izquierda */
 }
 
 .bloggerItem {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 40px;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 20px;
+  display: flex;
+  align-items: center;
+  width: 90%;
+  margin-bottom: 30px; /* Menos espacio entre bloggers */
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
+  position: relative;
+}
+
+.imageWrapper {
+  position: relative;
+  display: inline-block;
 }
 
 .bloggerImage {
-    width: 400px;
-    height: 400px;
-    object-fit: cover;
-    margin-right: 20px;
+  width: 300px; /* Reducido */
+  height: 300px; /* Reducido */
+  object-fit: cover;
+  object-position: top;
+  margin-right: 15px;
+}
+
+.bloggerCategory {
+  font-weight: bold;
+  font-size: 13px; /* Más pequeño */
+  color: black;
+  position: absolute;
+  bottom: 15px;
+  left: 10px;
+  background-color: #f2f0eb;
+  padding: 4px 8px;
+  text-transform: uppercase;
 }
 
 .bloggerInfo {
-    text-align: left;
+  text-align: left;
 }
 
 .bloggerTitle {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
+  font-size: 20px; /* Reducido */
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 
 .bloggerAuthor,
 .bloggerDate {
-    font-size: 16px;
-    color: gray;
-    margin-bottom: 5px;
+  font-size: 14px; /* Reducido */
+  color: gray;
+  margin-bottom: 3px;
 }
 
+/* 📌 Responsive */
 @media (max-width: 768px) {
-    .bloggers {
-      margin-top: 100px;
-      padding: 0 20px; /* Añade padding lateral para evitar bordes pegados */
-    }
-  
-    .bloggersTitle {
-      font-size: 40px; /* Reduce el tamaño del título */
-      margin-bottom: 50px;
-      margin-top: 10px;
-    }
-  
-    .bloggersList {
-      margin-left: 0; /* Elimina margen innecesario */
-      align-items: center; /* Centra los elementos */
-    }
-  
-    .bloggerItem {
-      flex-direction: column; /* Apila los elementos */
-      align-items: center; /* Centra el contenido */
-      text-align: center;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 20px;
-    }
-  
-    .bloggerImage {
-      width: 100%; /* Ocupa el ancho completo */
-      height: auto; /* Mantiene la proporción */
-      max-width: 350px; /* Controla el tamaño máximo */
-      margin-right: 0; /* Elimina margen derecho */
-      margin-bottom: 15px; /* Agrega espacio entre la imagen y el texto */
-    }
-  
-    .bloggerInfo {
-      text-align: center; /* Centra el texto */
-    }
-  
-    .bloggerTitle {
-      font-size: 20px; /* Reduce el tamaño del título */
-    }
-  
-    .bloggerAuthor,
-    .bloggerDate {
-      font-size: 14px; /* Ajusta el tamaño del texto */
-    }
+  .bloggers {
+    margin-top: 80px;
+    padding: 0 20px;
   }
-  
+
+  .bloggersTitle {
+    font-size: 40px;
+    margin-bottom: 50px;
+    margin-top: 10px;
+  }
+
+  .bloggersList {
+    margin-left: 0;
+    align-items: center;
+  }
+
+  .bloggerItem {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+  }
+
+  .bloggerImage {
+    width: 100%;
+    height: auto;
+    max-width: 280px; /* Más pequeño en móviles */
+    margin-right: 0;
+    margin-bottom: 12px;
+  }
+
+  .bloggerCategory {
+    font-size: 11px; /* Más pequeño */
+    position: absolute;
+    bottom: 25px;
+    left: 10px;
+    background: #f2f0eb;
+    color: black;
+    padding: 4px 8px;
+    text-transform: uppercase;
+    z-index: 10;
+  }
+
+  .bloggerInfo {
+    text-align: center;
+  }
+
+  .bloggerTitle {
+    font-size: 18px; /* Más pequeño */
+  }
+
+  .bloggerAuthor,
+  .bloggerDate {
+    font-size: 13px;
+  }
+}

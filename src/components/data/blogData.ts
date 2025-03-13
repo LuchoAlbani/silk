@@ -1,14 +1,16 @@
-// src/data/blogData.ts
 export interface BlogItemType {
+    id: string;
     img: string;
     category?: string; // Opcional para Blog
     title: string;
     author: string;
     date?: string; // Opcional para Bloggers
+    description?: string; // ✅ Agregado
 }
 
 export const blogItems: BlogItemType[] = [
     {
+        id: "1",
         img: "/images/blog_prueba_1.jpg",
         category: "STYLE",
         title: "Butter Yellow is hot!",
@@ -16,6 +18,7 @@ export const blogItems: BlogItemType[] = [
         date: "August 16, 2016",
     },
     {
+        id: "2",
         img: "/images/blog_prueba_2.jpg",
         category: "BEAUTY",
         title: "Title Censored",
@@ -23,6 +26,7 @@ export const blogItems: BlogItemType[] = [
         date: "May 24, 2016",
     },
     {
+        id: "3",
         img: "/images/blog_prueba_3.jpg",
         category: "CELEBRITY",
         title: "Taylor Swift vistiendo Versace",
@@ -31,6 +35,7 @@ export const blogItems: BlogItemType[] = [
     },
 
     {
+        id: "4",
         img: "/images/blog_prueba_4.jpeg",
         category: "GLAMOUR",
         title: "Elegance in the Mirror",
@@ -39,6 +44,7 @@ export const blogItems: BlogItemType[] = [
     },
 
     {
+        id: "5",
         img: "/images/blog_prueba_5.jpeg",
         category: "ICONIC",
         title: "Amarillo Monocromático en la Alfombra Roja",

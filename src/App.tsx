@@ -16,8 +16,8 @@ const App: React.FC = () => {
       <Quiz />
       <Section />
       <Blog />
+      <Outlet /> {/* Renderiza las rutas anidadas como Bloggers y BloggerDetail */}
       <Footer /> 
-      <Outlet />
     </div>
   );
 };
