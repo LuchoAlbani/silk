@@ -25,15 +25,44 @@ const BloggerDetail: React.FC = () => {
   return (
     <div className={styles.bloggerDetail}>
       <Header />
-      <div className={styles.content}>
+      <div className={styles.container}>
+        {/* ✅ Título del blog */}
+        <h1 className={styles.title}>{blogger.title}</h1>
+        <p className={styles.subtitle}>
+          {blogger.description}
+        </p>
+        <p className={styles.meta}>
+          {blogger.date} • Por {blogger.author}
+        </p>
+
+        {/* ✅ Primera imagen */}
         <img src={blogger.img} alt={blogger.title} className={styles.image} />
-        <div className={styles.info}>
-          <h2>{blogger.title}</h2>
-          <p className={styles.author}>{blogger.author}</p>
-          {blogger.date && <p className={styles.date}>{blogger.date}</p>}
-          {/* Mostrar description solo si existe */}
-          {blogger.description && <p className={styles.description}>{blogger.description}</p>}
-        </div>
+
+        {/* ✅ Contenido del blog */}
+        <p className={styles.text}>
+          {blogger.content1}
+        </p>
+
+        {/* ✅ Segunda imagen con numeración */}
+        {blogger.img2 && (
+          <>
+            <p className={styles.imageNumber}>1 / 2</p>
+            <img src={blogger.img2} alt="Imagen 2" className={styles.image} />
+          </>
+        )}
+
+        {/* ✅ Más texto */}
+        <p className={styles.text}>
+          {blogger.content2}
+        </p>
+
+        {/* ✅ Tercera imagen con numeración */}
+        {blogger.img3 && (
+          <>
+            <p className={styles.imageNumber}>2 / 2</p>
+            <img src={blogger.img3} alt="Imagen 3" className={styles.image} />
+          </>
+        )}
       </div>
       <Footer />
     </div>
