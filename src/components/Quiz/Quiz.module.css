@@ -1,89 +1,48 @@
-@font-face {
-  font-family: "AcuminProBold";
-  src: url("/assets/fonts/Acumin-BdltPro.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "AcuminProRegular";
-  src: url("/assets/fonts/Acumin-RPro.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "AcuminProItalic";
-  src: url("/assets/fonts/Acumin-ItPro.otf") format("opentype");
-}
-
 .quizContainer {
   background-image: url("/images/Quiz_assets-07.png");
   background-size: cover;
   background-position: center;
-  color: #161616;
   text-align: center;
-  padding: 50px 0px 0px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 50px 0px 0px 0px;
 }
 
-/* Cuadro del contenido */
+/* Cuadro con tamaño reducido */
 .quizBox {
-  background-image: url("/images/Quiz_assets-08.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 670px;
-  height: 500px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
-  z-index: 2;
-  padding: 40px;
+  width: 550px; /* Antes: 670px */
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Contenido dentro del cuadro */
-.quizContent {
-  text-align: center;
-  max-width: 70%;
-  margin-top: -60px;
+/* Imagen de fondo ajustada */
+.quizBackground {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-.quizContent h2 {
-  font-family: "AcuminProBold";
-  font-size: 2.5rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 25px;
-  line-height: 1.2;
-}
-
-.quizContent p {
-  font-family: "AcuminProRegular", sans-serif;
-  font-size: 1.2rem;
-  line-height: 1.6;
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.quizContent p strong {
-  font-weight: bold;
-}
-
-/* Botón mejorado */
+/* Botón con bordes redondeados */
 .quizButton {
-  font-family: "AcuminProBold", sans-serif;
+  position: absolute;
+  bottom: 20px;
   background-color: #1b4f3c;
   color: #ffffff;
-  padding: 8px 18px; /* Reduce el tamaño del botón */
+  padding: 12px 24px;
   border: none;
-  font-size: 1rem; /* Reduce el tamaño del texto */
+  border-radius: 8px; /* Borde redondeado leve */
+  font-size: 1rem;
   cursor: pointer;
+  font-family: "AcuminProBold", sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   transition: transform 0.3s ease, background-color 0.3s ease;
-  width: fit-content;
-  margin: 45px auto 0; /* Lo mueve más abajo */
 }
 
 .quizButton .arrow {
@@ -100,16 +59,16 @@
   transform: translateX(5px);
 }
 
-/* Sección de imágenes con fondo blanco */
+/* Sección de imágenes con la barra blanca ajustada */
 .quizImages {
   width: 100%;
-  height: 339px;
+  height: 250px; /* Reducida de 339px */
   background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 100px;
-  margin-top: -20px;
+  gap: 80px;
+  margin-top: 40px; /* Ajuste para que quede pegada al quiz */
 }
 
 .quizImageContainer {
@@ -119,7 +78,7 @@
 }
 
 .quizImage {
-  width: 130px;
+  width: 110px; /* Ajuste menor */
   height: auto;
   object-fit: contain;
   transition: transform 0.3s ease;
@@ -129,62 +88,52 @@
   transform: scale(1.2);
 }
 
+/* 📱 Responsive */
 @media (max-width: 768px) {
-  .quizContainer {
-      height: 650px; /* Mantiene la altura adecuada */
-   
-  }
+  
 
   .quizBox {
-    max-width: 350px; /* Limita su expansión */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative; /* Asegura que el botón no salga */
-    padding: 20px;
-  }
-
-  .quizContent {
-    max-width: 100%; /* Ocupar más espacio */
-    margin-bottom: 100px; /* Reduce el espacio extra debajo */
-  }
-
-  .quizContent h2 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
-
-  .quizContent p {
-    font-size: 0.8rem;
-    margin-bottom: 15px;
+    width: 90%;
+    max-width: 320px;
   }
 
   .quizButton {
-    font-size: 0.8rem; /* Reduce el tamaño del texto */
-    padding: 6px 12px; /* Reduce el tamaño del botón */
-    margin-top: 10px; /* Disminuye la separación con el contenido */
-    position: relative; /* Se mantiene dentro del cuadro */
+    font-size: 0.75rem; /* Más chico */
+    padding: 5px 12px; /* Más compacto */
+    bottom: 10px;
+    border-radius: 5px; /* Bordes suaves */
   }
 
-  /* Ajuste de imágenes y fondo */
   .quizImages {
-    width: 100%; /* Ahora ocupa todo el ancho */
-    height: auto;
-    display: flex;
-    justify-content: space-around; /* Distribuye mejor */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas en la primera fila */
+    grid-template-rows: auto auto; /* Dos filas */
+    gap: 10px;
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap; /* Permite ajuste dinámico */
-    gap: 15px;
-    padding: 20px 0;
-    margin-top: -50px; /* Acerca las imágenes al cuadro */
+    padding-bottom: 15px;
+  }
+
+  .quizImageContainer {
+    display: flex;
+    justify-content: center;
+  }
+
+  .quizImage:nth-child(1),
+  .quizImage:nth-child(2),
+  .quizImage:nth-child(3) {
+    align-self: flex-start; /* Asegura que estén alineadas arriba */
+  }
+
+  .quizImage:nth-child(4),
+  .quizImage:nth-child(5) {
+    grid-column: span 3; /* Ocuparán el centro en la segunda fila */
+    justify-self: center; /* Centra los elementos */
   }
 
   .quizImage {
-    width: 100px; /* Ajusta tamaño */
+    width: 85px; /* Tamaño uniforme */
   }
 }
-
 
 

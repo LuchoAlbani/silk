@@ -24,6 +24,15 @@
   z-index: 1;
 }
 
+/* Fondo oscuro con mayor opacidad */
+.overlayBackground {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.55); /* Más oscuro para mayor contraste */
+  z-index: 2;
+}
+
 /* Overlay con texto y botón */
 .overlay {
   position: absolute;
@@ -35,26 +44,37 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: 3; /* Para que esté sobre las imágenes */
+  padding: 20px;
 }
 
+/* Imagen de texto principal */
 .overlayText {
   width: 100%;
+  max-width: 80%;
   text-align: center;
-  margin-bottom: 20px; /* Espacio antes del botón */
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 3;
+  filter: brightness(1.2); /* Aumenta el brillo del texto */
 }
 
-/* Posicionamos el botón sin mover el overlay */
+/* Botón con mejor separación */
 .bannerButton {
-  position: absolute;
-  bottom: 100px; /* Ajusta la altura del botón sin afectar el overlay */
-  padding: 12px 25px;
+  position: relative;
+  bottom: 10px;
+  padding: 15px 30px;
   background-color: white;
   color: black;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
+  z-index: 3;
+  margin-top: 15px; /* Más espacio debajo del texto */
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-radius: 5px;
 }
 
 .bannerButton:hover {
@@ -62,45 +82,23 @@
   transform: scale(1.05);
 }
 
-.bannerContainer {
-  position: relative;
-  width: 100%;
-  height: 600px; /* Altura base */
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
+/* 📱 Responsive */
 @media (max-width: 768px) {
   .bannerContainer {
-    height: 600px; /* Mantiene la altura adecuada */
-  }
-
-  .overlay {
-    background-color: rgba(0, 0, 0, 0.5); /* Capa oscura para mejorar legibilidad */
-    padding: 0 5px; /* Reduce padding para más espacio */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    height: 500px; /* Ajuste en móviles */
   }
 
   .overlayText {
-    width: 120%; /* Hace que el texto sea más grande */
-    height: auto; /* Mantiene proporción */
-    max-width: none; /* Permite que crezca sin restricciones */
-    object-fit: contain; /* Evita deformaciones */
+    width: 180%;
+    height: auto;
+    max-width: none;
+    object-fit: contain;
   }
 
   .bannerButton {
-    bottom: 80px; /* Ajusta la posición */
-    font-size: 1.2rem;
+    top: 20px;
+    font-size: 1.1rem;
     padding: 12px 25px;
-    background-color: white;
-    color: black;
-    cursor: pointer;
-    border: none;
+    border-radius: 5px;
   }
 }
-
-
