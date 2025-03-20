@@ -14,16 +14,7 @@ export interface BlogItemType {
 
 
 export const blogItems: BlogItemType[] = [
-    /*
-    {
-        id: "1",
-        img: "/images/blog_prueba_1.jpg",
-        category: "STYLE",
-        title: "Butter Yellow is hot!",
-        author: "BY LUCAS CONTARDI",
-        date: "August 16, 2016",
-    },
-    */
+
         {
             id: "1",
             img: "/images/blog_prueba_1.jpg",
@@ -39,40 +30,60 @@ export const blogItems: BlogItemType[] = [
         },
 
     
-    {
-        id: "2",
-        img: "/images/blog_prueba_2.jpg",
-        category: "BEAUTY",
-        title: "Title Censored",
-        author: "BY MAGGIE CRUZ FREZZINI",
-        date: "May 24, 2016",
-    },
-    {
-        id: "3",
-        img: "/images/blog_prueba_3.jpg",
-        category: "CELEBRITY",
-        title: "Taylor Swift vistiendo Versace",
-        author: "BY LUCAS CONTARDI",
-        date: "May 24, 2016",
-    },
+        {
+            id: "2",
+            img: "/images/blog_prueba_1.jpg",
+            category: "STYLE",
+            title: "Butter Yellow is hot!",
+            author: "BY LUCAS CONTARDI",
+            date: "August 16, 2016",
+            description: "Descubre cómo el amarillo mantequilla se está convirtiendo en el color de moda.",
+            content1: "El color amarillo mantequilla ha sido visto en pasarelas y alfombras rojas...",
+            content2: "Incluso grandes marcas como Chanel y Dior han apostado por esta tonalidad...",
+            img2: "/images/blog_prueba_2.jpg", // Segunda imagen
+            img3: "/images/blog_prueba_3.jpg"  // Tercera imagen
+        },
+        {
+            id: "3",
+            img: "/images/blog_prueba_1.jpg",
+            category: "STYLE",
+            title: "Butter Yellow is hot!",
+            author: "BY LUCAS CONTARDI",
+            date: "August 16, 2016",
+            description: "Descubre cómo el amarillo mantequilla se está convirtiendo en el color de moda.",
+            content1: "El color amarillo mantequilla ha sido visto en pasarelas y alfombras rojas...",
+            content2: "Incluso grandes marcas como Chanel y Dior han apostado por esta tonalidad...",
+            img2: "/images/blog_prueba_2.jpg", // Segunda imagen
+            img3: "/images/blog_prueba_3.jpg"  // Tercera imagen
+        },
 
-    {
-        id: "4",
-        img: "/images/blog_prueba_4.jpeg",
-        category: "GLAMOUR",
-        title: "Elegance in the Mirror",
-        author: "BY LUCAS CONTARDI",
-        date: "May 24, 2016",
-    },
+        {
+            id: "4",
+            img: "/images/blog_prueba_1.jpg",
+            category: "STYLE",
+            title: "Butter Yellow is hot!",
+            author: "BY LUCAS CONTARDI",
+            date: "August 16, 2016",
+            description: "Descubre cómo el amarillo mantequilla se está convirtiendo en el color de moda.",
+            content1: "El color amarillo mantequilla ha sido visto en pasarelas y alfombras rojas...",
+            content2: "Incluso grandes marcas como Chanel y Dior han apostado por esta tonalidad...",
+            img2: "/images/blog_prueba_2.jpg", // Segunda imagen
+            img3: "/images/blog_prueba_3.jpg"  // Tercera imagen
+        },
 
-    {
-        id: "5",
-        img: "/images/blog_prueba_5.jpeg",
-        category: "ICONIC",
-        title: "Amarillo Monocromático en la Alfombra Roja",
-        author: "BY LUCAS CONTARDI",
-        date: "May 24, 2016",
-    },
+        {
+            id: "5",
+            img: "/images/blog_prueba_1.jpg",
+            category: "STYLE",
+            title: "Butter Yellow is hot!",
+            author: "BY LUCAS CONTARDI",
+            date: "August 16, 2016",
+            description: "Descubre cómo el amarillo mantequilla se está convirtiendo en el color de moda.",
+            content1: "El color amarillo mantequilla ha sido visto en pasarelas y alfombras rojas...",
+            content2: "Incluso grandes marcas como Chanel y Dior han apostado por esta tonalidad...",
+            img2: "/images/blog_prueba_2.jpg", // Segunda imagen
+            img3: "/images/blog_prueba_3.jpg"  // Tercera imagen
+        },
 
 ];
 
