@@ -3,6 +3,14 @@
   color: #f2f2f2;
   text-align: center;
   padding: 60px 40px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+
+.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .sectionContainer h2 {

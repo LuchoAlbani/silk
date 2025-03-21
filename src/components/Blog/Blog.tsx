@@ -1,22 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Blog.module.css";
 import { getBlogs } from "../../services/blogService";
-
-import type { Blog } from "../../services/blogService"; // Importamos la interfaz
+import type { Blog } from "../../services/blogService";
 
 const Blog: React.FC = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 3;
+  const blogRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const fetchBlogs = async () => {
       const blogsData = await getBlogs();
       setBlogs(blogsData);
     };
-
     fetchBlogs();
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (blogRef.current) {
+      observer.observe(blogRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   const nextSlide = () => {
@@ -32,7 +50,7 @@ const Blog: React.FC = () => {
   };
 
   return (
-    <div className={styles.blog}>
+    <div ref={blogRef} className={`${styles.blog} ${isVisible ? styles.fadeIn : ""}`}>
       <h2>
         Lo <em>último</em> de nuestro blog
       </h2>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Banner.module.css";
 
 const images = [
@@ -11,18 +11,37 @@ const images = [
 
 const Banner: React.FC = () => {
   const [currentImage, setCurrentImage] = useState(0);
+  const bannerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (bannerRef.current) {
+      observer.observe(bannerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 4000); // Cambia cada 4 segundos
+    }, 4000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className={styles.bannerContainer}>
-      {/* Imágenes de fondo con efecto fade */}
+    <div ref={bannerRef} className={`${styles.bannerContainer} ${isVisible ? styles.fadeIn : ""}`}>
       {images.map((img, index) => (
         <img
           key={index}
@@ -32,11 +51,9 @@ const Banner: React.FC = () => {
         />
       ))}
 
-      {/* Overlay con el fondo oscuro y texto */}
       <div className={styles.overlay}>
-        <div className={styles.overlayBackground}></div> {/* Fondo oscuro con opacidad */}
+        <div className={styles.overlayBackground}></div>
 
-        {/* ✅ Solo una imagen de texto */}
         <img src="/images/Banner solo texto_2@2x-8.png" alt="Texto del banner" className={styles.overlayText} />
 
         <button className={styles.bannerButton}>COMENZAR</button>

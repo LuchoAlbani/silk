@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Quiz.module.css";
 
 const Quiz: React.FC = () => {
+  const quizRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (quizRef.current) {
+      observer.observe(quizRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className={styles.quizContainer}>
-      {/* Nuevo fondo del cuadro */}
+    <div ref={quizRef} className={`${styles.quizContainer} ${isVisible ? styles.fadeIn : ""}`}>
       <div className={styles.quizBox}>
         <img
           src="/images/Bloque QUIZ sin boton-100.jpg"
@@ -16,7 +36,6 @@ const Quiz: React.FC = () => {
         </button>
       </div>
 
-      {/* Sección de imágenes */}
       <div className={styles.quizImages}>
         {[
           "Gorra - Cher.png",

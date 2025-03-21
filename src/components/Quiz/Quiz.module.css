@@ -7,6 +7,14 @@
   flex-direction: column;
   align-items: center;
   padding: 40px 0px 0px 0px; /* Ajuste para subir el botón */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+
+.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Cuadro con tamaño reducido */

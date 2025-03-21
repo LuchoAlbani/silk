@@ -2,6 +2,14 @@
   text-align: center;
   font-family: Arial, sans-serif;
   background-color: #ffffff;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+
+.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .blog h2 {
