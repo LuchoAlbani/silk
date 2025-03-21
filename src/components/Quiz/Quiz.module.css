@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 0px 0px 0px;
+  padding: 40px 0px 0px 0px; /* Ajuste para subir el botón */
 }
 
 /* Cuadro con tamaño reducido */
@@ -26,16 +26,16 @@
   display: block;
 }
 
-/* Botón con bordes redondeados */
+/* Botón con bordes redondeados y tamaño reducido */
 .quizButton {
   position: absolute;
-  bottom: 20px;
+  bottom: 35px; /* Subido un poco */
   background-color: #1b4f3c;
   color: #ffffff;
-  padding: 12px 24px;
+  padding: 10px 20px; /* Más compacto */
   border: none;
-  border-radius: 8px; /* Borde redondeado leve */
-  font-size: 1rem;
+  border-radius: 6px; /* Más pequeño */
+  font-size: 0.9rem; /* Reducción del tamaño del texto */
   cursor: pointer;
   font-family: "AcuminProBold", sans-serif;
   display: flex;
@@ -46,7 +46,7 @@
 }
 
 .quizButton .arrow {
-  font-size: 1.3rem;
+  font-size: 1.1rem; /* Más chico */
   transition: transform 0.3s ease;
 }
 
@@ -90,50 +90,25 @@
 
 /* 📱 Responsive */
 @media (max-width: 768px) {
-  
+
+  .quizContainer{
+    height: 500px;
+  }
 
   .quizBox {
     width: 90%;
     max-width: 320px;
+    margin-top: 100px;
   }
 
   .quizButton {
-    font-size: 0.75rem; /* Más chico */
-    padding: 5px 12px; /* Más compacto */
-    bottom: 10px;
-    border-radius: 5px; /* Bordes suaves */
+    font-size: 0.7rem; /* Más chico */
+    padding: 4px 6px; /* Más compacto */
+    bottom: 15px; /* Subido un poco más */
+    border-radius: 4px; /* Bordes suaves */
   }
 
   .quizImages {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Tres columnas en la primera fila */
-    grid-template-rows: auto auto; /* Dos filas */
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 15px;
-  }
-
-  .quizImageContainer {
-    display: flex;
-    justify-content: center;
-  }
-
-  .quizImage:nth-child(1),
-  .quizImage:nth-child(2),
-  .quizImage:nth-child(3) {
-    align-self: flex-start; /* Asegura que estén alineadas arriba */
-  }
-
-  .quizImage:nth-child(4),
-  .quizImage:nth-child(5) {
-    grid-column: span 3; /* Ocuparán el centro en la segunda fila */
-    justify-self: center; /* Centra los elementos */
-  }
-
-  .quizImage {
-    width: 85px; /* Tamaño uniforme */
+    display: none; /* Eliminadas las imágenes y la barra blanca */
   }
 }
-
-

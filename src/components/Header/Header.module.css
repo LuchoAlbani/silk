@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 40px;
+  padding: 10px 20px;
   font-family: "AcuminRPro", sans-serif;
   z-index: 1000;
   transition: padding 0.3s ease, height 0.3s ease;
@@ -15,7 +15,7 @@
 
 /* Cuando el header se achica */
 .shrink {
-  padding: 0px 40px;
+  padding: 0px 20px;
 }
 
 /* Navegación oculta en modo reducido */
@@ -28,12 +28,14 @@
 
 /* Logo */
 .logo img {
-  height: 80px;
+  height: 60px;
   transition: height 0.3s ease;
 }
 
 .shrink .logo img {
-  height: 50px;
+  height: 40px;
+  margin-bottom: -20px;
+  margin-top: 10px;
 }
 
 /* Línea divisoria */
@@ -41,7 +43,7 @@
   width: 100vw;
   height: 1px;
   background-color: #e0e0e0;
-  margin: 10px 0;
+  margin: 5px 0;
   transition: opacity 0.3s ease;
 }
 
@@ -49,38 +51,43 @@
   opacity: 0;
 }
 
-
 /* Navegación */
 .navList {
   list-style: none;
   display: flex;
-  gap: 40px;
+  gap: 35px;
   padding: 0;
   margin: 0;
-  justify-content: center; /* Centra los elementos horizontalmente */
-  align-items: center; /* Asegura que estén alineados verticalmente */
-  width: 100%; /* Asegura que ocupe todo el ancho disponible */
-  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 5px;
 }
 
 .nav {
   display: flex;
-  justify-content: center; /* Centra el contenedor de navegación */
+  justify-content: center;
   width: 100%;
 }
 
+.navList li {
+  position: relative;
+  padding-bottom: 5px;
+}
 
 .navList li a {
   text-decoration: none;
   color: #f2f0eb;
   font-size: 1rem;
   position: relative;
+  padding: 5px 0;
+  display: inline-block;
 }
 
 .navList li a::after {
   content: "";
   position: absolute;
-  bottom: -15px;
+  bottom: -10px;
   left: 0;
   width: 0;
   height: 2px;
@@ -93,7 +100,7 @@
 }
 
 .shrink .logo {
-  margin-top: 10px;
-  margin-bottom: -20px; /* Ajusta este valor según lo necesites */
+  margin-top: 5px;
+  margin-bottom: -10px;
   transition: margin-top 0.3s ease;
 }
