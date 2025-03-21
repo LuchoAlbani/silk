@@ -39,7 +39,7 @@ const BloggerDetail: React.FC = () => {
       <div className={styles.container}>
         <h1 className={styles.title}>{blog.title}</h1>
         <p className={styles.subtitle}>{blog.description}</p>
-        <p className={styles.meta}>{blog.date} • Por {blog.author}</p>
+        <p className={styles.meta}>{blog.date} {blog.author}</p>
         <img src={blog.img} alt={blog.title} className={styles.image} />
         <p className={styles.text}>{blog.content1}</p>
         {blog.img2 && (
