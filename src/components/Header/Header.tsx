@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
 
 interface NavLinkType {
@@ -17,6 +17,7 @@ const navLinks: NavLinkType[] = [
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,15 +44,27 @@ const Header: React.FC = () => {
 
       <nav className={`${styles.nav} ${isScrolled ? styles.hidden : ""}`}>
         <ul className={styles.navList}>
-          {navLinks.map((link, index) => (
-            <li key={index}>
-              {link.isExternal ? (
-                <a href={link.to}>{link.label}</a>
-              ) : (
-                <Link to={link.to}>{link.label}</Link>
-              )}
-            </li>
-          ))}
+          {navLinks.map((link, index) => {
+            const isActive =
+              location.pathname.startsWith("/blog") && link.to === "/blog";
+
+            return (
+              <li key={index}>
+                {link.isExternal ? (
+                  <a href={link.to} className={styles.navLink}>
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    to={link.to}
+                    className={`${styles.navLink} ${isActive ? styles.active : ""}`}
+                  >
+                    {link.label}
+                  </Link>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </header>

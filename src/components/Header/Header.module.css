@@ -15,7 +15,7 @@
 
 /* Cuando el header se achica */
 .shrink {
-  padding: 0px 20px;
+  padding: 5px 20px;
 }
 
 /* Navegación oculta en modo reducido */
@@ -34,8 +34,8 @@
 
 .shrink .logo img {
   height: 40px;
-  margin-bottom: -20px;
-  margin-top: 10px;
+  margin-bottom: -15px;
+  margin-top: 5px;
 }
 
 /* Línea divisoria */
@@ -82,6 +82,7 @@
   position: relative;
   padding: 5px 0;
   display: inline-block;
+  transition: color 0.3s ease;
 }
 
 .navList li a::after {
@@ -95,8 +96,13 @@
   transition: width 0.3s ease-in-out;
 }
 
-.navList li a:hover::after {
+.navList li a:hover::after,
+.navList li a.active::after {
   width: 100%;
+}
+
+.navList li a.active {
+  color: #ffffff;
 }
 
 .shrink .logo {
