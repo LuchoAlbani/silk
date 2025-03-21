@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./BloggerDetail.module.css";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
 import { getBlogById, Blog } from "../../services/blogService";
 
 const BloggerDetail: React.FC = () => {
@@ -23,19 +21,16 @@ const BloggerDetail: React.FC = () => {
   if (!blog) {
     return (
       <div className={styles.bloggerDetail}>
-        <Header />
         <div className={styles.content}>
           <h2>Blogger no encontrado</h2>
           <p>Lo sentimos, no pudimos encontrar este blogger.</p>
         </div>
-        <Footer />
       </div>
     );
   }
 
   return (
     <div className={styles.bloggerDetail}>
-      <Header />
       <div className={styles.container}>
         <h1 className={styles.title}>{blog.title}</h1>
         <p className={styles.subtitle}>{blog.description}</p>
@@ -56,7 +51,6 @@ const BloggerDetail: React.FC = () => {
           </>
         )}
       </div>
-      <Footer />
     </div>
   );
 };

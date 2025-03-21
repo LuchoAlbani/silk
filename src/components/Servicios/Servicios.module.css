@@ -1,0 +1,132 @@
+.container {
+  max-width: auto;
+  margin: 0 auto;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.subheading {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  color: #123524;
+}
+
+.heading {
+  font-size: 50px;
+  color: #123524;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 50px;
+  text-align: left;
+  text-align: justify;
+  margin-left: 800px;
+}
+
+.grid {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+
+.card {
+  max-width: 350px;
+  text-align: left;
+  transition: transform 0.3s ease, opacity 0.5s ease-in-out;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s forwards ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.image {
+  width: 100%;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos de las opciones desplegables */
+.opciones {
+  margin-top: 10px;
+}
+
+.opcion {
+  margin-bottom: 10px;
+}
+
+.opcionTitulo {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #123524;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.opcionTitulo:hover {
+  color: #1f4728;
+}
+
+.opcionContenido {
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+  transition: all 0.3s ease-in-out;
+}
+
+.button {
+  margin-top: 100px;
+  padding: 12px 24px;
+  background: #1f4728;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.button:hover {
+  background: #123524;
+}
+
+.opciones {
+  margin-top: 10px;
+  border-top: 1px solid #123524; /* Línea arriba de la primera opción */
+  border-bottom: 1px solid #123524; /* Línea debajo de la última opción */
+  padding: 10px 0;
+}
+
+.opcion {
+  border-bottom: 1px solid #123524; /* Línea entre opciones */
+  padding: 10px 0;
+}
+
+.opcion:last-child {
+  border-bottom: none; /* Evitar doble línea en la última opción */
+}

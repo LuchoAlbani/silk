@@ -11,7 +11,7 @@ interface NavLinkType {
 const navLinks: NavLinkType[] = [
   { to: "/blog", label: "BLOG" },
   { to: "#quiz", label: "QUIZ", isExternal: true },
-  { to: "#services", label: "SERVICIOS", isExternal: true },
+  { to: "/servicios", label: "SERVICIOS" },
   { to: "#we-are", label: "NOSOTROS", isExternal: true },
 ];
 

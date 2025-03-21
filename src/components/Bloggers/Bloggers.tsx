@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Bloggers.module.css";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
 import { getBlogs, Blog } from "../../services/blogService";
 
 const Bloggers: React.FC = () => {
@@ -19,7 +17,6 @@ const Bloggers: React.FC = () => {
 
   return (
     <div className={styles.bloggersPage}>
-      <Header />
       <div className={styles.bloggers}>
         <h2 className={styles.bloggersTitle}>Bloggers</h2>
         <div className={styles.bloggersList}>
@@ -38,7 +35,6 @@ const Bloggers: React.FC = () => {
           ))}
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
