@@ -35,8 +35,7 @@ const Footer: React.FC = () => {
         <div className={styles.footerContent}>
           <img src="/images/silk_logo-02.png" alt="Logo de Estudiosilk footer" />
           <p>
-            Combinamos creatividad y estrategia para transformar tu estilo en una herramienta de confianza y empoderamiento,
-            haciéndote sentir segura y auténtica cada día.
+            Combinamos creatividad y estrategia para transformar tu estilo en una herramienta de confianza y autenticidad, ayudándote a proyectar tu mejor versión cada día.
           </p>
         </div>
 
