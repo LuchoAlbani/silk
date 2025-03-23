@@ -69,8 +69,15 @@
 }
 
 .opcion {
-  border-bottom: 2px solid #3A5D3A;
+  border-bottom: 2px solid #3A5D3A; /* Línea inferior para todas */
   padding: 12px 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.opcion:first-child {
+  border-top: 2px solid #3A5D3A; /* Solo la primera opción tendrá borde superior */
 }
 
 .opcionTitulo {
@@ -119,8 +126,8 @@
 
 
 .button {
-  margin-top: 150px; /* Espaciado superior */
-  margin-bottom: 150px; /* Espaciado inferior */
+  margin-top: 100px; /* Espaciado superior */
+  margin-bottom: 100px; /* Espaciado inferior */
   padding: 16px 32px; /* Ajuste del tamaño interno */
   background: #3A5D3A; /* Fondo verde oscuro */
   color: #FFFFFF; /* Texto blanco */
@@ -139,3 +146,142 @@
   background: #123524; /* Fondo verde más oscuro al pasar el cursor */
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3); /* Sombra más intensa en hover */
 }
+
+.listaEsperaButton {
+  background-color: #3A5D3A;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+  
+}
+
+.listaEsperaButton:hover {
+  background-color: #2E4A2E;
+}
+
+
+.faq {
+  text-align: center;
+}
+
+.faq h3 {
+  font-size: 50px;
+  color: #3A2E1F;
+  font-weight: 500;
+  margin-bottom: 50px; /* Aumenta ligeramente el margen */
+}
+
+/* Contenedor de preguntas en dos columnas */
+.preguntasContainer {
+  display: flex;
+  justify-content: space-between; /* Cambiado a mejorar las proporciones */
+  gap: 60px; /* Aumenta el espacio entre columnas */
+  max-width: 1000px; /* Aumenta el tamaño máximo */
+  margin: 0 auto;
+  margin-bottom: 100px;
+}
+
+/* Columnas de preguntas */
+.columna {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 50%;
+}
+
+/* Estilo de cada pregunta */
+.pregunta {
+  background: #e3ddd1;
+  border-radius: 6px;
+  overflow: hidden;
+  width: 100%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.preguntaTitulo {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 12px 18px;
+  font-size: 18px;
+  text-align: left; /* Texto alineado a la izquierda */
+  color: #3d2b1f;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start; /* Alineación del contenido a la izquierda */
+  align-items: center;
+  transition: background 0.3s ease-in-out;
+}
+
+.preguntaTitulo::before {
+  content: "▶"; /* Flecha cerrada */
+  font-size: 16px;
+  margin-right: 10px;
+  transition: transform 0.3s ease-in-out;
+  display: inline-block;
+}
+
+.preguntaTitulo.abierta::before {
+  content: "▼"; /* Flecha abierta */
+}
+
+.preguntaTitulo:hover {
+  background: #E3D8C9;
+}
+
+.flecha {
+  font-size: 14px;
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out; /* Efecto extra */
+}
+.preguntaTitulo:hover .flecha {
+  color: #3A2E1F; /* Cambiar el color al pasar el mouse */
+}
+
+.abierta {
+  transform: rotate(0deg);
+}
+
+/* Respuesta animada */
+.preguntaRespuesta {
+  font-size: 16px;
+  color: #3A2E1F;
+  text-align: justify;
+  background: #F4EFEA;
+  border-left: 4px solid #E3D8C9;
+  
+  /* Ocultar inicialmente */
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 25px; /* Iniciar con padding 0 para evitar espacio en blanco */
+  
+  /* Agregar animación de apertura */
+  transition: max-height 0.5s ease-in-out, padding 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.mostrar {
+  max-height: 500px; /* Ajustar según el contenido */
+  padding: 20px 25px; /* Restaurar padding cuando se abre */
+  opacity: 1;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
