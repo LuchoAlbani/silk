@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Servicios.module.css";
+import { useNavigate } from "react-router-dom";
 
 const servicios = [
   {
@@ -147,6 +148,7 @@ const preguntasFrecuentes = [
 ];
 
 const Servicios: React.FC = () => {
+  const navigate = useNavigate(); // Hook para la navegación
   const [activo, setActivo] = useState<{ servicioId: number; opcionId: string } | null>(null);
   const [preguntaActiva, setPreguntaActiva] = useState<number | null>(null);
 
@@ -157,6 +159,8 @@ const Servicios: React.FC = () => {
   const togglePregunta = (id: number) => {
     setPreguntaActiva((prev) => (prev === id ? null : id));
   };
+
+
 
   return (
     <div className={styles.container}>
@@ -196,7 +200,10 @@ const Servicios: React.FC = () => {
         ))}
       </div>
 
-      <button className={styles.button}>COMENZÁ HOY</button>
+      {/* Botón actualizado para redirigir a ServiciosInterno */}
+      <button className={styles.button} onClick={() => navigate("/servicios-interno")}>
+        COMENZÁ HOY
+      </button>
 
       {/* Preguntas Frecuentes en dos columnas */}
       <div className={styles.faq}>
@@ -212,12 +219,9 @@ const Servicios: React.FC = () => {
                   {item.pregunta}
                 </button>
 
-                <p
-                  className={`${styles.preguntaRespuesta} ${preguntaActiva === item.id ? styles.mostrar : ""}`}
-                >
+                <p className={`${styles.preguntaRespuesta} ${preguntaActiva === item.id ? styles.mostrar : ""}`}>
                   {item.respuesta}
                 </p>
-
               </div>
             ))}
           </div>
@@ -232,12 +236,9 @@ const Servicios: React.FC = () => {
                   {item.pregunta}
                 </button>
 
-                <p
-                  className={`${styles.preguntaRespuesta} ${preguntaActiva === item.id ? styles.mostrar : ""}`}
-                >
+                <p className={`${styles.preguntaRespuesta} ${preguntaActiva === item.id ? styles.mostrar : ""}`}>
                   {item.respuesta}
                 </p>
-
               </div>
             ))}
           </div>
@@ -245,7 +246,6 @@ const Servicios: React.FC = () => {
       </div>
     </div>
   );
-
 };
 
 export default Servicios;

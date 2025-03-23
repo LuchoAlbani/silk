@@ -1,0 +1,151 @@
+/* ServiciosInterno.module.css */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  background-color: #f5f0e9; /* Fondo general */
+}
+
+.formContainer {
+  background-color: #eae5d9;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.title {
+  font-size: 12px;
+  font-weight: bold;
+  color: #134c31; /* Verde oscuro */
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 40px;
+  font-weight: normal;
+  color: #134c31;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.subtitle em {
+  font-style: italic;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input,
+.select {
+  all: unset; /* Resetea todos los estilos */
+  width: 100%;
+  border-bottom: 2px solid #134c31;
+  background: transparent;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.input:focus,
+.select:focus {
+  border-bottom: 2px solid #0a3a24 !important; /* Cambio de color al enfocar */
+}
+
+/* Estilos para los radio buttons */
+.checkboxGroup {
+  margin-bottom: 20px;
+  border: none;
+}
+
+.checkboxTitle {
+  font-size: 16px;
+  color: #134c31; /* Verde oscuro */
+  margin-bottom: 10px;
+}
+
+/* Estilo para los radios en forma de círculos */
+.radioLabel {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #134c31;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.radioLabel input {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #134c31;
+  margin-right: 10px;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+}
+
+.radioLabel input:checked {
+  background-color: #134c31;
+  border: 5px solid white;
+  box-shadow: 0 0 0 2px #134c31;
+}
+
+/* Campo extra para "Otro" */
+.inputOtro {
+  all: unset;
+  width: 100%;
+  border-bottom: 2px solid #134c31;
+  background: transparent;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+/* Checkbox de términos y sus estilos */
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #134c31;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.checkboxLabel input {
+  margin-right: 10px;
+}
+
+.submitButton {
+  width: 100%;
+  background-color: #134c31;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+  text-align: center;
+}
+
+.submitButton:hover {
+  background-color: #0a3a24;
+}
+
+.finalText {
+  font-size: 14px;
+  color: #134c31;
+  text-align: center;
+  margin-top: 20px;
+}
