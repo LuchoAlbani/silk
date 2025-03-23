@@ -128,19 +128,19 @@ const preguntasFrecuentes = [
   },
   {
     id: 6,
-    pregunta: "¿CUÁNTO PRESUPUESTO NECESITO PARA ROPA?",
+    pregunta: "¿VAN A PERSONALIZAR TODO SEGÚN MI TIPO DE CUERPO Y PREFERENCIAS?",
     respuesta:
-      "El plan se adapta completamente a tu presupuesto. Seleccionamos marcas y prendas en función de lo que podés invertir, siempre priorizando materiales de calidad. Si el presupuesto es más ajustado, podemos enfocarnos en menos looks o planificar qué piezas comprar primero. Nuestro objetivo es armar un guardarropa atemporal, con prendas que podés incorporar en cualquier momento.",
+      "¡Por supuesto! Todo el servicio está diseñado para vos. Cada recomendación se adapta a tu tipo de cuerpo, estilo de vida y gustos personales. Nada es impuesto, vos tenés la última palabra en cada elección.",
   },
   {
     id: 7,
-    pregunta: "¿TRABAJAN SOLO EN CABA?",
+    pregunta: "¿CUÁNTO PRESUPUESTO NECESITO PARA ROPA?",
     respuesta:
       "Ofrecemos asesoramiento para clientes de cualquier parte de Argentina y del exterior. Trabajamos de manera virtual mediante encuentros por Zoom o presencialmente a domicilio (viáticos no incluidos).",
   },
   {
     id: 8,
-    pregunta: "¿VAN A PERSONALIZAR TODO SEGÚN MI TIPO DE CUERPO Y PREFERENCIAS?",
+    pregunta: "¿TRABAJAN SOLO EN CABA?",
     respuesta:
       "¡Por supuesto! Todo el servicio está diseñado para vos. Cada recomendación se adapta a tu tipo de cuerpo, estilo de vida y gustos personales. Nada es impuesto, vos tenés la última palabra en cada elección.",
   },

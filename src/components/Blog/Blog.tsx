@@ -55,9 +55,9 @@ const Blog: React.FC = () => {
         Lo <em>último</em> de nuestro blog
       </h2>
       <div className={styles.blogCarousel} aria-live="polite">
-        <button className={styles.carouselButton} onClick={prevSlide} aria-label="Ver anteriores">
-          &lt;
-        </button>
+      <button className={styles.carouselButton} onClick={prevSlide} aria-label="Ver anteriores">
+  ◀
+</button>
 
         {blogs.slice(currentIndex, currentIndex + itemsPerPage).map((blog) => (
           <Link key={blog.id} to={`/bloggers/${blog.id}`} className={styles.blogLink}>
@@ -70,9 +70,9 @@ const Blog: React.FC = () => {
           </Link>
         ))}
 
-        <button className={styles.carouselButton} onClick={nextSlide} aria-label="Ver siguientes">
-          &gt;
-        </button>
+<button className={styles.carouselButton} onClick={nextSlide} aria-label="Ver siguientes">
+  ▶
+</button>
       </div>
     </div>
   );

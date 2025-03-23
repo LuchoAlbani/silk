@@ -181,7 +181,7 @@
   display: flex;
   justify-content: space-between; /* Cambiado a mejorar las proporciones */
   gap: 60px; /* Aumenta el espacio entre columnas */
-  max-width: 1000px; /* Aumenta el tamaño máximo */
+  max-width: 1200px; /* Aumenta el tamaño máximo */
   margin: 0 auto;
   margin-bottom: 100px;
 }
@@ -196,18 +196,20 @@
 
 /* Estilo de cada pregunta */
 .pregunta {
-  background: #e3ddd1;
+  background: #e3ddd1; /* Color de fondo */
   border-radius: 6px;
   overflow: hidden;
-  width: 100%;
+  width: 100%; /* Mantén el ancho total */
+  max-width: 800px; /* Ajusta según el tamaño deseado */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  margin: 0 auto; /* Centrar la barra dentro del contenedor */
 }
 
 .preguntaTitulo {
   width: 100%;
   background: none;
   border: none;
-  padding: 12px 18px;
+  padding: 10px 18px;
   font-size: 18px;
   text-align: left; /* Texto alineado a la izquierda */
   color: #3d2b1f;
@@ -251,8 +253,6 @@
   font-size: 16px;
   color: #3A2E1F;
   text-align: justify;
-  background: #F4EFEA;
-  border-left: 4px solid #E3D8C9;
   
   /* Ocultar inicialmente */
   max-height: 0;
@@ -282,6 +282,66 @@
   }
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 15px; /* Reduce padding en móvil */
+    text-align: center;
+  }
+
+  .heading {
+    font-size: 28px; /* Reduce el tamaño del título */
+    text-align: left; /* Centrar el título */
+    margin-left: 0;
+    max-width: 100%; /* Ocupa todo el ancho */
+    margin-bottom: 30px;
+  }
+
+  .grid {
+    flex-direction: column; /* Apilar en columna */
+    align-items: center;
+    gap: 30px; /* Reduce espacio entre tarjetas */
+  }
+
+  .card {
+    max-width: 90%; /* Ocupar más espacio en móviles */
+    text-align: center;
+    
+  }
+
+  .image {
+    border-radius: 20px; /* Ajusta bordes */
+  }
+
+  .button {
+    margin-top: 50px; /* Reduce espaciado */
+    padding: 14px 28px; /* Ajuste tamaño */
+    font-size: 16px; /* Reduce fuente */
+  }
+
+  .faq h3 {
+    font-size: 32px; /* Reduce tamaño de FAQ */
+    margin-bottom: 30px;
+  }
+
+  .preguntasContainer {
+    flex-direction: column; /* Apilar preguntas en columna */
+    gap: 20px; /* Espacio más reducido */
+  }
+
+  .columna {
+    width: 100%; /* Ocupa todo el ancho */
+  }
+
+  .preguntaTitulo {
+    font-size: 16px; /* Ajusta tamaño del título de preguntas */
+    padding: 10px 14px;
+  }
+
+  .preguntaRespuesta {
+    font-size: 14px;
+    padding: 15px;
+  }
+}
 
 
 
