@@ -96,7 +96,7 @@ const ServiciosInterno: React.FC = () => {
               <input
                 type="text"
                 name="otroServicio"
-                placeholder="Especificar otro servicio..."
+                placeholder="Especificar..."
                 value={formData.otroServicio}
                 onChange={handleChange}
                 className={styles.input}
@@ -106,45 +106,64 @@ const ServiciosInterno: React.FC = () => {
           </fieldset>
 
           {/* Selects */}
-          <select
-            name="presupuesto"
-            value={formData.presupuesto}
-            onChange={handleChange}
-            className={styles.select}
-            required
-          >
-            <option value="">¿Cuál sería tu presupuesto para invertir en ropa y accesorios?*</option>
-            <option value="bajo">Menos de $50.000</option>
-            <option value="medio">$50.000 - $150.000</option>
-            <option value="alto">Más de $150.000</option>
-          </select>
+{/* Presupuesto */}
+<div className={styles.selectWrapper}>
+  <label className={styles.selectLabel}>
+    ¿Cuál sería tu presupuesto para invertir en ropa y accesorios?*
+  </label>
+  <select
+    name="presupuesto"
+    value={formData.presupuesto}
+    onChange={handleChange}
+    className={styles.select}
+    required
+  >
+    <option value="">Seleccionar</option>
+    <option value="bajo">Menos de $50.000</option>
+    <option value="medio">$50.000 - $150.000</option>
+    <option value="alto">Más de $150.000</option>
+  </select>
+</div>
 
-          <select
-            name="inicio"
-            value={formData.inicio}
-            onChange={handleChange}
-            className={styles.select}
-            required
-          >
-            <option value="">¿Cuándo te gustaría empezar?*</option>
-            <option value="inmediato">Inmediatamente</option>
-            <option value="proximoMes">El próximo mes</option>
-            <option value="futuro">Más adelante</option>
-          </select>
+{/* Inicio */}
+<div className={styles.selectWrapper}>
+  <label className={styles.selectLabel}>
+    ¿Cuándo te gustaría empezar?*
+  </label>
+  <select
+    name="inicio"
+    value={formData.inicio}
+    onChange={handleChange}
+    className={styles.select}
+    required
+  >
+    <option value="">Seleccionar</option>
+    <option value="inmediato">Inmediatamente</option>
+    <option value="proximoMes">El próximo mes</option>
+    <option value="futuro">Más adelante</option>
+  </select>
+</div>
 
-          <select
-            name="referencia"
-            value={formData.referencia}
-            onChange={handleChange}
-            className={styles.select}
-            required
-          >
-            <option value="">¿Cómo nos conociste?*</option>
-            <option value="redes">Redes Sociales</option>
-            <option value="amigos">Recomendación de amigos</option>
-            <option value="busqueda">Búsqueda en Internet</option>
-            <option value="otro">Otro</option>
-          </select>
+{/* Referencia */}
+<div className={styles.selectWrapper}>
+  <label className={styles.selectLabel}>
+    ¿Cómo nos conociste?*
+  </label>
+  <select
+    name="referencia"
+    value={formData.referencia}
+    onChange={handleChange}
+    className={styles.select}
+    required
+  >
+    <option value="">Seleccionar</option>
+    <option value="redes">Redes Sociales</option>
+    <option value="amigos">Recomendación de amigos</option>
+    <option value="busqueda">Búsqueda en Internet</option>
+    <option value="otro">Otro</option>
+  </select>
+</div>
+
 
           {/* Checkbox de términos */}
           <label className={styles.checkboxLabel}>
