@@ -1,5 +1,5 @@
 .container {
-  max-width: auto;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 50px 20px;
   text-align: center;
@@ -8,26 +8,26 @@
 .subheading {
   font-weight: bold;
   font-size: 18px;
-  margin-top: 40px;
   margin-bottom: 30px;
-  color: #123524;
+  color: #3A5D3A;
+  margin-top: 30px;
 }
 
 .heading {
-  font-size: 50px;
-  color: #123524;
+  font-size: 40px;
+  color: #3A5D3A;
   font-weight: 500;
   line-height: 1.5;
-  margin-bottom: 50px;
-  text-align: left;
   text-align: justify;
-  margin-left: 800px;
+  max-width: 800px; /* Ajusta el ancho para un mejor efecto */
+  margin-bottom: 50px;
+  margin-left: 200px;
 }
 
 .grid {
   display: flex;
   justify-content: center;
-  gap: 80px;
+  gap: 50px;
   flex-wrap: wrap;
 }
 
@@ -63,70 +63,296 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilos de las opciones desplegables */
 .opciones {
-  margin-top: 10px;
+  margin-top: 20px;
+  text-align: left;
 }
 
 .opcion {
-  margin-bottom: 10px;
+  border-bottom: 2px solid #3A5D3A; /* Línea inferior para todas */
+  padding: 12px 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.opcion:first-child {
+  border-top: 2px solid #3A5D3A; /* Solo la primera opción tendrá borde superior */
 }
 
 .opcionTitulo {
-  width: 100%;
   background: none;
   border: none;
-  color: #123524;
+  color: #3A5D3A;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
-  text-align: left;
   display: flex;
   align-items: center;
-  gap: 8px;
+  width: 100%;
+  text-align: left;
+  padding: 12px;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
-.opcionTitulo:hover {
-  color: #1f4728;
+.opcionTitulo::before {
+  content: "▶"; /* Flecha cerrada */
+  font-size: 16px;
+  margin-right: 10px;
+  transition: transform 0.3s ease-in-out;
+  display: inline-block;
 }
 
+.opcionTitulo.activo::before {
+  content: "▼"; /* Flecha abierta */
+  
+}
+
+/* MODIFICAR ANIMACION*/
 .opcionContenido {
-  background: #f9f9f9;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 14px;
-  color: #333;
-  transition: all 0.3s ease-in-out;
+  font-size: 16px;
+  color: #3A5D3A;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out, padding 0.3s ease-in-out, opacity 0.1s linear;
+  padding: 0 12px;
+  opacity: 0;
 }
+
+/* Mostrar contenido */
+.mostrar {
+  max-height: 500px; /* Ajusta según el contenido */
+  padding: 12px;
+  opacity: 1;
+  transition: max-height 0.4s ease-in-out, padding 0.3s ease-in-out, opacity 0.05s linear;
+}
+
+
+
 
 .button {
-  margin-top: 100px;
-  padding: 12px 24px;
-  background: #1f4728;
-  color: #fff;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s;
+  margin-top: 100px; /* Espaciado superior */
+  margin-bottom: 100px; /* Espaciado inferior */
+  padding: 16px 32px; /* Ajuste del tamaño interno */
+  background: #3A5D3A; /* Fondo verde oscuro */
+  color: #FFFFFF; /* Texto blanco */
+  font-family: "Arial", sans-serif; /* Fuente moderna y limpia */
+  font-size: 18px; /* Tamaño del texto */
+  border: none; /* Sin bordes oscuros */
+  border-radius: 15px; /* Bordes redondeados, igual a la foto */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  cursor: pointer; /* Indicador de interactividad */
+  transition: background 0.3s, box-shadow 0.3s; /* Animación en hover */
+  
 }
 
 .button:hover {
-  background: #123524;
+  background: #123524; /* Fondo verde más oscuro al pasar el cursor */
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3); /* Sombra más intensa en hover */
 }
 
-.opciones {
+.listaEsperaButton {
+  background-color: #3A5D3A;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
   margin-top: 10px;
-  border-top: 1px solid #123524; /* Línea arriba de la primera opción */
-  border-bottom: 1px solid #123524; /* Línea debajo de la última opción */
-  padding: 10px 0;
+  transition: background 0.3s ease;
+  
 }
 
-.opcion {
-  border-bottom: 1px solid #123524; /* Línea entre opciones */
-  padding: 10px 0;
+.listaEsperaButton:hover {
+  background-color: #2E4A2E;
 }
 
-.opcion:last-child {
-  border-bottom: none; /* Evitar doble línea en la última opción */
+
+.faq {
+  text-align: center;
 }
+
+.faq h3 {
+  font-size: 50px;
+  color: #3A2E1F;
+  font-weight: 500;
+  margin-bottom: 50px; /* Aumenta ligeramente el margen */
+}
+
+/* Contenedor de preguntas en dos columnas */
+.preguntasContainer {
+  display: flex;
+  justify-content: space-between; /* Cambiado a mejorar las proporciones */
+  gap: 60px; /* Aumenta el espacio entre columnas */
+  max-width: 1200px; /* Aumenta el tamaño máximo */
+  margin: 0 auto;
+  margin-bottom: 100px;
+}
+
+/* Columnas de preguntas */
+.columna {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 50%;
+}
+
+/* Estilo de cada pregunta */
+.pregunta {
+  background: #e3ddd1; /* Color de fondo */
+  border-radius: 6px;
+  overflow: hidden;
+  width: 100%; /* Mantén el ancho total */
+  max-width: 800px; /* Ajusta según el tamaño deseado */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  margin: 0 auto; /* Centrar la barra dentro del contenedor */
+}
+
+.preguntaTitulo {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 10px 18px;
+  font-size: 18px;
+  text-align: left; /* Texto alineado a la izquierda */
+  color: #3d2b1f;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start; /* Alineación del contenido a la izquierda */
+  align-items: center;
+  transition: background 0.3s ease-in-out;
+}
+
+.preguntaTitulo::before {
+  content: "▶"; /* Flecha cerrada */
+  font-size: 16px;
+  margin-right: 10px;
+  transition: transform 0.3s ease-in-out;
+  display: inline-block;
+}
+
+.preguntaTitulo.abierta::before {
+  content: "▼"; /* Flecha abierta */
+}
+
+.preguntaTitulo:hover {
+  background: #E3D8C9;
+}
+
+.flecha {
+  font-size: 14px;
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out; /* Efecto extra */
+}
+.preguntaTitulo:hover .flecha {
+  color: #3A2E1F; /* Cambiar el color al pasar el mouse */
+}
+
+.abierta {
+  transform: rotate(0deg);
+}
+
+/* Respuesta animada */
+.preguntaRespuesta {
+  font-size: 16px;
+  color: #3A2E1F;
+  text-align: justify;
+  
+  /* Ocultar inicialmente */
+  max-height: 0;
+  overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 25px;
+  padding-right: 25px;
+  
+  /* Transición uniforme */
+  transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  opacity: 0;
+}
+
+.mostrar {
+  max-height: 600px; /* Mismo tiempo en apertura y cierre */
+  padding-top: 15px;
+  padding-bottom: 15px;
+  opacity: 1;
+}
+
+
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 15px; /* Reduce padding en móvil */
+    text-align: center;
+  }
+
+  .heading {
+    font-size: 28px; /* Reduce el tamaño del título */
+    text-align: left; /* Centrar el título */
+    margin-left: 0;
+    max-width: 100%; /* Ocupa todo el ancho */
+    margin-bottom: 30px;
+  }
+
+  .grid {
+    flex-direction: column; /* Apilar en columna */
+    align-items: center;
+    gap: 30px; /* Reduce espacio entre tarjetas */
+  }
+
+  .card {
+    max-width: 90%; /* Ocupar más espacio en móviles */
+    text-align: center;
+    
+  }
+
+  .image {
+    border-radius: 20px; /* Ajusta bordes */
+  }
+
+  .button {
+    margin-top: 50px; /* Reduce espaciado */
+    padding: 14px 28px; /* Ajuste tamaño */
+    font-size: 16px; /* Reduce fuente */
+  }
+
+  .faq h3 {
+    font-size: 32px; /* Reduce tamaño de FAQ */
+    margin-bottom: 30px;
+  }
+
+  .preguntasContainer {
+    flex-direction: column; /* Apilar preguntas en columna */
+    gap: 20px; /* Espacio más reducido */
+  }
+
+  .columna {
+    width: 100%; /* Ocupa todo el ancho */
+  }
+
+  .preguntaTitulo {
+    font-size: 16px; /* Ajusta tamaño del título de preguntas */
+    padding: 10px 14px;
+  }
+
+  .preguntaRespuesta {
+    font-size: 14px;
+    padding: 15px;
+  }
+}
+
+
+

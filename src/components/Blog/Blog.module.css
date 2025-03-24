@@ -30,8 +30,16 @@
 .carouselButton {
   background: none;
   border: none;
-  font-size: 50px;
+  font-size: 40px; /* Tamaño similar a "Servicios" */
+  border-radius: 20px;
   cursor: pointer;
+  color: #3A5D3A; /* Color similar */
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.carouselButton:hover {
+  transform: scale(1.2); /* Efecto de agrandamiento */
+  opacity: 1;
 }
 
 .blogItem {

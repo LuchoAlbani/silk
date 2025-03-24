@@ -1,0 +1,316 @@
+/* ======= CONTENEDORES ======= */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  background-color: #f1f0eb; /* Fondo general */
+}
+
+.formContainer {
+  background-color: #eae5d9;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  width: 100%;
+  margin: 50px auto;
+}
+
+/* ======= TITULOS ======= */
+.title {
+  font-size: 12px;
+  font-weight: bold;
+  color: #134c31;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 40px;
+  color: #134c31;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.subtitle em {
+  font-style: italic;
+}
+
+/* ======= FORMULARIO ======= */
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ======= INPUTS Y SELECTS ======= */
+.input {
+  all: unset;
+  width: 100%;
+  border-bottom: 2px solid #134c31;
+  background: transparent;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 30px;
+  transition: border-color 0.3s;
+}
+
+.input:focus {
+  border-bottom: 2px solid #0a3a24 !important;
+}
+
+/* ======= SELECTS ======= */
+/* Contenedor del select */
+.selectWrapper {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* Texto de la pregunta */
+.selectLabel {
+  font-family: "serif"; /* Ajusta según la fuente de la imagen */
+  color: #2F4031; /* Ajusta el color si es necesario */
+  font-size: 18px;
+}
+
+/* Select estilizado */
+.select {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #2F4031; /* Línea inferior */
+  padding: 8px 0;
+  font-size: 16px;
+  color: #2F4031;
+  outline: none;
+  appearance: none; /* Elimina el estilo por defecto */
+  cursor: pointer;
+  width: 100%;
+  background-color: #eae5d9;
+}
+
+/* Mantiene el color cuando está en foco */
+.select:focus,
+.select:active {
+  background-color: #eae5d9;
+  outline: none;
+}
+
+/* Flecha personalizada */
+.selectWrapper::after {
+  content: "▼"; /* Flecha personalizada */
+  font-size: 14px;
+  color: #2F4031;
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  pointer-events: none;
+}
+
+/* 🔹 Estilos para el menú desplegable */
+.select option {
+  background-color: #eae5d9 !important; /* Mismo color del formulario */
+  color: #2F4031 !important;
+  font-family: "serif"; /* Ajusta según la fuente deseada */
+  padding: 10px;
+  border: none;
+}
+
+/* 🔹 Color de la opción seleccionada */
+.select option:checked {
+  background-color: #d6d0c4 !important;
+}
+
+/* 🔹 Ajuste en dispositivos móviles */
+@media (max-width: 768px) {
+  .select {
+    font-size: 16px;
+  }
+}
+
+/* ======= RADIO BUTTONS ======= */
+.radioGroup {
+  margin-bottom: 20px;
+}
+
+.radioTitle {
+  font-size: 16px;
+  color: #134c31;
+  margin-bottom: 20px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #134c31;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.radioLabel input {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #134c31;
+  margin-right: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.3s, border 0.3s;
+}
+
+.radioLabel input:checked {
+  background-color: #134c31;
+  border: 5px solid white;
+  box-shadow: 0 0 0 2px #134c31;
+}
+
+/* ======= CHECKBOXES - Servicios ======= */
+.checkboxGroup {
+  padding: 15px;
+  border-radius: 10px;
+  background: #eae5d9;
+  margin-bottom: 30px;
+}
+
+/* Aumentar tamaño solo de las opciones */
+.checkboxGroup .checkboxLabel {
+  font-size: 16px; /* Ajusta el tamaño aquí */
+}
+
+.checkboxTitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: #134c31;
+  margin-bottom: 10px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #134c31;
+  margin-bottom: 12px; /* Separa los checkboxes */
+  cursor: pointer;
+}
+
+/* 🔹 Checkboxes redondos */
+.checkboxLabel input {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #134c31;
+  margin-right: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.3s, border 0.3s;
+}
+
+/* 🔹 Simula el "check" dentro del círculo */
+.checkboxLabel input:checked::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: #134c31;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 🔹 Campo extra "Otro" */
+.inputOtro {
+  all: unset;
+  width: calc(100% - 20px);
+  border-bottom: 2px solid #134c31;
+  background: transparent;
+  padding: 10px;
+  font-size: 16px;
+  margin: 5px 0 20px;
+}
+
+/* ======= CHECKBOXES - Términos y condiciones ======= */
+.checkboxContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.checkboxLabel {
+  font-size: 13px;
+  color: #134c31;
+  cursor: pointer;
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+
+.checkboxLabel input[name="aceptaTerminos"],
+.checkboxLabel input[name="recibirEmails"] {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  border: 1.5px solid #134c31;
+  margin-right: 6px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.3s, border 0.3s;
+}
+
+/* 🔹 Simula el "check" dentro del cuadrado */
+.checkboxLabel input[name="aceptaTerminos"]:checked::before,
+.checkboxLabel input[name="recibirEmails"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background-color: #134c31;
+  border-radius: 1px;
+  transform: translate(-50%, -50%);
+}
+
+/* 🔹 Enlaces en los checkboxes */
+.checkboxLabel a {
+  text-decoration: underline;
+  color: #134c31;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* ======= BOTÓN ENVIAR ======= */
+.submitButton {
+  width: 120px;
+  background-color: #134c31;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.submitButton:hover {
+  background-color: #0a3a24;
+  transform: scale(1.02);
+}
+
+/* ======= TEXTO FINAL ======= */
+.finalText {
+  font-size: 14px;
+  color: #134c31;
+  text-align: center;
+  margin-top: 20px;
+}
