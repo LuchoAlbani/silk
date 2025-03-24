@@ -108,20 +108,25 @@
   
 }
 
-
+/* MODIFICAR ANIMACION*/
 .opcionContenido {
   font-size: 16px;
   color: #3A5D3A;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s ease-in-out, padding 0.3s ease-in-out;
-  padding: 0 12px; /* Espaciado interno */
+  transition: max-height 0.4s ease-in-out, padding 0.3s ease-in-out, opacity 0.1s linear;
+  padding: 0 12px;
+  opacity: 0;
 }
 
+/* Mostrar contenido */
 .mostrar {
   max-height: 500px; /* Ajusta según el contenido */
-  padding: 10px 12px;
+  padding: 12px;
+  opacity: 1;
+  transition: max-height 0.4s ease-in-out, padding 0.3s ease-in-out, opacity 0.05s linear;
 }
+
 
 
 
@@ -257,18 +262,24 @@
   /* Ocultar inicialmente */
   max-height: 0;
   overflow: hidden;
-  padding: 0 25px; /* Iniciar con padding 0 para evitar espacio en blanco */
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 25px;
+  padding-right: 25px;
   
-  /* Agregar animación de apertura */
-  transition: max-height 0.5s ease-in-out, padding 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  /* Transición uniforme */
+  transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out, opacity 0.4s ease-in-out;
   opacity: 0;
 }
 
 .mostrar {
-  max-height: 500px; /* Ajustar según el contenido */
-  padding: 20px 25px; /* Restaurar padding cuando se abre */
+  max-height: 600px; /* Mismo tiempo en apertura y cierre */
+  padding-top: 15px;
+  padding-bottom: 15px;
   opacity: 1;
 }
+
+
 
 
 @keyframes fadeIn {

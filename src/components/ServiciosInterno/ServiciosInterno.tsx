@@ -13,28 +13,28 @@ const ServiciosInterno: React.FC = () => {
     referencia: "",
     aceptaTerminos: false,
     recibirEmails: false,
-    otroServicio: "", // Campo extra para "Otro"
+    otroServicio: "",
   });
 
   // Manejo de cambios en inputs y selects
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
-  
+
     setFormData((prevState) => ({
       ...prevState,
       [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
     }));
   };
-  
 
-  // Manejo de selección de servicios (checkboxes)
+  // ✅ Manejo de cambios en checkboxes de servicios (Permite múltiples selecciones)
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = e.target;
+
     setFormData((prevState) => ({
       ...prevState,
       servicio: checked
-        ? [...prevState.servicio, value]
-        : prevState.servicio.filter((item) => item !== value),
+        ? [...prevState.servicio, value] // Agrega el servicio si está seleccionado
+        : prevState.servicio.filter((s) => s !== value), // Lo quita si está deseleccionado
     }));
   };
 
@@ -67,8 +67,8 @@ const ServiciosInterno: React.FC = () => {
             />
           ))}
 
-          {/* Servicios - Checkboxes */}
-          <fieldset className={styles.checkboxGroup}>
+          {/* ✅ Servicios - Checkboxes */}
+          <fieldset className={styles.checkboxGroup} style={{ border: "none", padding: 0, margin: 0 }}>
             <legend className={styles.checkboxTitle}>
               ¿Qué servicio te interesa? Elegí 1 o más*
             </legend>
@@ -91,7 +91,7 @@ const ServiciosInterno: React.FC = () => {
               </label>
             ))}
 
-            {/* Campo extra para "Otro" */}
+            {/* ✅ Campo extra si el usuario elige "Otro" */}
             {formData.servicio.includes("Otro") && (
               <input
                 type="text"
@@ -155,10 +155,14 @@ const ServiciosInterno: React.FC = () => {
               onChange={handleChange}
               required
             />
-            <span>Acepto los términos y condiciones y la política de privacidad.</span>
+            <span>
+              Acepto los{" "}
+              <a href="/terminos" target="_blank" rel="noopener noreferrer">
+                términos y condiciones y la política de privacidad
+              </a>.
+            </span>
           </label>
 
-          {/* Checkbox de emails */}
           <label className={styles.checkboxLabel}>
             <input
               type="checkbox"
@@ -169,15 +173,16 @@ const ServiciosInterno: React.FC = () => {
             <span>Quiero recibir novedades, recomendaciones y contenido exclusivo en mi correo.</span>
           </label>
 
+          <p className={styles.finalText}>
+            (Nos ponemos en contacto con vos dentro de las próximas 24 hs.)
+          </p>
+
           {/* Botón de enviar */}
           <button type="submit" className={styles.submitButton}>
             ENVIAR
           </button>
-        </form>
 
-        <p className={styles.finalText}>
-          (Nos ponemos en contacto con vos dentro de las próximas 24 hs.)
-        </p>
+        </form>
       </div>
     </div>
   );
