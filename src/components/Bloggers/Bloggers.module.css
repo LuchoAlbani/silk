@@ -1,7 +1,7 @@
 .bloggersPage {
+  font-family: "AcuminPro-Regular", sans-serif;
   display: flex;
   flex-direction: column;
-  font-family: 'Vogue', sans-serif;
   color: #000;
   background-color: #fff;
   width: 100%;
@@ -14,6 +14,7 @@
 }
 
 .bloggersTitle {
+  font-family: "AcuminPro-Semibold", sans-serif;
   font-size: 50px; /* Mantiene el tamaño original */
   margin-bottom: 80px;
   font-weight: 400;
@@ -53,6 +54,7 @@
 }
 
 .bloggerCategory {
+  font-family: "AcuminPro-Regular", sans-serif;
   font-weight: bold;
   font-size: 13px; /* Más pequeño */
   color: black;
@@ -69,6 +71,7 @@
 }
 
 .bloggerTitle {
+  font-family: "AcuminPro-Semibold", sans-serif;
   font-size: 20px; /* Reducido */
   font-weight: bold;
   margin-bottom: 8px;
@@ -76,6 +79,7 @@
 
 .bloggerAuthor,
 .bloggerDate {
+  font-family: "AcuminPro-Medium", sans-serif;
   font-size: 14px; /* Reducido */
   color: gray;
   margin-bottom: 3px;

@@ -1,42 +1,38 @@
 @font-face {
-  font-family: 'AcuminBdItPro';
-  src: url('./assets/fonts/Acumin-BdItPro.otf') format('opentype');
+  font-family: "AcuminProSemibold";
+  src: url("/assets/fonts/Acumin\ Pro\ Semibold\ Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'AcuminBdPro';
-  src: url('./assets/fonts/Acumin-BdPro.otf') format('opentype');
+  font-family: "AcuminProMedium";
+  src: url("/assets/fonts/AcuminPro-Medium.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'AcuminItPro';
-  src: url('./assets/fonts/Acumin-ItPro.otf') format('opentype');
+  font-family: "AcuminProRegular";
+  src: url("/assets/fonts/Acumin\ Pro.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'AcuminRPro';
-  src: url('./assets/fonts/Acumin-RPro.otf') format('opentype');
+  font-family: "AcuminProBold";
+  src: url("/assets/fonts/Acumin-BdPro.otf") format("opentype");
 }
 
 @font-face {
-  font-family: 'ClassyVogue';
-  src: url('./assets/fonts/ClassyVogue.otf') format('opentype');
+  font-family: "AcuminProThin";
+  src: url("/assets/fonts/Acumin\ Pro\ Thin.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'Vogue';
-  src: url('./assets/fonts/Vogue.ttf') format('truetype');
+  font-family: "VeryVogueText";
+  src: url("/assets/fonts/very-vogue-text.otf") format("opentype");
 }
 
 @font-face {
-  font-family: 'very-vogue-text';
-  src: url('./assets/fonts/very-vogue-text.otf') format('opentype');
+  font-family: "VeryVogueTextItalic";
+  src: url("/assets/fonts/vogue-text-italic.otf") format("opentype");
 }
 
-@font-face {
-  font-family: 'vogue-text-italic';
-  src: url('./assets/fonts/vogue-text-italic.otf') format('opentype');
-}
 
 
 * {

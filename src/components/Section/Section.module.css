@@ -17,15 +17,15 @@
   font-size: 3.5rem;
   margin-bottom: 50px;
   font-family: "very-vogue-text", sans-serif;
-  letter-spacing: 1.5px;
-  font-weight: 100;
+  letter-spacing: 2px;
+  font-weight: 300;  /* Más visible */
 }
 
 .sectionContainer h2 em {
   font-size: 3.5rem;
   font-family: "vogue-text-italic", sans-serif;
   color: #ffffff;
-  font-weight: 50;
+  font-weight: 300; /* Más presencia */
 }
 
 /* Aplica la fuente ClassyVogue solo a la palabra SILK */
@@ -36,7 +36,7 @@
 .sectionGrid {
   display: flex;
   justify-content: center;
-  gap: 100px;
+  gap: 80px;  /* Ajuste para que no haya tanto espacio */
   flex-wrap: wrap;
 }
 
@@ -52,52 +52,59 @@
   object-fit: cover;
   object-position: center 100%;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
 }
+
+.sectionImage:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+}
+
 
 .sectionItem h3 {
   font-size: 1.5rem;
   margin-bottom: 15px;
   font-family: "AcuminBdPro", sans-serif;
-  font-weight: 300;
+  font-weight: 500; /* Más marcado */
 }
 
 .sectionItem p {
-  font-size: 1.1rem;
-  line-height: 1.8;
+  font-size: 1rem; /* Más pequeño como en la imagen */
+  line-height: 1.5;
   font-family: "AcuminRPro", sans-serif;
   font-weight: 300;
 }
 
 @media (max-width: 768px) {
   .sectionContainer {
-    padding: 40px 20px; /* Reduce el padding en móviles */
+    padding: 40px 20px;
   }
 
   .sectionContainer h2 {
-    font-size: 2.5rem; /* Reduce el tamaño del título */
+    font-size: 2.5rem;
     margin-bottom: 30px;
   }
 
   .sectionGrid {
-    gap: 50px; /* Reduce el espacio entre elementos */
+    gap: 50px;
   }
 
   .sectionItem {
-    width: 100%; /* Ocupa todo el ancho del contenedor */
-    text-align: center; /* Centraliza el texto en móviles */
+    width: 100%;
+    text-align: center;
   }
 
   .sectionImage {
-    height: 300px; /* Ajusta la altura de las imágenes */
+    height: 300px;
   }
 
   .sectionItem h3 {
-    font-size: 1.2rem; /* Reduce el tamaño del subtítulo */
+    font-size: 1.2rem;
     margin-bottom: 10px;
   }
 
   .sectionItem p {
-    font-size: 1rem; /* Reduce el tamaño del texto */
+    font-size: 0.9rem;
     line-height: 1.6;
   }
 }

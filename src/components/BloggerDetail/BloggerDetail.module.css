@@ -1,7 +1,7 @@
 .bloggerDetail {
     display: flex;
     flex-direction: column;
-    font-family: 'Vogue', sans-serif;
+    font-family: "AcuminPro-Regular", sans-serif;
     color: #000;
     background-color: #fff;
     width: 100%;
@@ -18,18 +18,21 @@
 }
 
 .title {
+    font-family: "AcuminPro-Semibold", sans-serif;
     font-size: 32px;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
 .subtitle {
+    font-family: "AcuminPro-Regular", sans-serif;
     font-size: 16px;
     color: #555;
     margin-bottom: 10px;
 }
 
 .meta {
+    font-family: "AcuminPro-Medium", sans-serif;
     font-size: 14px;
     color: gray;
     margin-bottom: 30px;
@@ -51,6 +54,7 @@
 }
 
 .text {
+    font-family: "AcuminPro-Regular", sans-serif;
     font-size: 16px;
     line-height: 1.8;
     color: #444;
