@@ -26,7 +26,7 @@
   background-color: #e2ddd0; /* Mismo fondo que el formulario */
   padding: 2rem;
   border-radius: 12px;
-  max-width: 600px;
+  max-width: 650px;
   width: 100%;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
   position: relative;
@@ -47,13 +47,13 @@
 
 .closeButton {
   position: absolute;
-  top: -15px;
-  right: -15px;
+  top: -65px;
+  right: -580px;
   background: none;
   border: none;
   font-size: 28px;
   cursor: pointer;
-  color: #244d3c;
+  color: #e2ddd0;
   transition: color 0.2s ease-in-out;
 }
 
@@ -137,7 +137,7 @@ h2 {
 }
 
 .phoneInput select {
-  width: 25%; /* Ajusté el select para hacerlo más grande */
+  width: 40%; /* Ajusté el select para hacerlo más grande */
   padding: 8px;
 }
 
