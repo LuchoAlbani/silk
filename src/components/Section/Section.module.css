@@ -1,11 +1,12 @@
 .sectionContainer {
   background-color: #161616;
-  color: #f2f2f2;
+  color: #f2f0eb;
   text-align: center;
   padding: 60px 40px;
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+  
 }
 
 .fadeIn {
@@ -14,24 +15,29 @@
 }
 
 .sectionContainer h2 {
-  font-size: 3.5rem;
+  font-size: 3.8rem; /* Tamaño ajustado */
   margin-bottom: 50px;
-  font-family: "very-vogue-text", sans-serif; /* Fuente para el título */
-  letter-spacing: 2px;
-  font-weight: 300;
+  font-family: "VeryVogue", serif; /* Fuente más refinada */
+  font-weight: 400; /* Menos grueso */
+  letter-spacing: 1px; /* Espaciado mejorado */
+  color: #f2f0eb;
+  text-transform: none;
 }
 
 .sectionContainer h2 em {
-  font-size: 3.5rem;
-  font-family: "AcuminProThin", sans-serif; /* Fuente para el énfasis */
-  color: #ffffff;
-  font-weight: 300;
+  font-size: 3.6rem;
+  font-family: "VogueItalic", serif;
+  font-weight: 300; /* Más ligero para darle elegancia */
+  color: #f2f0eb;
 }
 
-/* Estilo para el texto "SILK" */
 .silk {
-  font-family: "ClassyVogue", sans-serif; /* Fuente para "SILK" */
+  font-family: "ClassyVogue", sans-serif;
+  font-weight: 500; /* Un poco más fino */
+  letter-spacing: 1.5px;
+  color: #f2f0eb;
 }
+
 
 /* Estilos de la cuadrícula */
 .sectionGrid {
@@ -73,7 +79,7 @@
 .sectionItem p {
   font-size: 1rem;
   line-height: 1.5;
-  font-family: "AcuminProThin", sans-serif; /* Fuente para los párrafos */
+  font-family: "AcuminPro-Medium", sans-serif; /* Fuente para los párrafos */
   font-weight: 300;
 }
 
