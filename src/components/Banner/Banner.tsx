@@ -9,7 +9,11 @@ const images = [
   "/images/Banner 5_1.png",
 ];
 
-const Banner: React.FC = () => {
+interface BannerProps {
+  onOpenModal: () => void; // Nueva prop para abrir el modal
+}
+
+const Banner: React.FC<BannerProps> = ({ onOpenModal }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const bannerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -56,7 +60,9 @@ const Banner: React.FC = () => {
 
         <img src="/images/Banner solo texto_2@2x-8.png" alt="Texto del banner" className={styles.overlayText} />
 
-        <button className={styles.bannerButton}>COMENZAR</button>
+        <button className={styles.bannerButton} onClick={onOpenModal}>
+          COMENZAR
+        </button>
       </div>
     </div>
   );

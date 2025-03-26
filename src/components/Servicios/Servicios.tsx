@@ -166,9 +166,9 @@ const Servicios: React.FC = () => {
     <div className={styles.container}>
       <p className={styles.subheading}>NUESTROS SERVICIOS</p>
       <h2 className={styles.heading}>
-        “Un armario que <em>te inspira</em>.” <br />
-        “Una imagen que <em>te representa</em>.” <br />
-        “Una confianza que <em>transforma realidades</em>.”
+        “Un armario que <em>te inspira</em>. <br />
+        Una imagen que <em>te representa</em>. <br />
+        Una confianza que <em>transforma realidades</em>.”
       </h2>
 
       <div className={styles.grid}>

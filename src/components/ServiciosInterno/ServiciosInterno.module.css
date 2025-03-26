@@ -74,7 +74,7 @@
 /* Texto de la pregunta */
 .selectLabel {
   font-family: "serif"; /* Ajusta según la fuente de la imagen */
-  color: #2F4031; /* Ajusta el color si es necesario */
+  color: #244d3c; /* Ajusta el color si es necesario */
   font-size: 18px;
 }
 
@@ -82,10 +82,10 @@
 .select {
   background: transparent;
   border: none;
-  border-bottom: 1px solid #2F4031; /* Línea inferior */
+  border-bottom: 1px solid #244d3c; /* Línea inferior */
   padding: 8px 0;
   font-size: 16px;
-  color: #2F4031;
+  color: #244d3c;
   outline: none;
   appearance: none; /* Elimina el estilo por defecto */
   cursor: pointer;
@@ -104,7 +104,7 @@
 .selectWrapper::after {
   content: "▼"; /* Flecha personalizada */
   font-size: 14px;
-  color: #2F4031;
+  color: #244d3c;
   position: absolute;
   right: 10px;
   bottom: 8px;
@@ -114,7 +114,7 @@
 /* 🔹 Estilos para el menú desplegable */
 .select option {
   background-color: #eae5d9 !important; /* Mismo color del formulario */
-  color: #2F4031 !important;
+  color: #244d3c !important;
   font-family: "serif"; /* Ajusta según la fuente deseada */
   padding: 10px;
   border: none;
@@ -185,7 +185,6 @@
 
 .checkboxTitle {
   font-size: 18px;
-  font-weight: bold;
   color: #134c31;
   margin-bottom: 10px;
 }
