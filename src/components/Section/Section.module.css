@@ -16,27 +16,28 @@
 .sectionContainer h2 {
   font-size: 3.5rem;
   margin-bottom: 50px;
-  font-family: "very-vogue-text", sans-serif;
+  font-family: "very-vogue-text", sans-serif; /* Fuente para el título */
   letter-spacing: 2px;
-  font-weight: 300;  /* Más visible */
+  font-weight: 300;
 }
 
 .sectionContainer h2 em {
   font-size: 3.5rem;
-  font-family: "vogue-text-italic", sans-serif;
+  font-family: "AcuminProThin", sans-serif; /* Fuente para el énfasis */
   color: #ffffff;
-  font-weight: 300; /* Más presencia */
+  font-weight: 300;
 }
 
-/* Aplica la fuente ClassyVogue solo a la palabra SILK */
+/* Estilo para el texto "SILK" */
 .silk {
-  font-family: "ClassyVogue", sans-serif;
+  font-family: "ClassyVogue", sans-serif; /* Fuente para "SILK" */
 }
 
+/* Estilos de la cuadrícula */
 .sectionGrid {
   display: flex;
   justify-content: center;
-  gap: 80px;  /* Ajuste para que no haya tanto espacio */
+  gap: 80px;
   flex-wrap: wrap;
 }
 
@@ -60,21 +61,23 @@
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
 }
 
-
+/* Estilo para los h3 de cada sección */
 .sectionItem h3 {
   font-size: 1.5rem;
   margin-bottom: 15px;
-  font-family: "AcuminBdPro", sans-serif;
-  font-weight: 500; /* Más marcado */
+  font-family: "AcuminProSemibold", sans-serif; /* Fuente para h3 */
+  font-weight: 500;
 }
 
+/* Estilo para los párrafos en cada sección */
 .sectionItem p {
-  font-size: 1rem; /* Más pequeño como en la imagen */
+  font-size: 1rem;
   line-height: 1.5;
-  font-family: "AcuminRPro", sans-serif;
+  font-family: "AcuminProThin", sans-serif; /* Fuente para los párrafos */
   font-weight: 300;
 }
 
+/* Estilos responsivos */
 @media (max-width: 768px) {
   .sectionContainer {
     padding: 40px 20px;
