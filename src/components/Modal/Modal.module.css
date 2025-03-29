@@ -197,3 +197,68 @@ h2 {
     width: 100%; /* En móviles, los inputs se apilan y ocupan el 100% */
   }
 }
+
+
+@media (max-width: 768px) {
+  .modalContent {
+    padding: 0.8rem; /* Reduce aún más el padding */
+    max-width: 98%;
+  }
+
+  .closeButton {
+    top: 5px;
+    right: 5px;
+    font-size: 22px;
+  }
+
+  .subTitle {
+    font-size: 1.2rem; /* Reduce aún más el título */
+    margin-bottom: 8px;
+  }
+
+  .description {
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+  }
+
+  .form {
+    gap: 0.5rem; /* Reduce el espacio entre campos */
+  }
+
+  .form label {
+    font-size: 0.75rem; /* Hace las etiquetas más pequeñas */
+  }
+
+  .form input,
+  .form select {
+    padding: 6px;
+    font-size: 0.8rem;
+  }
+
+  .emailPhoneGroup {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .emailPhoneGroup .formGroup {
+    width: 100%;
+  }
+
+  .phoneInput {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .phoneInput select,
+  .phoneInput input {
+    width: 100%;
+  }
+
+  .submitButton {
+    font-size: 0.8rem;
+    padding: 8px;
+    max-width: 180px;
+  }
+}
+
+

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Modal.module.css";
 
 interface ModalProps {
@@ -6,7 +6,41 @@ interface ModalProps {
   onClose: () => void;
 }
 
+interface Country {
+  name: string;
+  cca2: string;
+  idd: string;
+  flag: string;
+}
+
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
+  const [countries, setCountries] = useState<Country[]>([]);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await fetch("https://restcountries.com/v3.1/all");
+        const data = await response.json();
+
+        const formattedCountries = data
+          .filter((country: any) => country.idd?.root)
+          .map((country: any) => ({
+            name: country.name.common,
+            cca2: country.cca2,
+            idd: `${country.idd.root}${country.idd.suffixes ? country.idd.suffixes[0] : ""}`,
+            flag: country.flags?.emoji || "🏳",
+          }))
+          .sort((a: Country, b: Country) => a.name.localeCompare(b.name));
+
+        setCountries(formattedCountries);
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
+    };
+
+    fetchCountries();
+  }, []);
+
   if (!isOpen) return null;
 
   return (
@@ -40,60 +74,22 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
               <input type="email" required placeholder="tu@email.com" />
             </div>
             <div className={styles.formGroup}>
-  <label>Teléfono*</label>
-  <div className={styles.phoneInput}>
-    <select>
-      <option value="+54">🇦🇷 +54</option>
-      <option value="+55">🇧🇷 +55</option>
-      <option value="+1">🇨🇦 +1</option>
-      <option value="+56">🇨🇱 +56</option>
-      <option value="+57">🇨🇴 +57</option>
-      <option value="+593">🇪🇨 +593</option>
-      <option value="+1">🇺🇸 +1</option>
-      <option value="+52">🇲🇽 +52</option>
-      <option value="+507">🇵🇦 +507</option>
-      <option value="+51">🇵🇪 +51</option>
-      <option value="+1">🇩🇴 +1</option>
-      <option value="+598">🇺🇾 +598</option>
-      <option value="+58">🇻🇪 +58</option>
-      <option value="+49">🇩🇪 +49</option>
-      <option value="+43">🇦🇹 +43</option>
-      <option value="+32">🇧🇪 +32</option>
-      <option value="+45">🇩🇰 +45</option>
-      <option value="+34">🇪🇸 +34</option>
-      <option value="+33">🇫🇷 +33</option>
-      <option value="+30">🇬🇷 +30</option>
-      <option value="+39">🇮🇹 +39</option>
-      <option value="+31">🇳🇱 +31</option>
-      <option value="+351">🇵🇹 +351</option>
-      <option value="+44">🇬🇧 +44</option>
-      <option value="+41">🇨🇭 +41</option>
-      <option value="+46">🇸🇪 +46</option>
-      <option value="+86">🇨🇳 +86</option>
-      <option value="+82">🇰🇷 +82</option>
-      <option value="+971">🇦🇪 +971</option>
-      <option value="+91">🇮🇳 +91</option>
-      <option value="+62">🇮🇩 +62</option>
-      <option value="+972">🇮🇱 +972</option>
-      <option value="+81">🇯🇵 +81</option>
-      <option value="+60">🇲🇾 +60</option>
-      <option value="+7">🇷🇺 +7</option>
-      <option value="+966">🇸🇦 +966</option>
-      <option value="+65">🇸🇬 +65</option>
-      <option value="+90">🇹🇷 +90</option>
-      <option value="+63">🇵🇭 +63</option>
-      <option value="+66">🇹🇭 +66</option>
-      <option value="+27">🇿🇦 +27</option>
-      <option value="+20">🇪🇬 +20</option>
-      <option value="+234">🇳🇬 +234</option>
-      <option value="+254">🇰🇪 +254</option>
-      <option value="+212">🇲🇦 +212</option>
-    </select>
-    <input type="tel" required placeholder="Número de teléfono" />
-  </div>
-</div>
-
-
+              <label>Teléfono*</label>
+              <div className={styles.phoneInput}>
+                <select>
+                  {countries.length > 0 ? (
+                    countries.map((country) => (
+                      <option key={country.cca2} value={country.idd}>
+                        {country.flag} {country.idd} ({country.name})
+                      </option>
+                    ))
+                  ) : (
+                    <option>Cargando códigos...</option>
+                  )}
+                </select>
+                <input type="tel" required placeholder="Número de teléfono" />
+              </div>
+            </div>
           </div>
 
           <div className={styles.formGroup}>

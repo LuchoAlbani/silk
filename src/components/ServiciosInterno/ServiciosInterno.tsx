@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./ServiciosInterno.module.css"; // ✅ Se usa correctamente
 
 const ServiciosInterno: React.FC = () => {
@@ -7,6 +7,7 @@ const ServiciosInterno: React.FC = () => {
     apellido: "",
     email: "",
     localidad: "",
+    telefono: "",
     servicio: [] as string[],
     presupuesto: "",
     inicio: "",
@@ -15,6 +16,35 @@ const ServiciosInterno: React.FC = () => {
     recibirEmails: false,
     otroServicio: "",
   });
+
+  const [countries, setCountries] = useState<any[]>([]); // Almacenamos los países
+  const [selectedCountryCode, setSelectedCountryCode] = useState(""); // Para almacenar el código seleccionado
+
+  // Fetch de países para obtener el código de teléfono
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await fetch("https://restcountries.com/v3.1/all");
+        const data = await response.json();
+
+        const formattedCountries = data
+          .filter((country: any) => country.idd?.root)
+          .map((country: any) => ({
+            name: country.name.common,
+            cca2: country.cca2,
+            idd: `${country.idd.root}${country.idd.suffixes ? country.idd.suffixes[0] : ""}`,
+            flag: country.flags?.emoji || "🏳",
+          }))
+          .sort((a: any, b: any) => a.name.localeCompare(b.name));
+
+        setCountries(formattedCountries);
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
+    };
+
+    fetchCountries();
+  }, []);
 
   // Manejo de cambios en inputs y selects
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -26,19 +56,27 @@ const ServiciosInterno: React.FC = () => {
     }));
   };
 
-  // ✅ Manejo de cambios en checkboxes de servicios (Permite múltiples selecciones)
+  // Manejo de cambios en el teléfono
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      telefono: `${selectedCountryCode} ${e.target.value}`, // Concatenar el código con el número
+    }));
+  };
+
+  // ✅ Manejo de cambios en checkboxes de servicios
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = e.target;
 
     setFormData((prevState) => ({
       ...prevState,
       servicio: checked
-        ? [...prevState.servicio, value] // Agrega el servicio si está seleccionado
-        : prevState.servicio.filter((s) => s !== value), // Lo quita si está deseleccionado
+        ? [...prevState.servicio, value]
+        : prevState.servicio.filter((s) => s !== value),
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const submitForm = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Formulario enviado:", formData);
   };
@@ -52,7 +90,7 @@ const ServiciosInterno: React.FC = () => {
           Potenciemos tu <em>imagen</em>.
         </h1>
 
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={submitForm}>
           {/* Campos de texto */}
           {["nombre", "apellido", "email", "localidad"].map((field) => (
             <input
@@ -67,18 +105,44 @@ const ServiciosInterno: React.FC = () => {
             />
           ))}
 
+          {/* Teléfono - Formato similar al modal */}
+          <div className={styles.emailPhoneGroup}>
+            <div className={styles.formGroup}>
+              <label>Teléfono*</label>
+              <div className={styles.phoneInput}>
+                <select
+                  onChange={(e) => setSelectedCountryCode(e.target.value)} // Actualizamos el código del país seleccionado
+                  required
+                >
+                  {countries.length > 0 ? (
+                    countries.map((country) => (
+                      <option key={country.cca2} value={country.idd}>
+                        {country.flag} {country.idd} ({country.name})
+                      </option>
+                    ))
+                  ) : (
+                    <option>Cargando códigos...</option>
+                  )}
+                </select>
+                <input
+                  type="tel"
+                  name="telefono"
+                  required
+                  placeholder="Número de teléfono"
+                  value={formData.telefono}
+                  onChange={handlePhoneChange}
+                  className={styles.input}
+                />
+              </div>
+            </div>
+          </div>
+
           {/* ✅ Servicios - Checkboxes */}
           <fieldset className={styles.checkboxGroup} style={{ border: "none", padding: 0, margin: 0 }}>
             <legend className={styles.checkboxTitle}>
               ¿Qué servicio te interesa? Elegí 1 o más*
             </legend>
-            {[
-              "Personal Shopping",
-              "Closet Detox",
-              "Transformá tu Imagen (Asesoramiento)",
-              "No estoy seguro/a, quiero asesoramiento",
-              "Otro",
-            ].map((servicio, index) => (
+            {[ "Personal Shopping", "Closet Detox", "Transformá tu Imagen (Asesoramiento)", "No estoy seguro/a, quiero asesoramiento", "Otro" ].map((servicio, index) => (
               <label key={index} className={styles.checkboxLabel}>
                 <input
                   type="checkbox"
@@ -90,8 +154,6 @@ const ServiciosInterno: React.FC = () => {
                 <span>{servicio}</span>
               </label>
             ))}
-
-            {/* ✅ Campo extra si el usuario elige "Otro" */}
             {formData.servicio.includes("Otro") && (
               <input
                 type="text"
@@ -105,65 +167,55 @@ const ServiciosInterno: React.FC = () => {
             )}
           </fieldset>
 
-          {/* Selects */}
-{/* Presupuesto */}
-<div className={styles.selectWrapper}>
-  <label className={styles.selectLabel}>
-    ¿Cuál sería tu presupuesto para invertir en ropa y accesorios?*
-  </label>
-  <select
-    name="presupuesto"
-    value={formData.presupuesto}
-    onChange={handleChange}
-    className={styles.select}
-    required
-  >
-    <option value="">Seleccionar</option>
-    <option value="bajo">Menos de $50.000</option>
-    <option value="medio">$50.000 - $150.000</option>
-    <option value="alto">Más de $150.000</option>
-  </select>
-</div>
+          {/* Selects y demás campos */}
+          <div className={styles.selectWrapper}>
+            <label className={styles.selectLabel}>¿Cuál sería tu presupuesto para invertir en ropa y accesorios?*</label>
+            <select
+              name="presupuesto"
+              value={formData.presupuesto}
+              onChange={handleChange}
+              className={styles.select}
+              required
+            >
+              <option value="">Seleccionar</option>
+              <option value="bajo">Menos de $50.000</option>
+              <option value="medio">$50.000 - $150.000</option>
+              <option value="alto">Más de $150.000</option>
+            </select>
+          </div>
 
-{/* Inicio */}
-<div className={styles.selectWrapper}>
-  <label className={styles.selectLabel}>
-    ¿Cuándo te gustaría empezar?*
-  </label>
-  <select
-    name="inicio"
-    value={formData.inicio}
-    onChange={handleChange}
-    className={styles.select}
-    required
-  >
-    <option value="">Seleccionar</option>
-    <option value="inmediato">Inmediatamente</option>
-    <option value="proximoMes">El próximo mes</option>
-    <option value="futuro">Más adelante</option>
-  </select>
-</div>
+          <div className={styles.selectWrapper}>
+            <label className={styles.selectLabel}>¿Cuándo te gustaría empezar?*</label>
+            <select
+              name="inicio"
+              value={formData.inicio}
+              onChange={handleChange}
+              className={styles.select}
+              required
+            >
+              <option value="">Seleccionar</option>
+              <option value="inmediato">Inmediatamente</option>
+              <option value="proximoMes">El próximo mes</option>
+              <option value="futuro">Más adelante</option>
+            </select>
+          </div>
 
-{/* Referencia */}
-<div className={styles.selectWrapper}>
-  <label className={styles.selectLabel}>
-    ¿Cómo nos conociste?*
-  </label>
-  <select
-    name="referencia"
-    value={formData.referencia}
-    onChange={handleChange}
-    className={styles.select}
-    required
-  >
-    <option value="">Seleccionar</option>
-    <option value="redes">Redes Sociales</option>
-    <option value="amigos">Recomendación de amigos</option>
-    <option value="busqueda">Búsqueda en Internet</option>
-    <option value="otro">Otro</option>
-  </select>
-</div>
-
+          <div className={styles.selectWrapper}>
+            <label className={styles.selectLabel}>¿Cómo nos conociste?*</label>
+            <select
+              name="referencia"
+              value={formData.referencia}
+              onChange={handleChange}
+              className={styles.select}
+              required
+            >
+              <option value="">Seleccionar</option>
+              <option value="redes">Redes Sociales</option>
+              <option value="amigos">Recomendación de amigos</option>
+              <option value="busqueda">Búsqueda en Internet</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
 
           {/* Checkbox de términos */}
           <label className={styles.checkboxLabel}>
@@ -200,7 +252,6 @@ const ServiciosInterno: React.FC = () => {
           <button type="submit" className={styles.submitButton}>
             ENVIAR
           </button>
-
         </form>
       </div>
     </div>

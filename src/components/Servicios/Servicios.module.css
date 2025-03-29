@@ -9,19 +9,26 @@
   font-weight: bold;
   font-size: 18px;
   margin-bottom: 30px;
-  color: #3A5D3A;
+  color: #244d3c;
   margin-top: 30px;
 }
 
 .heading {
-  font-size: 40px;
-  color: #244d3c;
-  font-weight: 500;
-  line-height: 1;
-  text-align: justify;
-  max-width: 800px; /* Ajusta el ancho para un mejor efecto */
-  margin-bottom: 50px;
-  margin-left: 200px;
+  font-family: 'Bodoni Moda', serif; /* Fuente refinada */
+  font-size: 45px; /* Tamaño legible y elegante */
+  color: #244d3c; /* Color acorde al estilo sofisticado */
+  text-align: left; /* Mantiene las frases alineadas hacia la izquierda */
+  margin-bottom: 50px; /* Margen ajustado para mejor separación */
+  margin-top: 50px;
+  margin-left: 10%;
+  line-height: 1.3; /* Espaciado entre líneas más amplio y visualmente agradable */
+  letter-spacing: 0.05em; /* Espaciado entre caracteres para mayor claridad */
+  text-transform: none;
+}
+
+.line:nth-of-type(2),
+.line:nth-of-type(3) {
+  margin-left: 0.4em; /* Espacio solo para la 2ª y 3ª línea */
 }
 
 .grid {
@@ -69,7 +76,7 @@
 }
 
 .opcion {
-  border-bottom: 2px solid #3A5D3A; /* Línea inferior para todas */
+  border-bottom: 2px solid #3a5d3a; /* Línea inferior para todas */
   padding: 12px 0;
   margin-top: 0;
   margin-bottom: 0;
@@ -77,13 +84,14 @@
 }
 
 .opcion:first-child {
-  border-top: 2px solid #3A5D3A; /* Solo la primera opción tendrá borde superior */
+  border-top: 2px solid #3a5d3a; /* Solo la primera opción tendrá borde superior */
 }
 
 .opcionTitulo {
+  font-family: "Acumin Pro Semibold" sans-serif;
   background: none;
   border: none;
-  color: #3A5D3A;
+  color: #3a5d3a;
   font-weight: bold;
   font-size: 18px;
   cursor: pointer;
@@ -92,7 +100,8 @@
   width: 100%;
   text-align: left;
   padding: 12px;
-  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out,
+    background-color 0.3s ease-in-out;
 }
 
 .opcionTitulo::before {
@@ -105,18 +114,69 @@
 
 .opcionTitulo.activo::before {
   content: "▼"; /* Flecha abierta */
-  
 }
 
 /* MODIFICAR ANIMACION*/
 .opcionContenido {
-  font-size: 16px;
-  color: #3A5D3A;
+  font-family: "Acumin Pro Medium", sans-serif;
+  font-size: 18px;
+  color: #3a5d3a;
+  line-height: 1.5;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease-in-out, padding 0.3s ease-in-out, opacity 0.1s linear;
-  padding: 0 12px;
+  transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out,
+    padding 0.3s ease-in-out;
+  padding: 0 15px;
   opacity: 0;
+}
+
+/* Mostrar contenido cuando está activo */
+.opcionContenido.mostrar {
+  max-height: 800px; /* Ajustado para más contenido */
+  opacity: 1;
+  padding: 12px 16px;
+}
+
+/* Listas mejor organizadas */
+.opcionContenido ul {
+  list-style-type: disc; /* Para los puntos */
+  padding-left: 20px; /* Ajusta el espacio de los puntos */
+  margin-top: 10px; /* Espaciado superior */
+  margin-bottom: 10px; /* Espaciado inferior */
+  display: block; /* Asegura que el contenido esté en bloque */
+}
+
+.opcionContenido li {
+  margin-bottom: 10px; /* Espacio entre los elementos de la lista */
+  display: block; /* Asegura que cada elemento se muestre en su propia línea */
+  padding-left: 10px; /* Ajuste para el indentado */
+}
+
+/* Resaltar títulos clave dentro del contenido */
+.opcionContenido strong {
+  font-weight: bold;
+  color: #2d5234;
+  background-color: rgba(45, 82, 52, 0.1); /* Suave fondo para resaltar */
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* Separación entre párrafos */
+.opcionContenido p {
+  margin-bottom: 14px;
+}
+
+.boldItalic {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.mostrar {
+  max-height: 800px; /* Aumentado para adaptarse a más contenido */
+  padding: 12px;
+  opacity: 1;
+  transition: max-height 0.4s ease-in-out, padding 0.3s ease-in-out,
+    opacity 0.05s linear;
 }
 
 /* Mostrar contenido */
@@ -124,19 +184,17 @@
   max-height: 500px; /* Ajusta según el contenido */
   padding: 12px;
   opacity: 1;
-  transition: max-height 0.4s ease-in-out, padding 0.3s ease-in-out, opacity 0.05s linear;
+  transition: max-height 0.4s ease-in-out, padding 0.3s ease-in-out,
+    opacity 0.05s linear;
 }
 
-
-
-
 .button {
+  font-family: "Acumin Pro", sans-serif;
   margin-top: 100px; /* Espaciado superior */
   margin-bottom: 100px; /* Espaciado inferior */
   padding: 16px 32px; /* Ajuste del tamaño interno */
-  background: #3A5D3A; /* Fondo verde oscuro */
-  color: #FFFFFF; /* Texto blanco */
-  font-family: "Arial", sans-serif; /* Fuente moderna y limpia */
+  background: #244d3c; /* Fondo verde oscuro */
+  color: #ffffff; /* Texto blanco */
   font-size: 18px; /* Tamaño del texto */
   border: none; /* Sin bordes oscuros */
   border-radius: 15px; /* Bordes redondeados, igual a la foto */
@@ -144,7 +202,6 @@
   text-transform: uppercase; /* Texto en mayúsculas */
   cursor: pointer; /* Indicador de interactividad */
   transition: background 0.3s, box-shadow 0.3s; /* Animación en hover */
-  
 }
 
 .button:hover {
@@ -153,7 +210,7 @@
 }
 
 .listaEsperaButton {
-  background-color: #3A5D3A;
+  background-color: #244d3c;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -162,13 +219,11 @@
   font-size: 16px;
   margin-top: 10px;
   transition: background 0.3s ease;
-  
 }
 
 .listaEsperaButton:hover {
-  background-color: #2E4A2E;
+  background-color: #2e4a2e;
 }
-
 
 .faq {
   text-align: center;
@@ -176,7 +231,7 @@
 
 .faq h3 {
   font-size: 50px;
-  color: #3A2E1F;
+  color: #3a2e1f;
   font-weight: 500;
   margin-bottom: 50px; /* Aumenta ligeramente el margen */
 }
@@ -211,6 +266,7 @@
 }
 
 .preguntaTitulo {
+  font-family: "Acumin Pro Semibold", sans-serif;
   width: 100%;
   background: none;
   border: none;
@@ -238,15 +294,16 @@
 }
 
 .preguntaTitulo:hover {
-  background: #E3D8C9;
+  background: #e3d8c9;
 }
 
 .flecha {
   font-size: 14px;
   transition: transform 0.3s ease-in-out, color 0.3s ease-in-out; /* Efecto extra */
 }
+
 .preguntaTitulo:hover .flecha {
-  color: #3A2E1F; /* Cambiar el color al pasar el mouse */
+  color: #3a2e1f; /* Cambiar el color al pasar el mouse */
 }
 
 .abierta {
@@ -255,10 +312,11 @@
 
 /* Respuesta animada */
 .preguntaRespuesta {
+  font-family: "Acumin Pro Thin" sans-serif;
   font-size: 16px;
-  color: #3A2E1F;
+  color: #3a2e1f;
   text-align: justify;
-  
+
   /* Ocultar inicialmente */
   max-height: 0;
   overflow: hidden;
@@ -266,9 +324,10 @@
   padding-bottom: 0;
   padding-left: 25px;
   padding-right: 25px;
-  
+
   /* Transición uniforme */
-  transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out,
+    opacity 0.4s ease-in-out;
   opacity: 0;
 }
 
@@ -278,9 +337,6 @@
   padding-bottom: 15px;
   opacity: 1;
 }
-
-
-
 
 @keyframes fadeIn {
   from {
@@ -299,12 +355,17 @@
     text-align: center;
   }
 
+  .subheading{
+    font-size: 12px;
+    margin-bottom: -20px;
+  }
+
   .heading {
-    font-size: 28px; /* Reduce el tamaño del título */
-    text-align: left; /* Centrar el título */
-    margin-left: 0;
+    font-size: 16px; /* Reduce el tamaño del título */
+    text-align: justify; /* Centrar el título */
+    margin-left: 10px;
     max-width: 100%; /* Ocupa todo el ancho */
-    margin-bottom: 30px;
+    margin-bottom: 40px;
   }
 
   .grid {
@@ -316,7 +377,6 @@
   .card {
     max-width: 90%; /* Ocupar más espacio en móviles */
     text-align: center;
-    
   }
 
   .image {
@@ -353,6 +413,4 @@
     padding: 15px;
   }
 }
-
-
 

@@ -101,8 +101,13 @@
 }
 
 .navList li a.active {
-  color: #ffffff;
+  color: #ffffff; /* O cualquier color que desees */
 }
+
+.navList li a.active::after {
+  width: 100%;
+}
+
 
 .shrink .logo {
   margin-top: 5px;

@@ -72,7 +72,7 @@
   position: relative;
   bottom: 10px;
   padding: 15px 30px;
-  background-color: white;
+  background-color: #e2ddd0;
   color: black;
   border: none;
   font-size: 1.3rem;
@@ -86,11 +86,11 @@
 }
 
 .bannerButton:hover {
-  background-color: #ddd;
+  background-color: #e2ddd0;
   transform: scale(1.05);
 }
 
-/* 📱 Responsive */
+/* Responsive */
 @media (max-width: 768px) {
   .bannerContainer {
     height: 500px; /* Ajuste en móviles */
