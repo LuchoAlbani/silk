@@ -45,8 +45,8 @@ const Header: React.FC = () => {
       <nav className={`${styles.nav} ${isScrolled ? styles.hidden : ""}`}>
         <ul className={styles.navList}>
           {navLinks.map((link, index) => {
-            const isActive =
-              location.pathname.startsWith("/blog") && link.to === "/blog";
+            // Identificar si la ruta actual es "/servicios" o "/blog" para aplicar la clase 'active'
+            const isActive = location.pathname === link.to;
 
             return (
               <li key={index}>

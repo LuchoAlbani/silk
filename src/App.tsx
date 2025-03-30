@@ -1,31 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import styles from "./App.module.css";  
 import Header from "./components/Header/Header"; 
 import Footer from "./components/Footer/Footer"; 
 import Banner from "./components/Banner/Banner";
 import Section from "./components/Section/Section";
 import Blog from "./components/Blog/Blog";
 import Quiz from "./components/Quiz/Quiz";
+import Modal from "./components/Modal/Modal"; 
+import BackButton from "./components/BackButton/BackButton";
+import "./index.css";
 
 const App: React.FC = () => {
   const location = useLocation();
-
   const isHome = location.pathname === "/";
 
+  // Estado del Modal para que sea global
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
-    <div className={styles.app}>
+    <div className="app">
       <Header />  
-      {isHome && (  // Solo muestra estos componentes en la página de inicio
+      {!isHome && <BackButton />} {/* Flecha después del header */}
+      
+      {isHome && ( 
         <>
-          <Banner />
+          <Banner onOpenModal={() => setIsModalOpen(true)} />
           <Quiz />
           <Section />
           <Blog />
         </>
       )}
-      <Outlet /> {/* Aquí se renderizan las demás rutas como "Servicios", "Bloggers", etc. */}
+      <Outlet /> 
       <Footer /> 
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };

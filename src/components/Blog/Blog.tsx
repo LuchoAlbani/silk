@@ -51,9 +51,13 @@ const Blog: React.FC = () => {
 
   return (
     <div ref={blogRef} className={`${styles.blog} ${isVisible ? styles.fadeIn : ""}`}>
-      <h2>
-        Lo <em>último</em> de nuestro blog
-      </h2>
+  <h2>
+  <span style={{ fontFamily: "VeryVogueText" }}>Lo</span>{" "}
+  <em style={{ fontFamily: "VeryVogueTextItalic" }}>último</em>{" "}
+  <span style={{ fontFamily: "VeryVogueText" }}>de nuestro blog</span>
+</h2>
+
+
       <div className={styles.blogCarousel} aria-live="polite">
       <button className={styles.carouselButton} onClick={prevSlide} aria-label="Ver anteriores">
   ◀

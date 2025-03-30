@@ -10,25 +10,38 @@ const servicios = [
       {
         id: "incluye",
         titulo: "¿QUÉ INCLUYE?",
-        contenido: `• Entrevista inicial para fijar objetivos de compra, estilo y presupuesto.
-• Presencial: Acompañamiento en tiendas x 3hs + coffee break.
-• Online: Guía de Shopping (tips y sugerencias) + Lista de compras personalizada (marcas, tiendas y productos con link de compra).
-• Guía post-shopping: Armado de outfits con las compras realizadas para que nunca te quedes sin ideas.`,
+        contenido: (
+          <ul>
+            <li>• Entrevista inicial para fijar objetivos de compra, estilo y presupuesto.</li>
+            <li>• <span className={styles.boldItalic}>Personas</span> que buscan desarrollar confianza a través de su imagen.</li>
+            <li>• <span className={styles.boldItalic}>Quienes</span> desean mejorar su relación con el espejo y su autoestima.</li>
+            <li>• <span className={styles.boldItalic}>Personas</span> en busca de evolución y transformación personal.</li>
+
+
+          </ul>
+        ),
       },
       {
         id: "para-quien",
         titulo: "¿PARA QUIÉN ES?",
-        contenido: `Personas que deseen un armario resolutivo, eficaz y adaptado a su estilo, ya sea para el día a día o para un evento particular.
-
-Elegí la modalidad online si…
-• Viajás y querés renovar tu closet en el exterior.
-• No te gusta o no tenés tiempo para ir de shopping.
-• Vivís fuera de CABA o AMBA.`,
+        contenido: (
+          <ul>
+            <li>• Personas que deseen un armario resolutivo, eficaz y adaptado a su estilo, ya sea para el día a día o para un evento particular.</li>
+            <li>• Elegí la modalidad online si…</li>
+            <li>• Viajás y querés renovar tu closet en el exterior.</li>
+            <li>• No te gusta o no tenés tiempo para ir de shopping.</li>
+            <li>• Vivís fuera de CABA o AMBA.</li>
+          </ul>
+        ),
       },
       {
         id: "inversion",
         titulo: "LA INVERSIÓN",
-        contenido: "Cada uno de nuestros clientes tiene necesidades diferentes, por lo que el precio se ajusta según lo que requieras. ¡Agendá una llamada con nosotros y armemos algo a tu medida!",
+        contenido: (
+          <p>
+            Cada uno de nuestros clientes tiene necesidades diferentes, por lo que el precio se ajusta según lo que requieras. ¡Agendá una llamada con nosotros y armemos algo a tu medida!
+          </p>
+        ),
       },
     ],
   },
@@ -39,20 +52,28 @@ Elegí la modalidad online si…
       {
         id: "incluye",
         titulo: "¿QUÉ INCLUYE?",
-        contenido: `• 2 sesiones de asesoramiento por Zoom (o más si es necesario)
-• Análisis de figura, rostro y estilo.
-• Colorimetría: Tu paleta ideal y cómo combinarla.
-• Sugerencias de estilismo, cabello y make-up.
-• Armado de un armario cápsula con 12 outfits.
-• Lista de compras con links a tiendas.`,
+        contenido: (
+          <ul>
+            <li>• 2 sesiones de asesoramiento por Zoom (o más si es necesario)</li>
+            <li>• Análisis de figura, rostro y estilo.</li>
+            <li>• Colorimetría: Tu paleta ideal y cómo combinarla.</li>
+            <li>• Sugerencias de estilismo, cabello y make-up.</li>
+            <li>• Armado de un armario cápsula con 12 outfits.</li>
+            <li>• Lista de compras con links a tiendas.</li>
+          </ul>
+        ),
       },
       {
         id: "para-quien",
         titulo: "¿PARA QUIÉN ES?",
-        contenido: `• Personas que deseen construir su estilo personal desde cero.
-• Quienes buscan alinear su guardarropa con sus objetivos.
-• Personas en cambios de vida (embarazo, ascenso, mudanza).
-• Quienes quieran perfeccionar su estilo y conocer sus colores ideales.`,
+        contenido: (
+          <ul>
+            <li>• Personas que deseen construir su estilo personal desde cero.</li>
+            <li>• Quienes buscan alinear su guardarropa con sus objetivos.</li>
+            <li>• Personas en cambios de vida (embarazo, ascenso, mudanza).</li>
+            <li>• Quienes quieran perfeccionar su estilo y conocer sus colores ideales.</li>
+          </ul>
+        ),
       },
       {
         id: "inversion",
@@ -68,17 +89,26 @@ Elegí la modalidad online si…
       {
         id: "incluye",
         titulo: "¿QUÉ INCLUYE?",
-        contenido: `• Sesión 1: Entrevista inicial. Autoconocimiento y fijación de objetivos.
-• Sesión 2: Trabajo sobre la percepción corporal y estilismo.
-• Sesión 3: Uso del color, análisis de colorimetría y combinaciones.
-• Sesión 4: Entrega de dossier con recomendaciones personalizadas.`,
+        contenido: (
+          <ul>
+            <li>• <span className={styles.boldItalic}>Sesión 1</span> : Entrevista inicial. Autoconocimiento y fijación de objetivos.</li>
+            <li>• <span className={styles.boldItalic}>Sesión 2</span> : Trabajo sobre la percepción corporal y estilismo.</li>
+            <li>• <span className={styles.boldItalic}>Sesión 3</span> : Uso del color, análisis de colorimetría y combinaciones.</li>
+            <li>• <span className={styles.boldItalic}>Sesión 4</span> : Entrega de dossier con recomendaciones personalizadas.</li>
+
+          </ul>
+        ),
       },
       {
         id: "para-quien",
         titulo: "¿PARA QUIÉN ES?",
-        contenido: `• Personas que buscan desarrollar confianza a través de su imagen.
-• Quienes desean mejorar su relación con el espejo y su autoestima.
-• Personas en busca de evolución y transformación personal.`,
+        contenido: (
+          <ul>
+            <li>• Personas que buscan desarrollar confianza a través de su imagen.</li>
+            <li>• Quienes desean mejorar su relación con el espejo y su autoestima.</li>
+            <li>• Personas en busca de evolución y transformación personal.</li>
+          </ul>
+        ),
       },
       {
         id: "inversion",
@@ -96,6 +126,7 @@ Elegí la modalidad online si…
     ],
   },
 ];
+
 
 const preguntasFrecuentes = [
   {
@@ -160,16 +191,14 @@ const Servicios: React.FC = () => {
     setPreguntaActiva((prev) => (prev === id ? null : id));
   };
 
-
-
   return (
     <div className={styles.container}>
       <p className={styles.subheading}>NUESTROS SERVICIOS</p>
       <h2 className={styles.heading}>
-        “Un armario que <em>te inspira</em>.” <br />
-        “Una imagen que <em>te representa</em>.” <br />
-        “Una confianza que <em>transforma realidades</em>.”
-      </h2>
+  <span className={styles.line}>"Un armario que <em>te inspira</em>.</span> <br />
+  <span className={styles.line}>Una imagen que <em>te representa</em>.</span> <br />
+  <span className={styles.line}>Una confianza que <em>transforma realidades</em>."</span>
+</h2>
 
       <div className={styles.grid}>
         {servicios.map((servicio) => (
@@ -180,16 +209,14 @@ const Servicios: React.FC = () => {
               {servicio.opciones.map((opcion) => (
                 <div key={opcion.id} className={styles.opcion}>
                   <button
-                    className={`${styles.opcionTitulo} ${activo?.servicioId === servicio.id && activo?.opcionId === opcion.id ? styles.activo : ""
-                      }`}
+                    className={`${styles.opcionTitulo} ${activo?.servicioId === servicio.id && activo?.opcionId === opcion.id ? styles.activo : ""}`}
                     onClick={() => toggleOpcion(servicio.id, opcion.id)}
                     aria-expanded={activo?.servicioId === servicio.id && activo?.opcionId === opcion.id}
                   >
                     {opcion.titulo}
                   </button>
                   <div
-                    className={`${styles.opcionContenido} ${activo?.servicioId === servicio.id && activo?.opcionId === opcion.id ? styles.mostrar : ""
-                      }`}
+                    className={`${styles.opcionContenido} ${activo?.servicioId === servicio.id && activo?.opcionId === opcion.id ? styles.mostrar : ""}`}
                   >
                     {opcion.contenido}
                   </div>
@@ -200,12 +227,10 @@ const Servicios: React.FC = () => {
         ))}
       </div>
 
-      {/* Botón actualizado para redirigir a ServiciosInterno */}
       <button className={styles.button} onClick={() => navigate("/servicios-interno")}>
         COMENZÁ HOY
       </button>
 
-      {/* Preguntas Frecuentes en dos columnas */}
       <div className={styles.faq}>
         <h3>Preguntas Frecuentes</h3>
         <div className={styles.preguntasContainer}>
@@ -218,7 +243,6 @@ const Servicios: React.FC = () => {
                 >
                   {item.pregunta}
                 </button>
-
                 <p className={`${styles.preguntaRespuesta} ${preguntaActiva === item.id ? styles.mostrar : ""}`}>
                   {item.respuesta}
                 </p>
@@ -235,7 +259,6 @@ const Servicios: React.FC = () => {
                 >
                   {item.pregunta}
                 </button>
-
                 <p className={`${styles.preguntaRespuesta} ${preguntaActiva === item.id ? styles.mostrar : ""}`}>
                   {item.respuesta}
                 </p>

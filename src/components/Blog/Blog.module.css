@@ -13,12 +13,17 @@
 }
 
 .blog h2 {
-  font-size: 40px;
+  font-size: 60px;
   margin-top: 60px;
+  font-family: "VeryVogueText", sans-serif;
+  font-weight: normal;
+  margin-bottom: 20px;
+  text-transform: none;
 }
 
 .blog em {
   font-style: italic;
+  font-family: "VeryVogueTextItalic", sans-serif;
 }
 
 .blogCarousel {
@@ -60,7 +65,7 @@
   font-size: 15px;
   color: black;
   position: absolute;
-  bottom: 60px;
+  bottom: 40px;
   left: 10px;
   background-color: #f2f0eb;
   padding: 5px 10px;
