@@ -62,6 +62,7 @@
 }
 
 h2 {
+  font-family: 'Acumin Pro';
   font-size: 14px;
   font-weight: bold;
   color: #134c31;
@@ -80,6 +81,7 @@ h2 {
 }
 
 .description {
+  font-family: 'Acumin Pro';
   font-size: 1rem;
   color: #1b4f3c;
   margin-bottom: 25px;

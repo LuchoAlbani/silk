@@ -15,20 +15,26 @@
 }
 
 .sectionContainer h2 {
-  font-size: 3.8rem; /* Tamaño ajustado */
+  font-size: 3.5rem; /* Tamaño ajustado */
   margin-bottom: 50px;
   font-family: "VeryVogue", serif; /* Fuente más refinada */
   font-weight: 400; /* Menos grueso */
   letter-spacing: 1px; /* Espaciado mejorado */
   color: #f2f0eb;
   text-transform: none;
+  margin-bottom: 20px; /* Reducimos el margen inferior */
+  line-height: 1.1; /* Disminuimos la altura de línea para compactar */
+
 }
 
 .sectionContainer h2 em {
-  font-size: 3.6rem;
+  font-size: 3.5rem;
   font-family: "VogueItalic", serif;
   font-weight: 300; /* Más ligero para darle elegancia */
   color: #f2f0eb;
+  display: block; /* Asegura que siga en una nueva línea */
+  margin-bottom: 60px; /* Reduce la separación con el título */
+  line-height: 1.1;
 }
 
 .silk {
@@ -70,8 +76,7 @@
 .sectionItem h3 {
   font-size: 1.5rem;
   margin-bottom: 15px;
-  font-family: "AcuminProSemibold", sans-serif; /* Fuente para h3 */
-  font-weight: 500;
+  font-family: "Acumin Pro Bold", sans-serif; /* Fuente para h3 */
 }
 
 /* Estilo para los párrafos en cada sección */
