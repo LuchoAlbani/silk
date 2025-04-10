@@ -13,11 +13,9 @@ const servicios = [
         contenido: (
           <ul>
             <li>• Entrevista inicial para fijar objetivos de compra, estilo y presupuesto.</li>
-            <li>• <span className={styles.boldItalic}>Personas</span> que buscan desarrollar confianza a través de su imagen.</li>
-            <li>• <span className={styles.boldItalic}>Quienes</span> desean mejorar su relación con el espejo y su autoestima.</li>
-            <li>• <span className={styles.boldItalic}>Personas</span> en busca de evolución y transformación personal.</li>
-
-
+            <li>• <span className={styles.boldItalic}>Presencial:</span> Acompañamiento en tiendas x 3hs + coffee break.</li>
+            <li>• <span className={styles.boldItalic}>Online:</span> Guía de Shopping (con tips y sugerencias) + Lista de compras personalizada (marcas, tiendas y productos con link de compra).</li>
+            <li>• <span className={`${styles.boldItalic} ${styles.noBoldItalic}`}>Guía post-shopping:</span> Armado de outfits con las compras realizadas para que nunca te quedes sin ideas.</li>
           </ul>
         ),
       },
@@ -27,7 +25,7 @@ const servicios = [
         contenido: (
           <ul>
             <li>• Personas que deseen un armario resolutivo, eficaz y adaptado a su estilo, ya sea para el día a día o para un evento particular.</li>
-            <li>• Elegí la modalidad online si…</li>
+            <li> Elegí la modalidad online si…</li>
             <li>• Viajás y querés renovar tu closet en el exterior.</li>
             <li>• No te gusta o no tenés tiempo para ir de shopping.</li>
             <li>• Vivís fuera de CABA o AMBA.</li>
@@ -84,17 +82,18 @@ const servicios = [
   },
   {
     id: 3,
-    image: "/images/Coaching Card@2x-8.png",
+    image: "/images/Coaching Card_1@2x-8.png",
     opciones: [
       {
         id: "incluye",
         titulo: "¿QUÉ INCLUYE?",
         contenido: (
           <ul>
-            <li>• <span className={styles.boldItalic}>Sesión 1</span> : Entrevista inicial. Autoconocimiento y fijación de objetivos.</li>
-            <li>• <span className={styles.boldItalic}>Sesión 2</span> : Trabajo sobre la percepción corporal y estilismo.</li>
-            <li>• <span className={styles.boldItalic}>Sesión 3</span> : Uso del color, análisis de colorimetría y combinaciones.</li>
-            <li>• <span className={styles.boldItalic}>Sesión 4</span> : Entrega de dossier con recomendaciones personalizadas.</li>
+            <li>• <span className={`${styles.boldItalic} ${styles.noBoldItalic}`}>Sesión 1</span> : Entrevista inicial. Autoconocimiento y fijación de objetivos.</li>
+            <li>• <span className={`${styles.boldItalic} ${styles.noBoldItalic}`}>Sesión 2</span> : Trabajo sobre la percepción corporal y estilismo.</li>
+            <li>• <span className={`${styles.boldItalic} ${styles.noBoldItalic}`}>Sesión 3</span> : Uso del color, análisis de colorimetría y combinaciones.</li>
+            <li>• <span className={`${styles.boldItalic} ${styles.noBoldItalic}`}>Sesión 4</span> : Entrega de dossier con recomendaciones personalizadas.</li>
+
 
           </ul>
         ),
@@ -195,10 +194,11 @@ const Servicios: React.FC = () => {
     <div className={styles.container}>
       <p className={styles.subheading}>NUESTROS SERVICIOS</p>
       <h2 className={styles.heading}>
-  <span className={styles.line}>"Un armario que <em>te inspira</em>.</span> <br />
-  <span className={styles.line}>Una imagen que <em>te representa</em>.</span> <br />
-  <span className={styles.line}>Una confianza que <em>transforma realidades</em>."</span>
-</h2>
+        <span className={styles.line}>"Un armario que <em className={styles.italic}>te inspira</em>.</span> <br />
+        <span className={styles.line}>Una imagen que <em className={styles.italic}>te representa</em>.</span> <br />
+        <span className={styles.line}>Una confianza que <em className={styles.italic}>transforma realidades</em>."</span>
+      </h2>
+
 
       <div className={styles.grid}>
         {servicios.map((servicio) => (
