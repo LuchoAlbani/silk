@@ -132,6 +132,11 @@ h2 {
   border-bottom: 2px solid #134c31;
 }
 
+.form select:focus {
+  background-color: #e2ddd0; /* Cambia el fondo al enfocar */
+  border-bottom: 2px solid #134c31;
+}
+
 .phoneInput {
   display: flex;
   gap: 1rem;

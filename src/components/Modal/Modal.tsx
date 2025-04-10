@@ -68,6 +68,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
             <input type="text" required placeholder="Ingresa tu apellido" />
           </div>
 
+          <div className={styles.formGroup}>
+            <label>Localidad*</label>
+            <input type="text" required placeholder="Ingresa tu localidad" />
+          </div>
+
           <div className={styles.emailPhoneGroup}>
             <div className={styles.formGroup}>
               <label>Email*</label>
@@ -95,10 +100,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
           <div className={styles.formGroup}>
             <label>Presupuesto en ropa y accesorios*</label>
             <select required>
-              <option>Seleccionar</option>
-              <option>Menos de $100</option>
-              <option>$100 - $500</option>
-              <option>Más de $500</option>
+              <option value="">Seleccionar</option>
+              <option value="rango1">$0 - $100.000 ARS</option>
+              <option value="rango2">$100.000 - $250.000</option>
+              <option value="rango3">$250.000 - $500.000</option>
+              <option value="rango4">$500.000 - $1.000.000</option>
+              <option value="rango5">Más de $1.000.000</option>
             </select>
           </div>
 

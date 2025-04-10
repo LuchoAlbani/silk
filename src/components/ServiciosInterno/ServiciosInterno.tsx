@@ -142,7 +142,7 @@ const ServiciosInterno: React.FC = () => {
             <legend className={styles.checkboxTitle}>
               ¿Qué servicio te interesa? Elegí 1 o más*
             </legend>
-            {[ "Personal Shopping", "Closet Detox", "Transformá tu Imagen (Asesoramiento)", "No estoy seguro/a, quiero asesoramiento", "Otro" ].map((servicio, index) => (
+            {["Personal Shopping", "Closet Detox", "Transformá tu Imagen (Asesoramiento)", "No estoy seguro/a, quiero asesoramiento", "Otro"].map((servicio, index) => (
               <label key={index} className={styles.checkboxLabel}>
                 <input
                   type="checkbox"
@@ -178,9 +178,11 @@ const ServiciosInterno: React.FC = () => {
               required
             >
               <option value="">Seleccionar</option>
-              <option value="bajo">Menos de $50.000</option>
-              <option value="medio">$50.000 - $150.000</option>
-              <option value="alto">Más de $150.000</option>
+              <option value="rango1">$0 - $100.000 ARS</option>
+              <option value="rango2">$100.000 - $250.000</option>
+              <option value="rango3">$250.000 - $500.000</option>
+              <option value="rango4">$500.000 - $1.000.000</option>
+              <option value="rango5">Más de $1.000.000</option>
             </select>
           </div>
 
