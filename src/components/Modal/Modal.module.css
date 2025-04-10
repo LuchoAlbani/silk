@@ -78,6 +78,7 @@ h2 {
   color: #1b4f3c;
   margin-bottom: 20px;
   text-align: center;
+  line-height: 1; /* Ajusta este valor para modificar el interlineado */
 }
 
 .description {

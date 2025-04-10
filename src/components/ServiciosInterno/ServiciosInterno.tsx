@@ -210,9 +210,11 @@ const ServiciosInterno: React.FC = () => {
               required
             >
               <option value="">Seleccionar</option>
-              <option value="redes">Redes Sociales</option>
-              <option value="amigos">Recomendación de amigos</option>
-              <option value="busqueda">Búsqueda en Internet</option>
+              <option value="redes">Instagram</option>
+              <option value="amigos">TikTok</option>
+              <option value="busqueda">Facebook</option>
+              <option value="otro">Google</option>
+              <option value="personal">Personal</option>
               <option value="otro">Otro</option>
             </select>
           </div>
