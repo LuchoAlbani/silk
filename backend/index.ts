@@ -36,40 +36,94 @@ app.post("/frente", async (req: Request, res: Response): Promise<void> => {
       : "Tu guía de colorimetría gratuita + acceso al blog";
 
     const mensaje = esPresupuestoAlto
-      ? `Hola ${nombre},\n\n¡Felicitaciones! Tendrás una sesión gratuita de colorimetría por Zoom.\nEn 24 hs te contactaremos por WhatsApp para coordinar el horario.\n\n¡Gracias por confiar en nosotros!\n\nEquipo Silk`
-      : `Hola ${nombre},\n\nGracias por tu interés en descubrir tu paleta de colores.\nAdjuntamos tu guía gratuita de colorimetría y te dejamos acceso exclusivo al blog:\nhttps://www.silk.com.ar/blog/colorimetria\n\n¡Esperamos que te sirva mucho!\n\nEquipo Silk`;
+      ? `Hola ${nombre},
+
+¡Felicitaciones! Tendrás una sesión gratuita de colorimetría por Zoom.
+En 24 hs te contactaremos por WhatsApp para coordinar el horario.
+
+¡Gracias por confiar en nosotros!
+
+Equipo Silk`
+      : `Hola ${nombre},
+
+Gracias por tu interés en descubrir tu paleta de colores.
+Adjuntamos tu guía gratuita de colorimetría y te dejamos acceso exclusivo al blog:
+https://www.silk.com.ar/blog/colorimetria
+
+¡Esperamos que te sirva mucho!
+
+Equipo Silk`;
+
+    const mensajeHTML = `
+      <p>Hola ${nombre},</p>
+      <p>${
+        esPresupuestoAlto
+          ? "¡Felicitaciones! Tendrás una sesión gratuita de colorimetría por Zoom.<br/>En 24 hs te contactaremos por WhatsApp para coordinar el horario."
+          : "Gracias por tu interés en descubrir tu paleta de colores.<br/>Adjuntamos tu guía gratuita de colorimetría y te dejamos acceso exclusivo al blog:<br/><a href='https://www.silk.com.ar/blog/colorimetria'>https://www.silk.com.ar/blog/colorimetria</a>"
+      }</p>
+      <p>¡Esperamos que te sirva mucho!</p>
+      <br/>
+      <p><strong>Equipo Silk</strong></p>
+      <img src="cid:logo_silk" style="width:150px; margin-top:10px;" />
+    `;
+
+    const logoPath = path.resolve(__dirname, "..", "public", "images", "silk_logo-black.png");
+
+    // **AÑADIDO PARA DEPURACIÓN:** Verifica que la ruta del logo sea correcta
+    console.log("Ruta del logo:", logoPath);
+    if (!fs.existsSync(logoPath)) {
+        console.error("❌ El archivo del logo no existe en la ruta especificada:", logoPath);
+        // Opcional: podrías decidir si quieres lanzar un error o continuar sin el logo
+    }
+
+    // MODIFICACIÓN IMPORTANTE: Especificar los tipos de 'contentDisposition' y añadir 'contentType'
+    const attachments: Array<{
+      filename: string;
+      path: string;
+      cid?: string;
+      contentDisposition?: 'inline' | 'attachment'; // Tipo literal para contentDisposition
+      contentType?: string; // Tipo MIME para el contenido
+    }> = [
+      {
+        filename: "silk_logo-black.png", // Puedes probar con un nombre más genérico como "logo.png" si el problema persiste
+        path: logoPath,
+        cid: "logo_silk",
+        contentDisposition: "inline", // Crucial para incrustar
+        contentType: "image/png", // Asegúrate de que sea el tipo MIME correcto para tu imagen
+      },
+    ];
+
+    // Si es presupuesto bajo, también adjuntamos la guía PDF
+    if (!esPresupuestoAlto) {
+      const adjuntoPath = path.resolve(__dirname, "assets", "guia-colorimetria.pdf");
+
+      if (!fs.existsSync(adjuntoPath)) {
+        console.error("❌ El archivo adjunto de la guía no existe:", adjuntoPath);
+        res.status(500).send("Archivo adjunto de la guía no encontrado.");
+        return;
+      }
+
+      attachments.push({
+        filename: "guia-colorimetria.pdf",
+        path: adjuntoPath,
+        contentType: "application/pdf" // Es buena práctica especificar el tipo MIME también para otros adjuntos
+      });
+    }
 
     const mailOptions: nodemailer.SendMailOptions = {
       from: process.env.EMAIL_FROM,
       to: email,
       subject: asunto,
-      text: mensaje,
+      text: mensaje.replace(/\n/g, " "),
+      html: mensajeHTML,
+      attachments,
     };
-
-    if (!esPresupuestoAlto) {
-      const adjuntoPath = path.resolve(__dirname, "assets", "guia-colorimetria.pdf");
-      console.log("📎 Adjunto:", adjuntoPath);
-
-      if (!fs.existsSync(adjuntoPath)) {
-        console.error("❌ El archivo adjunto no existe:", adjuntoPath);
-        res.status(500).send("Archivo adjunto no encontrado.");
-        return;
-      }
-
-
-      mailOptions.attachments = [
-        {
-          filename: "guia-colorimetria.pdf",
-          path: adjuntoPath,
-        },
-      ];
-    }
 
     console.log("📨 Enviando correo a:", email);
     await transporter.sendMail(mailOptions);
     console.log("✅ Correo enviado exitosamente.");
 
-    // Guardar datos en Excel
+    // Guardado de datos en Excel
     const dataDir = path.resolve(__dirname, "data");
     if (!fs.existsSync(dataDir)) {
       fs.mkdirSync(dataDir);
@@ -102,7 +156,7 @@ app.post("/frente", async (req: Request, res: Response): Promise<void> => {
       console.warn("⚠️ No se encontró archivo Excel existente, se creará uno nuevo.");
       workbook = XLSX.utils.book_new();
       worksheet = XLSX.utils.json_to_sheet([]);
-      XLSX.utils.book_append_sheet(workbook, worksheet, sheetName); // 🔑 agregamos hoja al workbook
+      XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
     }
 
     const data = XLSX.utils.sheet_to_json(worksheet);
@@ -111,8 +165,6 @@ app.post("/frente", async (req: Request, res: Response): Promise<void> => {
     const newSheet = XLSX.utils.json_to_sheet(data);
     workbook.Sheets[sheetName] = newSheet;
     XLSX.writeFile(workbook, filePath);
-
-
 
     res.send("Formulario recibido correctamente.");
   } catch (err) {
