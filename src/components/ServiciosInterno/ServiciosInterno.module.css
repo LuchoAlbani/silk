@@ -502,23 +502,76 @@
   }
 
 
-  .checkboxLabel {
-    font-size: 14px; /* Reducir tamaño de fuente */
+/* ======= MEDIA QUERIES PARA 768px ======= */
+@media screen and (max-width: 768px) {
+  /* ... tus estilos existentes para .phoneInput y otros elementos ... */
+
+  /* Estilos para los checkbox de 'servicio' (los de arriba, que NO queremos personalizar su apariencia) */
+  .checkboxLabel { /* Este es el label para "Qué servicio te interesa?" */
+    font-size: 14px;
     display: flex;
-    align-items: center;
+    align-items: center; /* Vuelve a 'center' para estos, si se alinean bien por defecto */
     margin-bottom: 12px;
+    line-height: 1.4; /* Sigue siendo útil para el texto */
+    /* Aquí NO queremos gap: 10px si el input ya tiene su margin-right por defecto y se alinea bien */
   }
 
-  .checkboxLabel input {
-    width: 18px; /* Reducir el tamaño del checkbox */
+  .checkboxLabel input { /* Input dentro del label para "Qué servicio te interesa?" */
+    /* Eliminar cualquier personalización de 'appearance' o 'background-image' aquí */
+    width: 18px; /* Mantener el tamaño si lo quieres uniforme */
+    height: 18px; /* Mantener el tamaño si lo quieres uniforme */
+    margin-right: 10px; /* Mantener el margen derecho para separar el checkbox del texto */
+    /* Asegurarse de que no tengan 'appearance: none;' aquí */
+    /* vertical-align: middle; /* Podría ser útil para la alineación si el texto es de una línea */
+  }
+
+
+  /* NUEVA CLASE: Para los checkboxes de "Acepto los términos" y "Quiero recibir emails" */
+  .customCheckboxLabel {
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start; /* Mantenemos 'flex-start' para alineación superior */
+    margin-bottom: 12px;
+    line-height: 1.4;
+    gap: 10px; /* Usar gap para la separación entre checkbox y texto */
+  }
+
+  .customCheckboxLabel input[type="checkbox"] { /* Más específico para evitar conflictos */
+    flex-shrink: 0;
+    width: 18px;
     height: 18px;
-    margin-right: 10px;
-    border-radius: 3px; /* Asegurarse de que sea más estético */
+    border: 1px solid #134c31;
+    border-radius: 3px;
+    background-color: #fff;
+    cursor: pointer;
+    /* Las siguientes dos líneas son cruciales para la personalización */
+    appearance: none;
+    -webkit-appearance: none;
+    /* Ajuste fino de alineación */
+    vertical-align: top; /* O 'middle' si 'top' lo sube demasiado */
+    margin-top: 3px; /* Ajusta este valor si es necesario para un centrado visual perfecto */
   }
 
-  .checkboxLabel input:checked {
-    background-color: #134c31; /* Asegurar color cuando está marcado */
+  /* Estilo del "check" para los checkboxes personalizados */
+  .customCheckboxLabel input[type="checkbox"]:checked {
+    background-color: #134c31;
+    border-color: #134c31;
+    /* Usar background-image con SVG para el check (más robusto) */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='%23fff' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L6.5 9.793l4.793-4.793a1 1 0 0 1 1.414 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80%; /* Ajusta el tamaño del checkmark dentro del cuadrado */
   }
+
+  /* Asegurarse de que el span dentro de customCheckboxLabel tenga estos estilos */
+  .customCheckboxLabel span {
+    display: block;
+    flex-grow: 1;
+    padding: 0;
+    margin: 0;
+  }
+
+ 
 
   .inputOtro {
     padding: 10px;
@@ -531,4 +584,5 @@
   }
 
 
+}
 }
