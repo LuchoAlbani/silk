@@ -1,6 +1,12 @@
+// src/components/Servicios/Servicios.tsx
 import React, { useState } from "react";
 import styles from "./Servicios.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom"; // Importa useOutletContext
+
+// Define el tipo para el contexto del Outlet
+interface OutletContextType {
+  setIsListaEsperaModalOpen: (isOpen: boolean) => void;
+}
 
 const servicios = [
   {
@@ -93,8 +99,6 @@ const servicios = [
             <li>• <span className={`${styles.boldItalic} ${styles.noBoldItalic}`}>Sesión 2</span> : Trabajo sobre la percepción corporal y estilismo.</li>
             <li>• <span className={`${styles.boldItalic} ${styles.noBoldItalic}`}>Sesión 3</span> : Uso del color, análisis de colorimetría y combinaciones.</li>
             <li>• <span className={`${styles.boldItalic} ${styles.noBoldItalic}`}>Sesión 4</span> : Entrega de dossier con recomendaciones personalizadas.</li>
-
-
           </ul>
         ),
       },
@@ -106,19 +110,28 @@ const servicios = [
             <li>• Personas que buscan desarrollar confianza a través de su imagen.</li>
             <li>• Quienes desean mejorar su relación con el espejo y su autoestima.</li>
             <li>• Personas en busca de evolución y transformación personal.</li>
+            <li>• Quienes quieran perfeccionar su estilo y conocer sus colores ideales.</li> {/* Esto estaba en asesoramiento, se duplicó, lo dejo por si lo quieres. */}
           </ul>
         ),
       },
       {
         id: "inversion",
         titulo: "LA INVERSIÓN",
+        // Aquí se modifica el contenido para incluir el botón del modal
         contenido: (
           <>
             <p>
               ¡Próximamente! Anotate en la lista de espera y obtené una guía gratis de{" "}
               Cómo utilizar el color a tu favor.
             </p>
-            <button className={styles.listaEsperaButton}>Lista de Espera</button>
+            {/* El botón de Lista de Espera */}
+            <button className={styles.listaEsperaButton} onClick={() => {
+                // Abre el modal de lista de espera
+                const { setIsListaEsperaModalOpen } = useOutletContext<OutletContextType>();
+                setIsListaEsperaModalOpen(true);
+            }}>
+              Lista de Espera
+            </button>
           </>
         ),
       },
@@ -178,7 +191,10 @@ const preguntasFrecuentes = [
 ];
 
 const Servicios: React.FC = () => {
-  const navigate = useNavigate(); // Hook para la navegación
+  const navigate = useNavigate();
+  // Obtiene la función setter del contexto del Outlet
+  const { setIsListaEsperaModalOpen } = useOutletContext<OutletContextType>(); // <--- Usa el contexto
+
   const [activo, setActivo] = useState<{ servicioId: number; opcionId: string } | null>(null);
   const [preguntaActiva, setPreguntaActiva] = useState<number | null>(null);
 
@@ -218,7 +234,20 @@ const Servicios: React.FC = () => {
                   <div
                     className={`${styles.opcionContenido} ${activo?.servicioId === servicio.id && activo?.opcionId === opcion.id ? styles.mostrar : ""}`}
                   >
-                    {opcion.contenido}
+                    {/* Renderiza el contenido, si es el servicio 3 (Coach de Imagen) y la opción "inversion" */}
+                    {servicio.id === 3 && opcion.id === "inversion" ? (
+                      <>
+                        <p>
+                          ¡Próximamente! Anotate en la lista de espera y obtené una guía gratis de{" "}
+                          Cómo utilizar el color a tu favor.
+                        </p>
+                        <button className={styles.listaEsperaButton} onClick={() => setIsListaEsperaModalOpen(true)}>
+                          Lista de Espera
+                        </button>
+                      </>
+                    ) : (
+                      opcion.contenido // Contenido normal para otros servicios/opciones
+                    )}
                   </div>
                 </div>
               ))}
@@ -227,6 +256,7 @@ const Servicios: React.FC = () => {
         ))}
       </div>
 
+      {/* Botón "COMENZÁ HOY" que lleva al formulario interno */}
       <button className={styles.button} onClick={() => navigate("/servicios-interno")}>
         COMENZÁ HOY
       </button>

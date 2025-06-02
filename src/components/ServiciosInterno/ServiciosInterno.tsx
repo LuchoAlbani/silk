@@ -7,7 +7,6 @@ const ServiciosInterno: React.FC = () => {
     apellido: "",
     email: "",
     localidad: "",
-    // 'telefono' ya no se guarda directamente aquí, se gestiona con 'phoneNumber'
     servicio: [] as string[],
     presupuesto: "",
     inicio: "",
@@ -22,13 +21,15 @@ const ServiciosInterno: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState(""); // Nuevo estado para el número de teléfono puro
   const [loadingCountries, setLoadingCountries] = useState(true); // Para estado de carga de países
   const [countryError, setCountryError] = useState(false); // Para errores al cargar países
+  const [isSubmitting, setIsSubmitting] = useState(false); // Para deshabilitar el botón al enviar
+  const [submitMessage, setSubmitMessage] = useState(""); // Mensajes al usuario
 
   // Fetch de países para obtener el código de teléfono
   useEffect(() => {
     const fetchCountries = async () => {
       try {
         const response = await fetch("https://restcountries.com/v3.1/all");
-        if (!response.ok) { // Verifica si la respuesta HTTP es exitosa
+        if (!response.ok) {
           throw new Error(`Error HTTP! Status: ${response.status}`);
         }
         const data = await response.json();
@@ -41,36 +42,32 @@ const ServiciosInterno: React.FC = () => {
             idd: `${country.idd.root}${country.idd.suffixes ? country.idd.suffixes[0] : ""}`,
             flag: country.flags?.emoji || "🏳",
           }))
-          .sort((a: any, b: any) => a.name.localeCompare(b.name)); // Ordenar alfabéticamente
+          .sort((a: any, b: any) => a.name.localeCompare(b.name));
 
         setCountries(formattedCountries);
       } catch (error) {
         console.error("Error al cargar países:", error);
-        setCountryError(true); // Marcar que hubo un error
+        setCountryError(true);
       } finally {
-        setLoadingCountries(false); // Finalizar estado de carga
+        setLoadingCountries(false);
       }
     };
 
     fetchCountries();
   }, []);
 
-  // Manejo de cambios en inputs y selects (excepto el número de teléfono puro)
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
-
     setFormData((prevState) => ({
       ...prevState,
       [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
     }));
   };
 
-  // Manejo de cambios para el input del número de teléfono (solo el número)
   const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPhoneNumber(e.target.value);
   };
 
-  // Manejo de cambios en checkboxes de servicios
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = e.target;
 
@@ -82,56 +79,63 @@ const ServiciosInterno: React.FC = () => {
     }));
   };
 
-  const submitForm = (e: React.FormEvent) => {
+  const submitForm = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage(""); // Limpiar mensajes anteriores
 
-    // --- Validaciones adicionales ---
+    // --- Validaciones previas al envío ---
     if (formData.servicio.length === 0) {
-      alert("Por favor, seleccioná al menos un servicio.");
+      setSubmitMessage("Por favor, seleccioná al menos un servicio.");
+      setIsSubmitting(false);
       return;
     }
 
     if (formData.servicio.includes("Otro") && !formData.otroServicio.trim()) {
-      alert("Por favor, especificá el otro servicio.");
+      setSubmitMessage("Por favor, especificá el otro servicio.");
+      setIsSubmitting(false);
       return;
     }
 
-    // Validar que si hay un código de país, el número no esté vacío y viceversa
     if (selectedCountryCode && !phoneNumber.trim()) {
-        alert("Por favor, ingresá tu número de teléfono.");
+        setSubmitMessage("Por favor, ingresá tu número de teléfono.");
+        setIsSubmitting(false);
         return;
     }
     if (!selectedCountryCode && phoneNumber.trim()) {
-        alert("Por favor, seleccioná el código de país para tu teléfono.");
+        setSubmitMessage("Por favor, seleccioná el código de país para tu teléfono.");
+        setIsSubmitting(false);
         return;
     }
 
-    // Concatenar el código de país y el número antes de enviar
     const fullPhoneNumber = selectedCountryCode ? `${selectedCountryCode} ${phoneNumber}` : phoneNumber;
 
-    console.log("Formulario enviado:", {
+    // Datos a enviar al backend
+    const dataToSend = {
       ...formData,
-      telefono: fullPhoneNumber, // El número de teléfono completo
-    });
+      telefono: fullPhoneNumber,
+    };
 
-    // Aquí iría tu lógica para enviar los datos al backend
-    // Por ejemplo, con fetch:
-    /*
-    fetch('/api/submitForm', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...formData, telefono: fullPhoneNumber })
-    })
-    .then(response => {
+    console.log("Enviando formulario a /servicios-filtrado:", dataToSend);
+
+    try {
+      const response = await fetch("http://localhost:3001/servicios-filtrado", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataToSend),
+      });
+
       if (!response.ok) {
-        throw new Error(`Error en la red: ${response.statusText}`);
+        // Si la respuesta no es 2xx, lanza un error
+        const errorData = await response.text(); // o response.json() si el backend envía JSON en error
+        throw new Error(`Error en el servidor: ${response.statusText} - ${errorData}`);
       }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Success:', data);
-      alert('Formulario enviado con éxito!');
-      // Opcional: Resetear el formulario después del envío exitoso
+
+      const result = await response.text(); // O response.json() si tu backend envía JSON
+      console.log("Respuesta del servidor:", result);
+      setSubmitMessage("¡Formulario enviado con éxito! Revisa tu correo.");
+
+      // Opcional: Resetear el formulario después de un envío exitoso
       setFormData({
         nombre: "", apellido: "", email: "", localidad: "",
         servicio: [], presupuesto: "", inicio: "", referencia: "",
@@ -139,19 +143,19 @@ const ServiciosInterno: React.FC = () => {
       });
       setPhoneNumber("");
       setSelectedCountryCode("");
-    })
-    .catch(error => {
-      console.error('Error al enviar formulario:', error);
-      alert('Hubo un error al enviar el formulario. Por favor, intentá de nuevo.');
-    });
-    */
+
+    } catch (error) {
+      console.error("Error al enviar el formulario:", error);
+      setSubmitMessage("Hubo un error al enviar tu solicitud. Por favor, intentá de nuevo.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  // Campos de texto configurables para mayor flexibilidad y accesibilidad
   const textFields = [
     { name: "nombre", label: "Nombre*", type: "text" },
     { name: "apellido", label: "Apellido*", type: "text" },
-    { name: "email", label: "Email*", type: "email" }, // Usar type="email"
+    { name: "email", label: "Email*", type: "email" },
     { name: "localidad", label: "Localidad*", type: "text" },
   ];
 
@@ -168,9 +172,9 @@ const ServiciosInterno: React.FC = () => {
           {/* Campos de texto */}
           {textFields.map((field) => (
             <div className={styles.formGroup} key={field.name}>
-              <label htmlFor={field.name}>{field.label}</label> {/* Label asociado */}
+              <label htmlFor={field.name}>{field.label}</label>
               <input
-                id={field.name} // ID para asociar con el label
+                id={field.name}
                 type={field.type}
                 name={field.name}
                 placeholder={field.label.replace('*', '')}
@@ -182,16 +186,17 @@ const ServiciosInterno: React.FC = () => {
             </div>
           ))}
 
-          {/* Teléfono - Mejorado con estados separados */}
+          {/* Teléfono */}
           <div className={styles.formGroup}>
             <label htmlFor="phoneCountryCode">Teléfono*</label>
             <div className={styles.phoneInput}>
               <select
-                id="phoneCountryCode" // ID para asociar con el label
+                id="phoneCountryCode"
                 value={selectedCountryCode}
                 onChange={(e) => setSelectedCountryCode(e.target.value)}
                 required
                 className={styles.select}
+                disabled={loadingCountries || countryError} // Deshabilitar si está cargando o hay error
               >
                 <option value="">Seleccioná</option>
                 {loadingCountries && <option disabled>Cargando códigos...</option>}
@@ -206,32 +211,32 @@ const ServiciosInterno: React.FC = () => {
               </select>
               <input
                 type="tel"
-                name="phoneNumber" // Usar un nombre que refleje que es solo el número
+                name="phoneNumber"
                 required
                 placeholder="Número de teléfono"
-                value={phoneNumber} // Vinculado al nuevo estado 'phoneNumber'
+                value={phoneNumber}
                 onChange={handlePhoneNumberChange}
                 className={styles.input}
               />
             </div>
           </div>
 
-          {/* Checkboxes de Servicios (NO USAN customCheckboxLabel) */}
+          {/* Checkboxes de Servicios (Solo los que usan el filtro de presupuesto) */}
           <fieldset className={styles.checkboxGroup} style={{ border: "none", padding: 0, margin: 0 }}>
             <legend className={styles.checkboxTitle}>
               ¿Qué servicio te interesa? Elegí 1 o más*
             </legend>
+            {/* Opciones activas que usan el filtro de presupuesto */}
             {["Personal Shopping", "Closet Detox", "Transformá tu Imagen (Asesoramiento)", "No estoy seguro/a, quiero asesoramiento", "Otro"].map((servicio, index) => (
-              <label key={index} className={styles.checkboxLabel}> {/* Usa la clase original */}
+              <label key={index} className={styles.checkboxLabel}>
                 <input
                   type="checkbox"
                   name="servicio"
                   value={servicio}
                   checked={formData.servicio.includes(servicio)}
                   onChange={handleCheckboxChange}
-                  // La validación de al menos uno se hará en submitForm
                 />
-                <span>{servicio}</span> {/* ¡IMPORTANTE!: Texto dentro de un span */}
+                <span>{servicio}</span>
               </label>
             ))}
             {formData.servicio.includes("Otro") && (
@@ -302,14 +307,14 @@ const ServiciosInterno: React.FC = () => {
               <option value="redes">Instagram</option>
               <option value="amigos">TikTok</option>
               <option value="busqueda">Facebook</option>
-              <option value="otro">Google</option>
+              <option value="google">Google</option> {/* Cambiado de 'otro' a 'google' */}
               <option value="personal">Personal</option>
               <option value="otro">Otro</option>
             </select>
           </div>
 
-          {/* Checkbox de términos (USA customCheckboxLabel para personalización) */}
-          <label htmlFor="aceptaTerminos" className={styles.customCheckboxLabel}> {/* <--- CAMBIO AQUÍ */}
+          {/* Checkbox de términos */}
+          <label htmlFor="aceptaTerminos" className={styles.customCheckboxLabel}>
             <input
               id="aceptaTerminos"
               type="checkbox"
@@ -318,7 +323,7 @@ const ServiciosInterno: React.FC = () => {
               onChange={handleChange}
               required
             />
-            <span> {/* ¡IMPORTANTE!: Texto dentro de un span */}
+            <span>
               Acepto los{" "}
               <a href="/terminos" target="_blank" rel="noopener noreferrer">
                 términos y condiciones y la política de privacidad
@@ -326,8 +331,8 @@ const ServiciosInterno: React.FC = () => {
             </span>
           </label>
 
-          {/* Checkbox de recibir emails (USA customCheckboxLabel para personalización) */}
-          <label htmlFor="recibirEmails" className={styles.customCheckboxLabel}> {/* <--- CAMBIO AQUÍ */}
+          {/* Checkbox de recibir emails */}
+          <label htmlFor="recibirEmails" className={styles.customCheckboxLabel}>
             <input
               id="recibirEmails"
               type="checkbox"
@@ -335,16 +340,22 @@ const ServiciosInterno: React.FC = () => {
               checked={formData.recibirEmails}
               onChange={handleChange}
             />
-            <span>Quiero recibir novedades, recomendaciones y contenido exclusivo en mi correo.</span> {/* ¡IMPORTANTE!: Texto dentro de un span */}
+            <span>Quiero recibir novedades, recomendaciones y contenido exclusivo en mi correo.</span>
           </label>
 
           <p className={styles.finalText}>
             (Nos ponemos en contacto con vos dentro de las próximas 24 hs.)
           </p>
 
+          {submitMessage && (
+            <p className={styles.submitMessage}>
+              {submitMessage}
+            </p>
+          )}
+
           {/* Botón de enviar */}
-          <button type="submit" className={styles.submitButton}>
-            ENVIAR
+          <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
+            {isSubmitting ? "Enviando..." : "ENVIAR"}
           </button>
         </form>
       </div>
