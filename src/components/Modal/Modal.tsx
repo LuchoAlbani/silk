@@ -55,8 +55,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className={styles.modalOverlay} onClick={onClose}>
-      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+    <div className={styles.modalOverlay}>
+      <div className={styles.modalContent}>
+
         <button className={styles.closeButton} onClick={onClose}>
           ✖
         </button>
@@ -69,143 +70,143 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
         </p>
 
         <form
-  className={styles.form}
-  onSubmit={async (e) => {
-    e.preventDefault();
+          className={styles.form}
+          onSubmit={async (e) => {
+            e.preventDefault();
 
-    try {
-      const response = await fetch("http://localhost:3001/frente", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          nombre,
-          apellido,
-          localidad,
-          email,
-          telefono: `${codigoPais} ${telefono}`,
-          presupuesto,
-          inicio,
-        }),
-      });
+            try {
+              const response = await fetch("http://localhost:3001/frente", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  nombre,
+                  apellido,
+                  localidad,
+                  email,
+                  telefono: `${codigoPais} ${telefono}`,
+                  presupuesto,
+                  inicio,
+                }),
+              });
 
-      const data = await response.text();
-      alert(data);
-      onClose(); // Cierra modal si todo OK
-    } catch (error) {
-      console.error("Error al enviar formulario:", error);
-      alert("Hubo un error al enviar tus datos.");
-    }
-  }}
->
-  <div className={styles.formGroup}>
-    <label>Nombre*</label>
-    <input
-      type="text"
-      required
-      placeholder="Ingresa tu nombre"
-      value={nombre}
-      onChange={(e) => setNombre(e.target.value)}
-    />
-  </div>
-
-  <div className={styles.formGroup}>
-    <label>Apellido*</label>
-    <input
-      type="text"
-      required
-      placeholder="Ingresa tu apellido"
-      value={apellido}
-      onChange={(e) => setApellido(e.target.value)}
-    />
-  </div>
-
-  <div className={styles.formGroup}>
-    <label>Localidad*</label>
-    <input
-      type="text"
-      required
-      placeholder="Ingresa tu localidad"
-      value={localidad}
-      onChange={(e) => setLocalidad(e.target.value)}
-    />
-  </div>
-
-  <div className={styles.emailPhoneGroup}>
-    <div className={styles.formGroup}>
-      <label>Email*</label>
-      <input
-        type="email"
-        required
-        placeholder="tu@email.com"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-    </div>
-
-    <div className={styles.formGroup}>
-      <label>Teléfono*</label>
-      <div className={styles.phoneInput}>
-        <select
-          required
-          value={codigoPais}
-          onChange={(e) => setCodigoPais(e.target.value)}
+              const data = await response.text();
+              alert(data);
+              onClose(); // Cierra modal si todo OK
+            } catch (error) {
+              console.error("Error al enviar formulario:", error);
+              alert("Hubo un error al enviar tus datos.");
+            }
+          }}
         >
-          <option value="">Seleccioná</option>
-          {countries.length > 0 ? (
-            countries.map((country) => (
-              <option key={country.cca2} value={country.idd}>
-                {country.flag} {country.idd} ({country.name})
-              </option>
-            ))
-          ) : (
-            <option>Cargando códigos...</option>
-          )}
-        </select>
-        <input
-          type="tel"
-          required
-          placeholder="Número de teléfono"
-          value={telefono}
-          onChange={(e) => setTelefono(e.target.value)}
-        />
-      </div>
-    </div>
-  </div>
+          <div className={styles.formGroup}>
+            <label>Nombre*</label>
+            <input
+              type="text"
+              required
+              placeholder="Ingresa tu nombre"
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+            />
+          </div>
 
-  <div className={styles.formGroup}>
-    <label>Presupuesto en ropa y accesorios*</label>
-    <select
-      required
-      value={presupuesto}
-      onChange={(e) => setPresupuesto(e.target.value)}
-    >
-      <option value="">Seleccionar</option>
-      <option value="rango1">$0 - $100.000 ARS</option>
-      <option value="rango2">$100.000 - $250.000</option>
-      <option value="rango3">$250.000 - $500.000</option>
-      <option value="rango4">$500.000 - $1.000.000</option>
-      <option value="rango5">Más de $1.000.000</option>
-    </select>
-  </div>
+          <div className={styles.formGroup}>
+            <label>Apellido*</label>
+            <input
+              type="text"
+              required
+              placeholder="Ingresa tu apellido"
+              value={apellido}
+              onChange={(e) => setApellido(e.target.value)}
+            />
+          </div>
 
-  <div className={styles.formGroup}>
-    <label>¿Cuándo te gustaría empezar?*</label>
-    <select
-      required
-      value={inicio}
-      onChange={(e) => setInicio(e.target.value)}
-    >
-      <option value="">Seleccionar</option>
-      <option>Inmediatamente</option>
-      <option>En un mes</option>
-      <option>No estoy seguro</option>
-    </select>
-  </div>
+          <div className={styles.formGroup}>
+            <label>Localidad*</label>
+            <input
+              type="text"
+              required
+              placeholder="Ingresa tu localidad"
+              value={localidad}
+              onChange={(e) => setLocalidad(e.target.value)}
+            />
+          </div>
 
-  <button type="submit" className={styles.submitButton}>
-    COMENZÁ YA
-  </button>
-</form>
+          <div className={styles.emailPhoneGroup}>
+            <div className={styles.formGroup}>
+              <label>Email*</label>
+              <input
+                type="email"
+                required
+                placeholder="tu@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label>Teléfono*</label>
+              <div className={styles.phoneInput}>
+                <select
+                  required
+                  value={codigoPais}
+                  onChange={(e) => setCodigoPais(e.target.value)}
+                >
+                  <option value="">Seleccioná</option>
+                  {countries.length > 0 ? (
+                    countries.map((country) => (
+                      <option key={country.cca2} value={country.idd}>
+                        {country.flag} {country.idd} ({country.name})
+                      </option>
+                    ))
+                  ) : (
+                    <option>Cargando códigos...</option>
+                  )}
+                </select>
+                <input
+                  type="tel"
+                  required
+                  placeholder="Número de teléfono"
+                  value={telefono}
+                  onChange={(e) => setTelefono(e.target.value)}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.formGroup}>
+            <label>Presupuesto en ropa y accesorios*</label>
+            <select
+              required
+              value={presupuesto}
+              onChange={(e) => setPresupuesto(e.target.value)}
+            >
+              <option value="">Seleccionar</option>
+              <option value="rango1">$0 - $100.000 ARS</option>
+              <option value="rango2">$100.000 - $250.000</option>
+              <option value="rango3">$250.000 - $500.000</option>
+              <option value="rango4">$500.000 - $1.000.000</option>
+              <option value="rango5">Más de $1.000.000</option>
+            </select>
+          </div>
+
+          <div className={styles.formGroup}>
+            <label>¿Cuándo te gustaría empezar?*</label>
+            <select
+              required
+              value={inicio}
+              onChange={(e) => setInicio(e.target.value)}
+            >
+              <option value="">Seleccionar</option>
+              <option>Inmediatamente</option>
+              <option>En un mes</option>
+              <option>No estoy seguro</option>
+            </select>
+          </div>
+
+          <button type="submit" className={styles.submitButton}>
+            COMENZÁ YA
+          </button>
+        </form>
       </div>
     </div>
   );
