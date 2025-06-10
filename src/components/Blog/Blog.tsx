@@ -38,32 +38,37 @@ const Blog: React.FC = () => {
   }, []);
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      blogs.length <= itemsPerPage ? 0 : (prevIndex + 1) % blogs.length
-    );
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % blogs.length);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      blogs.length <= itemsPerPage ? 0 : (prevIndex - 1 + blogs.length) % blogs.length
-    );
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + blogs.length) % blogs.length);
+  };
+
+  const getVisibleBlogs = () => {
+    if (blogs.length <= itemsPerPage) return blogs;
+
+    const visible = [];
+    for (let i = 0; i < itemsPerPage; i++) {
+      visible.push(blogs[(currentIndex + i) % blogs.length]);
+    }
+    return visible;
   };
 
   return (
     <div ref={blogRef} className={`${styles.blog} ${isVisible ? styles.fadeIn : ""}`}>
-  <h2>
-  <span style={{ fontFamily: "VeryVogueText" }}>Lo</span>{" "}
-  <em style={{ fontFamily: "VeryVogueTextItalic" }}>último</em>{" "}
-  <span style={{ fontFamily: "VeryVogueText" }}>de nuestro blog</span>
-</h2>
-
+      <h2>
+        <span style={{ fontFamily: "VeryVogueText" }}>Lo</span>{" "}
+        <em style={{ fontFamily: "VeryVogueTextItalic" }}>último</em>{" "}
+        <span style={{ fontFamily: "VeryVogueText" }}>de nuestro blog</span>
+      </h2>
 
       <div className={styles.blogCarousel} aria-live="polite">
-      <button className={styles.carouselButton} onClick={prevSlide} aria-label="Ver anteriores">
-  ◀
-</button>
+        <button className={styles.carouselButton} onClick={prevSlide} aria-label="Ver anteriores">
+          ◀
+        </button>
 
-        {blogs.slice(currentIndex, currentIndex + itemsPerPage).map((blog) => (
+        {getVisibleBlogs().map((blog) => (
           <Link key={blog.id} to={`/bloggers/${blog.id}`} className={styles.blogLink}>
             <div className={styles.blogItem}>
               <img src={blog.img} alt={blog.title} />
@@ -74,9 +79,9 @@ const Blog: React.FC = () => {
           </Link>
         ))}
 
-<button className={styles.carouselButton} onClick={nextSlide} aria-label="Ver siguientes">
-  ▶
-</button>
+        <button className={styles.carouselButton} onClick={nextSlide} aria-label="Ver siguientes">
+          ▶
+        </button>
       </div>
     </div>
   );
