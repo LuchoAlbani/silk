@@ -31,15 +31,29 @@ export const addBlog = async (blogData: Blog): Promise<void> => {
 export const getBlogs = async (): Promise<Blog[]> => {
   try {
     const querySnapshot = await getDocs(collection(db, "blogs"));
-    return querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    })) as Blog[];
+    return querySnapshot.docs.map((doc) => {
+      const data = doc.data();
+
+      return {
+        id: doc.id,
+        title: data.title ?? "",
+        author: data.autor ?? "Autor desconocido", // <-- corregido aquí
+        category: data.category ?? "",
+        date: data.date ?? "",
+        description: data.description ?? "",
+        img: data.img ?? "",
+        content1: data.content1 ?? "",
+        content2: data.content2 ?? "",
+        img2: data.img2 ?? "",
+        img3: data.img3 ?? "",
+      };
+    });
   } catch (error) {
     console.error("❌ Error obteniendo los blogs:", error);
     return [];
   }
 };
+
 
 // Obtener un solo blog por ID
 export const getBlogById = async (id: string): Promise<Blog | null> => {
@@ -48,7 +62,20 @@ export const getBlogById = async (id: string): Promise<Blog | null> => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      return { id: docSnap.id, ...docSnap.data() } as Blog;
+      const data = docSnap.data();
+      return {
+        id: docSnap.id,
+        title: data.title ?? "",
+        author: data.autor ?? "Autor desconocido",
+        category: data.category ?? "",
+        date: data.date ?? "",
+        description: data.description ?? "",
+        img: data.img ?? "",
+        content1: data.content1 ?? "",
+        content2: data.content2 ?? "",
+        img2: data.img2 ?? "",
+        img3: data.img3 ?? "",
+      };
     } else {
       console.warn("⚠️ No se encontró el blog con ID:", id);
       return null;
@@ -58,6 +85,7 @@ export const getBlogById = async (id: string): Promise<Blog | null> => {
     return null;
   }
 };
+
 
 // Actualizar un blog
 export const updateBlog = async (id: string, updatedData: Partial<Blog>): Promise<void> => {

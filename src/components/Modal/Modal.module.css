@@ -195,9 +195,8 @@ h2 {
     font-size: 0.8rem;
     padding: 8px;
   }
-}
 
-.closeButton {
+  .closeButton {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -213,6 +212,9 @@ h2 {
 .closeButton:hover {
   color: #ff6347;
 }
+}
+
+
 
 @media (max-width: 480px) {
   .modalContent {
