@@ -85,6 +85,46 @@
   margin-bottom: 3px;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.pageButton {
+  background-color: transparent;
+  color: #134c31;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  min-width: 28px;
+  text-align: center;
+}
+
+.pageButton:hover:not(:disabled) {
+  background-color: #eae5d9;
+  transform: scale(1.05);
+}
+
+.pageButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.active {
+  background-color: #134c31;
+  color: white;
+  font-weight: bold;
+}
+
+
+
 
 /* 📌 Responsive */
 @media (max-width: 768px) {
