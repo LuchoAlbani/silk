@@ -69,7 +69,7 @@ const Blog: React.FC = () => {
               <img src={blog.img} alt={blog.title} />
               <div className={styles.blogCategory}>{blog.category}</div>
               <h3>{blog.title}</h3>
-              <p>{blog.author}</p>
+              <p className={styles.blogAuthor}>BY {blog.author.toUpperCase()}</p>
             </div>
           </Link>
         ))}

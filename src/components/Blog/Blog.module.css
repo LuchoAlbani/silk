@@ -65,7 +65,7 @@
   font-size: 15px;
   color: black;
   position: absolute;
-  bottom: 40px;
+  bottom: 60px;
   left: 10px;
   background-color: #f2f0eb;
   padding: 5px 10px;
@@ -73,7 +73,7 @@
 }
 
 .blogItem h3 {
-  font-size: 30px;
+  font-size: 20px;
   margin: 5px 0;
 }
 

@@ -8,6 +8,9 @@ const BloggerDetail: React.FC = () => {
   const [blog, setBlog] = useState<Blog | null>(null);
 
   useEffect(() => {
+
+    window.scrollTo(0, 0); // Desplaza al tope de la página
+
     const fetchBlog = async () => {
       if (id) {
         const blogData = await getBlogById(id);
@@ -22,8 +25,6 @@ const BloggerDetail: React.FC = () => {
     return (
       <div className={styles.bloggerDetail}>
         <div className={styles.content}>
-          <h2>Blogger no encontrado</h2>
-          <p>Lo sentimos, no pudimos encontrar este blogger.</p>
         </div>
       </div>
     );
@@ -33,20 +34,20 @@ const BloggerDetail: React.FC = () => {
     <div className={styles.bloggerDetail}>
       <div className={styles.container}>
         <h1 className={styles.title}>{blog.title}</h1>
+        <p className={styles.author}><span className={styles.by}>BY</span> {blog.author}</p>
         <p className={styles.subtitle}>{blog.description}</p>
-        <p className={styles.meta}>{blog.date} {blog.author}</p>
+        <p className={styles.meta}>{blog.date}</p>
+
         <img src={blog.img} alt={blog.title} className={styles.image} />
         <p className={styles.text}>{blog.content1}</p>
         {blog.img2 && (
           <>
-            <p className={styles.imageNumber}>1 / 2</p>
             <img src={blog.img2} alt="Imagen 2" className={styles.image} />
           </>
         )}
         <p className={styles.text}>{blog.content2}</p>
         {blog.img3 && (
           <>
-            <p className={styles.imageNumber}>2 / 2</p>
             <img src={blog.img3} alt="Imagen 3" className={styles.image} />
           </>
         )}

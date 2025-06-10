@@ -80,10 +80,11 @@
 .bloggerAuthor,
 .bloggerDate {
   font-family: "AcuminPro-Medium", sans-serif;
-  font-size: 14px; /* Reducido */
+  font-size: 12px; /* Reducido */
   color: gray;
   margin-bottom: 3px;
 }
+
 
 /* 📌 Responsive */
 @media (max-width: 768px) {

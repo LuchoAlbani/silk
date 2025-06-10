@@ -28,7 +28,7 @@ const Bloggers: React.FC = () => {
               </div>
               <div className={styles.bloggerInfo}>
                 <h3 className={styles.bloggerTitle}>{blogger.title}</h3>
-                <p className={styles.bloggerAuthor}>{blogger.author}</p>
+                <p className={styles.bloggerAuthor}><span className={styles.by}>BY</span> {blogger.author}</p>
                 {blogger.date && <p className={styles.bloggerDate}>{blogger.date}</p>}
               </div>
             </Link>
