@@ -11,7 +11,7 @@ const ListaEsperaModal: React.FC<ListaEsperaModalProps> = ({ isOpen, onClose }) 
   const [formData, setFormData] = useState({
     nombre: "",
     email: "",
-    telefono: "", 
+    telefono: "",
   });
   const [countries, setCountries] = useState<any[]>([]);
   const [selectedCountryCode, setSelectedCountryCode] = useState("");
@@ -21,23 +21,38 @@ const ListaEsperaModal: React.FC<ListaEsperaModalProps> = ({ isOpen, onClose }) 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
 
-  // Cargar países (similar a ServiciosInterno)
+  // Cargar países
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await fetch("https://restcountries.com/v3.1/all");
+        // *** CAMBIO CLAVE AQUÍ: Filtrando los campos para la API v3.1 ***
+        // Solo pide los campos que realmente necesitas: name, cca2, idd, flags.
+        const response = await fetch("https://restcountries.com/v3.1/all?fields=name,cca2,idd,flags");
+        
         if (!response.ok) {
+          console.error(
+            "Error al obtener los países:",
+            response.status,
+            response.statusText
+          );
           throw new Error(`Error HTTP! Status: ${response.status}`);
         }
         const data = await response.json();
         const formattedCountries = data
-          .filter((country: any) => country.idd?.root)
-          .map((country: any) => ({
-            name: country.name.common,
-            cca2: country.cca2,
-            idd: `${country.idd.root}${country.idd.suffixes ? country.idd.suffixes[0] : ""}`,
-            flag: country.flags?.emoji || "🏳",
-          }))
+          .filter((country: any) => country.idd?.root) // Asegura que 'idd.root' exista
+          .map((country: any) => {
+            const root = country.idd.root;
+            const suffix = country.idd.suffixes && country.idd.suffixes.length > 0
+              ? country.idd.suffixes[0]
+              : "";
+            
+            return {
+              name: country.name.common,
+              cca2: country.cca2,
+              idd: `${root}${suffix}`, // Combina root y el primer sufijo si existe
+              flag: country.flags?.emoji || "🏳", // Usa emoji si existe, sino bandera genérica
+            };
+          })
           .sort((a: any, b: any) => a.name.localeCompare(b.name));
         setCountries(formattedCountries);
       } catch (error) {
@@ -47,10 +62,14 @@ const ListaEsperaModal: React.FC<ListaEsperaModalProps> = ({ isOpen, onClose }) 
         setLoadingCountries(false);
       }
     };
-    if (isOpen && countries.length === 0) { // Solo cargar si el modal está abierto y los países no están cargados
+    
+    // Solo cargar si el modal está abierto y los países no están cargados o hubo un error previo
+    if (isOpen && (countries.length === 0 || countryError)) { 
+      setLoadingCountries(true); // Reinicia el estado de carga al intentar de nuevo
+      setCountryError(false); // Reinicia el estado de error
       fetchCountries();
     }
-  }, [isOpen, countries.length]);
+  }, [isOpen, countries.length, countryError]); // Agregué countryError como dependencia
 
   // Resetear formulario cuando el modal se abre/cierra
   useEffect(() => {

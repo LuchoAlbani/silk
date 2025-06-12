@@ -175,7 +175,7 @@
   margin-bottom: 15px;
 }
 
-.checkboxLabel {
+.checkboxLabel { /* Esta clase es para los checkboxes de "Servicio" */
   display: flex;
   align-items: center;
   font-size: 18px;
@@ -225,40 +225,47 @@
   gap: 8px;
 }
 
-.checkboxLabel {
-  font-size: 16px;
+.termsCheckboxLabel { /* Esta clase es para los checkboxes de "Acepto términos" y "Recibir novedades" */
+  font-size: 14px;
   color: #134c31;
   cursor: pointer;
   margin-bottom: 8px;
-  line-height: 1.4;
+  line-height: 1.3;
+  display: flex;
+  align-items: center; /* Alineado al centro por defecto, se ajusta para flex-start en mobile */
 }
 
-.checkboxLabel input[name="aceptaTerminos"],
-.checkboxLabel input[name="recibirEmails"] {
-  width: 18px;
-  height: 18px;
+.termsCheckboxLabel input[name="aceptaTerminos"],
+.termsCheckboxLabel input[name="recibirEmails"] {
+  width: 16px;
+  height: 16px;
   border-radius: 3px;
   border: 2px solid #134c31;
-  margin-right: 8px;
+  margin-right: 6px;
   cursor: pointer;
   position: relative;
   transition: background 0.3s, border 0.3s;
+  flex-shrink: 0;
+  /* Personalización del checkbox para mobile - importante */
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #fff; /* Fondo blanco para el cuadrado */
+  margin-top: 2px; /* Ajuste para que el input quede un poco más centrado visualmente con el texto */
 }
 
-.checkboxLabel input[name="aceptaTerminos"]:checked::before,
-.checkboxLabel input[name="recibirEmails"]:checked::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 10px;
-  height: 10px;
-  background-color: #134c31;
-  border-radius: 2px;
-  transform: translate(-50%, -50%);
+/* Usamos un SVG para el checkmark para mejor control y nitidez */
+.termsCheckboxLabel input[name="aceptaTerminos"]:checked,
+.termsCheckboxLabel input[name="recibirEmails"]:checked {
+    background-color: #134c31;
+    border-color: #134c31;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='%23fff' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L6.5 9.793l4.793-4.793a1 1 0 0 1 1.414 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80%; /* Ajusta el tamaño del checkmark dentro del cuadrado */
 }
 
-.checkboxLabel a {
+
+.termsCheckboxLabel a {
   text-decoration: underline;
   color: #134c31;
   font-weight: bold;
@@ -295,110 +302,11 @@
   margin-top: 30px;
 }
 
-/* ======= MEDIA QUERIES PARA 768px ======= */
-@media screen and (max-width: 768px) {
-  .container {
-    padding: 50px 20px;
-  }
-
-  .formContainer {
-    padding: 30px;
-    margin: 30px auto;
-  }
-
-  .title {
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-
-  .subtitle {
-    font-size: 32px;
-    margin-bottom: 25px;
-  }
-
-  .input {
-    padding: 12px;
-    font-size: 16px;
-    margin-bottom: 30px;
-  }
-
-  .selectWrapper {
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-
-  .selectLabel {
-    font-size: 20px;
-  }
-
-  .select {
-    padding: 10px 0;
-    font-size: 16px;
-  }
-
-  .selectWrapper::after {
-    font-size: 18px;
-    bottom: 8px;
-  }
-
-  .select option {
-    padding: 10px;
-  }
-
-  .radioGroup {
-    margin-bottom: 20px;
-  }
-
-  .radioTitle {
-    font-size: 16px;
-    margin-bottom: 15px;
-  }
-
-  .radioLabel {
-    font-size: 16px;
-    margin-bottom: 8px;
-  }
-
-  .radioLabel input {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-  }
-
-  .radioLabel input:checked {
-    border: 4px solid white;
-  }
-
-  .checkboxGroup {
-    padding: 15px;
-    margin-bottom: 30px;
-  }
-
-  .checkboxTitle {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-
-  .checkboxLabel {
-    font-size: 16px;
-  }
-
-  .inputOtro {
-    padding: 10px;
-    font-size: 14px;
-  }
-
-  .submitButton {
-    padding: 12px;
-    font-size: 16px;
-  }
-
-  .finalText {
-    font-size: 14px;
-  }
+.underlinedText {
+  text-decoration: underline;
 }
 
-/* ======= TELÉFONO ======= */
+/* ======= TELÉFONO - Estilos por defecto (fuera de media query) ======= */
 .emailPhoneGroup {
   display: flex;
   flex-direction: column;
@@ -423,6 +331,7 @@
   gap: 15px;
   align-items: center;
   width: 100%;
+  margin-bottom: 30px;
 }
 
 .phoneInput select {
@@ -434,6 +343,7 @@
   color: #134c31;
   background: transparent;
   outline: none;
+  appearance: none; /* Asegura que el custom arrow del select de país funcione */
   cursor: pointer;
 }
 
@@ -473,116 +383,157 @@
   border-color: #0a3a24;
 }
 
-/* ======= MEDIA QUERIES PARA 768px ======= */
+
+/* ========================================= */
+/* ======= MEDIA QUERIES PARA MOBILE ======= */
+/* ========================================= */
 @media screen and (max-width: 768px) {
-  /* Ajuste en el contenedor del teléfono y select */
-  .phoneInput {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-    align-items: center;
-    color: #134c31;
+  .container {
+    padding: 30px 15px; /* Reducido el padding general para móviles */
   }
 
-  /* Ajustes de ancho para los campos dentro de phoneInput */
-  .phoneInput select,
-  .phoneInput input[type="tel"] {
-    width: 48%; /* Ajuste para que queden uno al lado del otro */
-    padding: 10px 0;
-    font-size: 14px;
+  .formContainer {
+    padding: 25px; /* Reducido el padding del contenedor del formulario */
+    margin: 20px auto; /* Reducido el margen para que ocupe más espacio */
   }
 
-  /* Ajustes de padding y font-size */
-  .phoneInput select {
-    font-size: 14px;
+  .title {
+    font-size: 12px; /* Título más pequeño */
+    margin-bottom: 15px;
   }
 
-  .phoneInput input[type="tel"] {
-    font-size: 14px;
+  .subtitle {
+    font-size: 28px; /* Subtítulo más pequeño */
+    margin-bottom: 20px;
+    letter-spacing: 1px; /* Ajuste de espaciado */
   }
 
-
-/* ======= MEDIA QUERIES PARA 768px ======= */
-@media screen and (max-width: 768px) {
-  /* ... tus estilos existentes para .phoneInput y otros elementos ... */
-
-  /* Estilos para los checkbox de 'servicio' (los de arriba, que NO queremos personalizar su apariencia) */
-  .checkboxLabel { /* Este es el label para "Qué servicio te interesa?" */
-    font-size: 14px;
-    display: flex;
-    align-items: center; /* Vuelve a 'center' para estos, si se alinean bien por defecto */
-    margin-bottom: 12px;
-    line-height: 1.4; /* Sigue siendo útil para el texto */
-    /* Aquí NO queremos gap: 10px si el input ya tiene su margin-right por defecto y se alinea bien */
+  .subtitle em {
+    font-weight: 500; /* Puedes ajustar el peso de la fuente si es necesario */
   }
 
-  .checkboxLabel input { /* Input dentro del label para "Qué servicio te interesa?" */
-    /* Eliminar cualquier personalización de 'appearance' o 'background-image' aquí */
-    width: 18px; /* Mantener el tamaño si lo quieres uniforme */
-    height: 18px; /* Mantener el tamaño si lo quieres uniforme */
-    margin-right: 10px; /* Mantener el margen derecho para separar el checkbox del texto */
-    /* Asegurarse de que no tengan 'appearance: none;' aquí */
-    /* vertical-align: middle; /* Podría ser útil para la alineación si el texto es de una línea */
+  /* INPUTS y SELECTS */
+  .input {
+    padding: 10px;
+    font-size: 15px;
+    margin-bottom: 25px; /* Menor margen inferior */
   }
 
-
-  /* NUEVA CLASE: Para los checkboxes de "Acepto los términos" y "Quiero recibir emails" */
-  .customCheckboxLabel {
-    font-size: 14px;
-    display: flex;
-    align-items: flex-start; /* Mantenemos 'flex-start' para alineación superior */
-    margin-bottom: 12px;
-    line-height: 1.4;
-    gap: 10px; /* Usar gap para la separación entre checkbox y texto */
+  .selectWrapper {
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
 
-  .customCheckboxLabel input[type="checkbox"] { /* Más específico para evitar conflictos */
-    flex-shrink: 0;
-    width: 18px;
-    height: 18px;
-    border: 1px solid #134c31;
-    border-radius: 3px;
-    background-color: #fff;
-    cursor: pointer;
-    /* Las siguientes dos líneas son cruciales para la personalización */
-    appearance: none;
-    -webkit-appearance: none;
-    /* Ajuste fino de alineación */
-    vertical-align: top; /* O 'middle' si 'top' lo sube demasiado */
-    margin-top: 3px; /* Ajusta este valor si es necesario para un centrado visual perfecto */
+  .selectLabel {
+    font-size: 18px; /* Label de select un poco más pequeño */
   }
 
-  /* Estilo del "check" para los checkboxes personalizados */
-  .customCheckboxLabel input[type="checkbox"]:checked {
-    background-color: #134c31;
-    border-color: #134c31;
-    /* Usar background-image con SVG para el check (más robusto) */
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='%23fff' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L6.5 9.793l4.793-4.793a1 1 0 0 1 1.414 0z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 80%; /* Ajusta el tamaño del checkmark dentro del cuadrado */
+  .select {
+    padding: 8px 0;
+    font-size: 15px;
   }
 
-  /* Asegurarse de que el span dentro de customCheckboxLabel tenga estos estilos */
-  .customCheckboxLabel span {
-    display: block;
-    flex-grow: 1;
-    padding: 0;
-    margin: 0;
+  .selectWrapper::after {
+    font-size: 16px;
+    right: 5px;
+    bottom: 5px;
   }
 
- 
+  /* RADIO BUTTONS */
+  .radioGroup {
+    margin-bottom: 20px;
+  }
+
+  .radioTitle {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .radioLabel {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .radioLabel input {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
+
+  .radioLabel input:checked {
+    border: 3px solid white; /* Borde más delgado para el check */
+  }
+
+  /* CHECKBOXES - Servicios */
+  .checkboxGroup {
+    padding: 15px;
+    margin-bottom: 25px;
+  }
+
+  .checkboxTitle {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .checkboxLabel { /* Checkboxes de servicios */
+    font-size: 15px;
+    margin-bottom: 10px; /* Menor margen inferior */
+  }
+
+  .checkboxLabel input {
+    width: 20px; /* Tamaño del input de servicio */
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  .checkboxLabel input:checked::before {
+    width: 10px; /* Tamaño del check de servicio */
+    height: 10px;
+  }
 
   .inputOtro {
-    padding: 10px;
+    padding: 8px;
     font-size: 14px;
+    margin: 8px 0 20px;
   }
 
+  /* CHECKBOXES - Términos y condiciones */
+  .checkboxContainer {
+    gap: 10px; /* Ajusta el gap entre los labels de términos si es necesario */
+  }
+
+  .termsCheckboxLabel { /* Checkboxes de términos y novedades */
+    font-size: 13px; /* Aún más pequeño el texto si lo necesitas */
+    margin-bottom: 6px; /* Menor separación entre ellos */
+    line-height: 1.2; /* Para que el texto ocupe menos alto */
+    align-items: flex-start; /* Asegura la alineación arriba si el texto es largo */
+  }
+
+  .termsCheckboxLabel input[name="aceptaTerminos"],
+  .termsCheckboxLabel input[name="recibirEmails"] {
+    width: 14px; /* Checkbox más pequeño */
+    height: 14px;
+    margin-right: 5px; /* Menor margen derecho */
+    margin-top: 1px; /* Ajuste fino si es necesario */
+  }
+
+  .termsCheckboxLabel input[name="aceptaTerminos"]:checked::before,
+  .termsCheckboxLabel input[name="recibirEmails"]:checked::before {
+    width: 7px; /* Checkmark más pequeño */
+    height: 7px;
+  }
+
+  /* BOTÓN ENVIAR */
   .submitButton {
-    padding: 12px;
-    font-size: 16px;
+    padding: 10px;
+    font-size: 15px;
+    max-width: 150px; /* Puedes hacerlo un poco más pequeño si lo prefieres */
+    margin: 20px auto;
   }
 
-
-}
+  /* TEXTO FINAL */
+  .finalText {
+    font-size: 13px;
+    margin-top: 20px;
+  }
 }

@@ -13,7 +13,6 @@ interface Country {
   flag: string;
 }
 
-
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   const [countries, setCountries] = useState<Country[]>([]);
 
@@ -30,34 +29,58 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await fetch("https://restcountries.com/v3.1/all");
+        // *** CAMBIO CLAVE AQUÍ: Filtrando los campos para la API v3.1 ***
+        // Solo pide los campos que realmente necesitas para evitar errores.
+        const response = await fetch(
+          "https://restcountries.com/v3.1/all?fields=name,cca2,idd,flags"
+        );
+
+        if (!response.ok) {
+          // Verifica si la respuesta HTTP fue exitosa
+          console.error(
+            "Error al obtener los países:",
+            response.status,
+            response.statusText
+          );
+          // Puedes lanzar un error o establecer un estado para mostrar un mensaje al usuario
+          return;
+        }
+
         const data = await response.json();
 
         const formattedCountries = data
-          .filter((country: any) => country.idd?.root)
-          .map((country: any) => ({
-            name: country.name.common,
-            cca2: country.cca2,
-            idd: `${country.idd.root}${country.idd.suffixes ? country.idd.suffixes[0] : ""}`,
-            flag: country.flags?.emoji || "🏳",
-          }))
+          .filter((country: any) => country.idd?.root) // Asegura que 'idd.root' exista
+          .map((country: any) => {
+            const root = country.idd.root;
+            const suffix = country.idd.suffixes && country.idd.suffixes.length > 0
+              ? country.idd.suffixes[0]
+              : "";
+            
+            return {
+              name: country.name.common,
+              cca2: country.cca2,
+              idd: `${root}${suffix}`, // Combina root y el primer sufijo si existe
+              flag: country.flags?.emoji || "🏳", // Usa emoji si existe, sino bandera genérica
+            };
+          })
           .sort((a: Country, b: Country) => a.name.localeCompare(b.name));
 
         setCountries(formattedCountries);
       } catch (error) {
-        console.error("Error fetching countries:", error);
+        console.error("Error al cargar los países:", error);
       }
     };
 
-    fetchCountries();
-  }, []);
+    if (isOpen) { // Solo si el modal está abierto, para evitar llamadas innecesarias
+      fetchCountries();
+    }
+  }, [isOpen]); // Dependencia 'isOpen' para que se ejecute cuando el modal se abre
 
   if (!isOpen) return null;
 
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
-
         <button className={styles.closeButton} onClick={onClose}>
           ✖
         </button>
@@ -66,7 +89,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
           ¿Estás usando los colores que realmente te favorecen?
         </p>
         <p className={styles.description}>
-          TOMÁ EL PRIMER PASO: DESCUBRÍ TU TONO DE PIEL Y TU PALETA PARA DESBLOQUEAR ESOS COLORES QUE TE HACEN BRILLAR.
+          TOMÁ EL PRIMER PASO: DESCUBRÍ TU TONO DE PIEL Y TU PALETA PARA
+          DESBLOQUEAR ESOS COLORES QUE TE HACEN BRILLAR.
         </p>
 
         <form
@@ -159,7 +183,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                       </option>
                     ))
                   ) : (
-                    <option>Cargando códigos...</option>
+                    <option disabled>Cargando códigos...</option> // Deshabilitar la opción de carga
                   )}
                 </select>
                 <input

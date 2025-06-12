@@ -39,7 +39,7 @@ const Bloggers: React.FC = () => {
   return (
     <div className={styles.bloggersPage}>
       <div className={styles.bloggers}>
-        <h2 className={styles.bloggersTitle}>Bloggers</h2>
+        <h2 className={styles.bloggersTitle}>Blog</h2>
         <div className={styles.bloggersList}>
           {currentBlogs.map((blogger) => (
             <div key={blogger.id} className={styles.bloggerItem}>

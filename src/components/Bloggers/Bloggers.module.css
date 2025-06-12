@@ -14,7 +14,8 @@
 }
 
 .bloggersTitle {
-  font-family: "AcuminPro-Semibold", sans-serif;
+  font-family: 'Very Vogue' sans-serif;
+  text-transform: capitalize;
   font-size: 50px; /* Mantiene el tamaño original */
   margin-bottom: 80px;
   font-weight: 400;
@@ -71,7 +72,8 @@
 }
 
 .bloggerTitle {
-  font-family: "AcuminPro-Semibold", sans-serif;
+  font-family: 'Very Vogue' sans-serif;
+  text-transform: lowercase;
   font-size: 20px; /* Reducido */
   font-weight: bold;
   margin-bottom: 8px;
@@ -137,6 +139,7 @@
     font-size: 40px;
     margin-bottom: 50px;
     margin-top: 10px;
+    font-family: 'Very Vogue' sans-serif;
   }
 
   .bloggersList {

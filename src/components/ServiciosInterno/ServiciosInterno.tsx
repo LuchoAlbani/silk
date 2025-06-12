@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import styles from "./ServiciosInterno.module.css"; // Se usa correctamente
+import styles from "./ServiciosInterno.module.css";
+import ModalCondiciones from "../ModalCondiciones/ModalCondiciones"; // Importa el nuevo modal
 
 const ServiciosInterno: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -11,37 +12,53 @@ const ServiciosInterno: React.FC = () => {
     presupuesto: "",
     inicio: "",
     referencia: "",
-    aceptaTerminos: false,
+    aceptaTerminos: false, // Este estado lo manejaremos con el modal
     recibirEmails: false,
     otroServicio: "",
   });
 
-  const [countries, setCountries] = useState<any[]>([]); // Almacenamos los países
-  const [selectedCountryCode, setSelectedCountryCode] = useState(""); // Para almacenar el código seleccionado
-  const [phoneNumber, setPhoneNumber] = useState(""); // Nuevo estado para el número de teléfono puro
-  const [loadingCountries, setLoadingCountries] = useState(true); // Para estado de carga de países
-  const [countryError, setCountryError] = useState(false); // Para errores al cargar países
-  const [isSubmitting, setIsSubmitting] = useState(false); // Para deshabilitar el botón al enviar
-  const [submitMessage, setSubmitMessage] = useState(""); // Mensajes al usuario
+  const [countries, setCountries] = useState<any[]>([]);
+  const [selectedCountryCode, setSelectedCountryCode] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [loadingCountries, setLoadingCountries] = useState(true);
+  const [countryError, setCountryError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
+  const [isConditionsModalOpen, setIsConditionsModalOpen] = useState(false); // Nuevo estado para el modal de condiciones
 
   // Fetch de países para obtener el código de teléfono
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await fetch("https://restcountries.com/v3.1/all");
+        const response = await fetch(
+          "https://restcountries.com/v3.1/all?fields=name,cca2,idd,flags"
+        );
         if (!response.ok) {
+          console.error(
+            "Error al obtener los países:",
+            response.status,
+            response.statusText
+          );
           throw new Error(`Error HTTP! Status: ${response.status}`);
         }
         const data = await response.json();
 
         const formattedCountries = data
           .filter((country: any) => country.idd?.root)
-          .map((country: any) => ({
-            name: country.name.common,
-            cca2: country.cca2,
-            idd: `${country.idd.root}${country.idd.suffixes ? country.idd.suffixes[0] : ""}`,
-            flag: country.flags?.emoji || "🏳",
-          }))
+          .map((country: any) => {
+            const root = country.idd.root;
+            const suffix =
+              country.idd.suffixes && country.idd.suffixes.length > 0
+                ? country.idd.suffixes[0]
+                : "";
+
+            return {
+              name: country.name.common,
+              cca2: country.cca2,
+              idd: `${root}${suffix}`,
+              flag: country.flags?.emoji || "🏳",
+            };
+          })
           .sort((a: any, b: any) => a.name.localeCompare(b.name));
 
         setCountries(formattedCountries);
@@ -56,12 +73,19 @@ const ServiciosInterno: React.FC = () => {
     fetchCountries();
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { name, value, type } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
-    }));
+    if (name === "aceptaTerminos") {
+      // Si es el checkbox de términos, abrimos el modal en lugar de cambiar el estado directamente
+      setIsConditionsModalOpen(true);
+    } else {
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
+      }));
+    }
   };
 
   const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,12 +103,44 @@ const ServiciosInterno: React.FC = () => {
     }));
   };
 
+  // Función para manejar la aceptación de términos desde el modal
+  const handleAcceptTerms = () => {
+    setFormData((prevState) => ({
+      ...prevState,
+      aceptaTerminos: true,
+    }));
+    setIsConditionsModalOpen(false); // Cierra el modal
+  };
+
+  // Función para cancelar (cerrar el modal sin aceptar)
+  const handleCancelTerms = () => {
+    setFormData((prevState) => ({
+      ...prevState,
+      aceptaTerminos: false, // Asegura que el checkbox no esté marcado si se cancela
+    }));
+    setIsConditionsModalOpen(false); // Cierra el modal
+  };
+
   const submitForm = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitMessage(""); // Limpiar mensajes anteriores
 
     // --- Validaciones previas al envío ---
+    if (
+      !formData.nombre.trim() ||
+      !formData.apellido.trim() ||
+      !formData.localidad.trim() ||
+      !formData.email.trim() ||
+      !formData.presupuesto.trim() ||
+      !formData.inicio.trim() ||
+      !formData.referencia.trim()
+    ) {
+      setSubmitMessage("Por favor, completá todos los campos obligatorios.");
+      setIsSubmitting(false);
+      return;
+    }
+
     if (formData.servicio.length === 0) {
       setSubmitMessage("Por favor, seleccioná al menos un servicio.");
       setIsSubmitting(false);
@@ -97,18 +153,30 @@ const ServiciosInterno: React.FC = () => {
       return;
     }
 
+    // Validación de teléfono: ambos o ninguno
     if (selectedCountryCode && !phoneNumber.trim()) {
-        setSubmitMessage("Por favor, ingresá tu número de teléfono.");
-        setIsSubmitting(false);
-        return;
+      setSubmitMessage("Por favor, ingresá tu número de teléfono.");
+      setIsSubmitting(false);
+      return;
     }
     if (!selectedCountryCode && phoneNumber.trim()) {
-        setSubmitMessage("Por favor, seleccioná el código de país para tu teléfono.");
-        setIsSubmitting(false);
-        return;
+      setSubmitMessage("Por favor, seleccioná el código de país para tu teléfono.");
+      setIsSubmitting(false);
+      return;
     }
 
-    const fullPhoneNumber = selectedCountryCode ? `${selectedCountryCode} ${phoneNumber}` : phoneNumber;
+    if (!formData.aceptaTerminos) {
+      setSubmitMessage("Debes aceptar los términos y condiciones para continuar.");
+      setIsSubmitting(false);
+      // Opcional: Podrías abrir el modal aquí si el usuario intenta enviar sin aceptar
+      // setIsConditionsModalOpen(true);
+      return;
+    }
+
+    // Construye el número de teléfono completo
+    const fullPhoneNumber = selectedCountryCode
+      ? `${selectedCountryCode} ${phoneNumber}`
+      : phoneNumber || "N/A"; // Si no hay número, enviar N/A
 
     // Datos a enviar al backend
     const dataToSend = {
@@ -119,34 +187,45 @@ const ServiciosInterno: React.FC = () => {
     console.log("Enviando formulario a /servicios-filtrado:", dataToSend);
 
     try {
-      const response = await fetch("http://localhost:3001/servicios-filtrado", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('http://localhost:3001/servicios-filtrado', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dataToSend),
-      });
+      })
+        ;
 
       if (!response.ok) {
-        // Si la respuesta no es 2xx, lanza un error
-        const errorData = await response.text(); // o response.json() si el backend envía JSON en error
-        throw new Error(`Error en el servidor: ${response.statusText} - ${errorData}`);
+        const errorData = await response.text();
+        throw new Error(
+          `Error en el servidor: ${response.statusText} - ${errorData}`
+        );
       }
 
-      const result = await response.text(); // O response.json() si tu backend envía JSON
+      const result = await response.text();
       console.log("Respuesta del servidor:", result);
       setSubmitMessage("¡Formulario enviado con éxito! Revisa tu correo.");
 
       // Opcional: Resetear el formulario después de un envío exitoso
       setFormData({
-        nombre: "", apellido: "", email: "", localidad: "",
-        servicio: [], presupuesto: "", inicio: "", referencia: "",
-        aceptaTerminos: false, recibirEmails: false, otroServicio: "",
+        nombre: "",
+        apellido: "",
+        email: "",
+        localidad: "",
+        servicio: [],
+        presupuesto: "",
+        inicio: "",
+        referencia: "",
+        aceptaTerminos: false,
+        recibirEmails: false,
+        otroServicio: "",
       });
       setPhoneNumber("");
       setSelectedCountryCode("");
-
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
-      setSubmitMessage("Hubo un error al enviar tu solicitud. Por favor, intentá de nuevo.");
+      setSubmitMessage(
+        "Hubo un error al enviar tu solicitud. Por favor, intentá de nuevo."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -177,7 +256,7 @@ const ServiciosInterno: React.FC = () => {
                 id={field.name}
                 type={field.type}
                 name={field.name}
-                placeholder={field.label.replace('*', '')}
+                placeholder={field.label.replace("*", "")}
                 value={formData[field.name as keyof typeof formData] as string}
                 onChange={handleChange}
                 className={styles.input}
@@ -196,7 +275,7 @@ const ServiciosInterno: React.FC = () => {
                 onChange={(e) => setSelectedCountryCode(e.target.value)}
                 required
                 className={styles.select}
-                disabled={loadingCountries || countryError} // Deshabilitar si está cargando o hay error
+                disabled={loadingCountries || countryError}
               >
                 <option value="">Seleccioná</option>
                 {loadingCountries && <option disabled>Cargando códigos...</option>}
@@ -222,12 +301,21 @@ const ServiciosInterno: React.FC = () => {
           </div>
 
           {/* Checkboxes de Servicios (Solo los que usan el filtro de presupuesto) */}
-          <fieldset className={styles.checkboxGroup} style={{ border: "none", padding: 0, margin: 0 }}>
+          <fieldset
+            className={styles.checkboxGroup}
+            style={{ border: "none", padding: 0, margin: 0 }}
+          >
             <legend className={styles.checkboxTitle}>
               ¿Qué servicio te interesa? Elegí 1 o más*
             </legend>
             {/* Opciones activas que usan el filtro de presupuesto */}
-            {["Personal Shopping", "Closet Detox", "Transformá tu Imagen (Asesoramiento)", "No estoy seguro/a, quiero asesoramiento", "Otro"].map((servicio, index) => (
+            {[
+              "Personal Shopping",
+              "Closet Detox",
+              "Transformá tu Imagen (Asesoramiento)",
+              "No estoy seguro/a, quiero asesoramiento",
+              "Otro",
+            ].map((servicio, index) => (
               <label key={index} className={styles.checkboxLabel}>
                 <input
                   type="checkbox"
@@ -241,7 +329,9 @@ const ServiciosInterno: React.FC = () => {
             ))}
             {formData.servicio.includes("Otro") && (
               <div className={styles.formGroup}>
-                <label htmlFor="otroServicio" className="sr-only">Especificar otro servicio</label>
+                <label htmlFor="otroServicio" className="sr-only">
+                  Especificar otro servicio
+                </label>
                 <input
                   id="otroServicio"
                   type="text"
@@ -258,7 +348,9 @@ const ServiciosInterno: React.FC = () => {
 
           {/* Selects de presupuesto, inicio y referencia */}
           <div className={styles.selectWrapper}>
-            <label htmlFor="presupuesto" className={styles.selectLabel}>¿Cuál sería tu presupuesto para invertir en ropa y accesorios?*</label>
+            <label htmlFor="presupuesto" className={styles.selectLabel}>
+              ¿Cuál sería tu presupuesto para invertir en ropa y accesorios?*
+            </label>
             <select
               id="presupuesto"
               name="presupuesto"
@@ -277,7 +369,9 @@ const ServiciosInterno: React.FC = () => {
           </div>
 
           <div className={styles.selectWrapper}>
-            <label htmlFor="inicio" className={styles.selectLabel}>¿Cuándo te gustaría empezar?*</label>
+            <label htmlFor="inicio" className={styles.selectLabel}>
+              ¿Cuándo te gustaría empezar?*
+            </label>
             <select
               id="inicio"
               name="inicio"
@@ -294,7 +388,9 @@ const ServiciosInterno: React.FC = () => {
           </div>
 
           <div className={styles.selectWrapper}>
-            <label htmlFor="referencia" className={styles.selectLabel}>¿Cómo nos conociste?*</label>
+            <label htmlFor="referencia" className={styles.selectLabel}>
+              ¿Cómo nos conociste?*
+            </label>
             <select
               id="referencia"
               name="referencia"
@@ -307,27 +403,34 @@ const ServiciosInterno: React.FC = () => {
               <option value="redes">Instagram</option>
               <option value="amigos">TikTok</option>
               <option value="busqueda">Facebook</option>
-              <option value="google">Google</option> {/* Cambiado de 'otro' a 'google' */}
+              <option value="google">Google</option>
               <option value="personal">Personal</option>
               <option value="otro">Otro</option>
             </select>
           </div>
 
-          {/* Checkbox de términos */}
+          {/* Checkbox de términos modificado */}
           <label htmlFor="aceptaTerminos" className={styles.customCheckboxLabel}>
             <input
               id="aceptaTerminos"
               type="checkbox"
               name="aceptaTerminos"
               checked={formData.aceptaTerminos}
-              onChange={handleChange}
-              required
+              onChange={handleChange} // Ahora handleChange abrirá el modal
             />
             <span>
               Acepto los{" "}
-              <a href="/terminos" target="_blank" rel="noopener noreferrer">
+              <a
+                href="#" // Cambiado a '#' para que no navegue
+                onClick={(e) => {
+                  e.preventDefault(); // Previene la navegación
+                  setIsConditionsModalOpen(true); // Abre el modal
+                }}
+                rel="noopener noreferrer"
+              >
                 términos y condiciones y la política de privacidad
-              </a>.
+              </a>
+              .
             </span>
           </label>
 
@@ -347,11 +450,7 @@ const ServiciosInterno: React.FC = () => {
             (Nos ponemos en contacto con vos dentro de las próximas 24 hs.)
           </p>
 
-          {submitMessage && (
-            <p className={styles.submitMessage}>
-              {submitMessage}
-            </p>
-          )}
+          {submitMessage && <p className={styles.submitMessage}>{submitMessage}</p>}
 
           {/* Botón de enviar */}
           <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
@@ -359,6 +458,13 @@ const ServiciosInterno: React.FC = () => {
           </button>
         </form>
       </div>
+
+      {/* Renderiza el ModalCondiciones */}
+      <ModalCondiciones
+        isOpen={isConditionsModalOpen}
+        onClose={handleCancelTerms}
+        onAccept={handleAcceptTerms}
+      />
     </div>
   );
 };
